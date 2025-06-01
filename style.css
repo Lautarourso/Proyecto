@@ -1,0 +1,44 @@
+:root {
+  --azul: #003366;
+  --gris-claro: #F0F0F0;
+  --negro: #000000;
+  --naranja: #E24B16;
+}
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background-color: var(--azul);
+  color: var(--gris-claro);
+}
+
+.hero {
+  background-color: var(--azul);
+}
+
+.racing-text {
+  font-family: 'Racing Sans One', cursive;
+  font-size: 18px;
+}
+
+.roboto {
+  font-family: 'Roboto Slab', serif;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.btn-orange {
+  background-color: var(--naranja);
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 25px;
+}
+
+.btn-orange:hover {
+  background-color: #c53d0f;
+  color: white;
+}
+
+.carousel-indicators [data-bs-target] {
+  background-color: var(--naranja);
+}
