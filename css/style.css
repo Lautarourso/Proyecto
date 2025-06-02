@@ -1,0 +1,127 @@
+:root {
+  --azul: #003366;
+  --azul-oscuro: #002244;
+  --gris-claro: #F0F0F0;
+  --naranja: #E24B16;
+  --naranja-oscuro: #C53D0F;
+  --blanco: #FFFFFF;
+  --negro: #000000;
+}
+
+/* ESTILOS GENERALES */
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background-color: var(--azul);
+  color: var(--gris-claro);
+  min-width: 1200px;
+  margin: 0;
+  padding: 0;
+}
+
+/* HEADER */
+.header-custom {
+  background-color: var(--gris-claro);
+  border-bottom: 2px solid var(--naranja);
+}
+
+.nav-link-custom {
+  color: var(--negro) !important;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+.nav-link-custom:hover {
+  color: var(--naranja) !important;
+}
+
+/* HERO SECTION */
+.hero-section {
+  background-color: var(--azul-oscuro);
+  padding: 6rem 0;
+}
+
+.racing-text {
+  font-family: 'Racing Sans One', cursive;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+/* INFO SECTION */
+.info-section {
+  background-color: var(--azul);
+}
+
+.title-custom {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--gris-claro);
+}
+
+.roboto-text {
+  font-family: 'Roboto Slab', serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* BOTÓN NARANJA */
+.btn-orange-custom {
+  background-color: var(--naranja);
+  color: var(--blanco);
+  font-weight: 600;
+  border: none;
+  padding: 10px 25px;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+
+.btn-orange-custom:hover {
+  background-color: var(--naranja-oscuro);
+  color: var(--blanco);
+  transform: translateY(-2px);
+}
+
+/* CONTACTO */
+.contact-section {
+  background-color: var(--gris-claro);
+}
+
+.contact-title {
+  color: var(--negro);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* FOOTER */
+.footer-custom {
+  background-color: var(--gris-claro);
+  border-top: 2px solid var(--naranja);
+}
+
+.footer-text {
+  color: var(--negro);
+  font-weight: 600;
+}
+
+.footer-link {
+  color: var(--negro) !important;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* MODALES */
+.modal-header-custom {
+  background-color: var(--azul);
+  color: var(--gris-claro);
+}
+
+/* CARRUSEL */
+.carousel-indicators [data-bs-target] {
+  background-color: var(--naranja);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+}
