@@ -10,6 +10,9 @@
 </head>
 <body>
 
+<!-- Barra de progreso -->
+<div id="progressBar" class="progress-bar-custom"></div>
+
   <!-- HEADER -->
   <header class="header-custom">
     <div class="container d-flex justify-content-between align-items-center py-3">
@@ -94,7 +97,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header modal-header-custom">
-          <h5 class="modal-title">INICIAR SESIÓN</h5>
+          <h5 class="modal-title">INICIAR   SESIÓN</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -200,5 +203,26 @@ function mostrarRegistro() {
   new bootstrap.Modal(document.getElementById('registroModal')).show();
 }
 </script>
+<script>
+// Barra de progreso al hacer scroll
+window.addEventListener('scroll', function() {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById('progressBar').style.width = scrolled + '%';
+  
+  // Opcional: hacer que aparezca solo después de cierto desplazamiento
+  const progressBar = document.getElementById('progressBar');
+  if (winScroll > 100) {
+    progressBar.style.opacity = '1';
+  } else {
+    progressBar.style.opacity = '0';
+  }
+});
+
+// Inicializar la barra como invisible
+document.getElementById('progressBar').style.opacity = '0';
+</script>
+
 </body>
 </html>

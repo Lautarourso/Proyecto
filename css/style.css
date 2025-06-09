@@ -125,3 +125,15 @@ body {
   border-radius: 50%;
   border: none;
 }
+
+/* Barra de progreso */
+.progress-bar-custom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background-color: var(--negro);
+  width: 0%;
+  z-index: 9999;
+  transition: width 0.1s ease-out;
+}
