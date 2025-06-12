@@ -92,7 +92,7 @@
     </div>
   </footer>
 
-  <!-- MODALES -->
+  <!-- Modal Inicio sesion -->
   <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -110,7 +110,7 @@
               <label class="form-label">CONTRASEÑA</label>
               <input type="password" class="form-control" id="password" required>
             </div>
-            <button type="submit" class="btn-orange-custom w-100">onclick="Iniciosesion()">Iniciar</button>
+            <button type="submit" class="btn-orange-custom w-100"> onclick= "Iniciosesion()">Iniciar</button>
           </form>
         </div>
       </div>
@@ -190,6 +190,26 @@ function validarRegistro() {
   
 }
 
+function Iniciosesion() {
+  const form = document.getElementById('sesionForm');
+  const password = document.getElementById('password').value;
+  const email = document.getElementById('email').value;
+  
+  // Marcar todos los campos como validados
+  form.classList.add('was-validated');
+  
+  // Validación personalizada de contraseñas
+
+  
+  // Verificar si el formulario es válido
+  if (form.checkValidity() === false) {
+    return false;
+  }
+  
+
+  
+}
+
 function mostrarRegistro() {
   // Resetear el formulario al abrir
   const form = document.getElementById('registroForm');
@@ -200,6 +220,18 @@ function mostrarRegistro() {
   new bootstrap.Modal(document.getElementById('registroModal')).show();
 }
 </script>
+
+
+<script>
+function mostrarLogin() {
+  const form = document.getElementById('sesionForm');
+  form.reset(); // Opcional: limpia el formulario al abrir
+
+  // Mostrar el modal
+  new bootstrap.Modal(document.getElementById('loginModal')).show();
+}
+</script>
+
 <script>
 // Barra de progreso al hacer scroll
 window.addEventListener('scroll', function() {
