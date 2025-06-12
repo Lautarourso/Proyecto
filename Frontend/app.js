@@ -19,8 +19,7 @@ try {
     const data = await res.json();
 
     if (res.ok) {
-      alert('Registro exitoso!');
-      document.getElementById('formRegistro').reset();
+      alert('Registro exitoso! Ahora inicia sesion');
     } else {
       alert(`Error: ${data.message}`);
     }

@@ -101,16 +101,16 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id ="sesionForm" novalidate>
             <div class="mb-3">
               <label class="form-label">MAIL</label>
-              <input type="email" class="form-control">
+              <input type="email" class="form-control" id="nombre" required>
             </div>
             <div class="mb-3">
               <label class="form-label">CONTRASEÑA</label>
-              <input type="password" class="form-control">
+              <input type="password" class="form-control" id="password" required>
             </div>
-            <button type="submit" class="btn-orange-custom w-100">INGRESAR</button>
+            <button type="submit" class="btn-orange-custom w-100">onclick="Iniciosesion()">Iniciar</button>
           </form>
         </div>
       </div>
