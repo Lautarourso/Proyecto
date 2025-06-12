@@ -157,7 +157,7 @@
             <input type="password" class="form-control" id="confirmPassword" required>
             <div class="invalid-feedback">Las contraseñas no coinciden</div>
           </div>
-          <button type="button" class="btn-orange-custom w-100" onclick="validarRegistro()">CONTINUAR</button>
+          <button type="submit" class="btn-orange-custom w-100" onclick="validarRegistro()">CONTINUAR</button>
         </form>
       </div>
     </div>
@@ -185,12 +185,9 @@ function validarRegistro() {
     return false;
   }
   
-  // Si todo está correcto, redirigir después de 1 segundo (simulación)
-  setTimeout(function() {
-    window.location.href = "videos.html";
-  }, 1000);
   
-  return false;
+
+  
 }
 
 function mostrarRegistro() {
@@ -223,6 +220,7 @@ window.addEventListener('scroll', function() {
 // Inicializar la barra como invisible
 document.getElementById('progressBar').style.opacity = '0';
 </script>
+<script src="app.js"></script>
 
 </body>
 </html>
