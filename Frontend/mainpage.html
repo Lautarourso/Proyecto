@@ -104,11 +104,11 @@
           <form id ="sesionForm" novalidate>
             <div class="mb-3">
               <label class="form-label">MAIL</label>
-              <input type="email" class="form-control" id="nombre" required>
+              <input type="email" class="form-control" id="Iemail" required>
             </div>
             <div class="mb-3">
               <label class="form-label">CONTRASEÑA</label>
-              <input type="password" class="form-control" id="password" required>
+              <input type="password" class="form-control" id="Ipassword" required>
             </div>
             <button type="submit" class="btn-orange-custom w-100"> onclick= "Iniciosesion()">Iniciar</button>
           </form>
@@ -192,8 +192,8 @@ function validarRegistro() {
 
 function Iniciosesion() {
   const form = document.getElementById('sesionForm');
-  const password = document.getElementById('password').value;
-  const email = document.getElementById('email').value;
+  const password = document.getElementById('Ipassword').value;
+  const email = document.getElementById('Iemail').value;
   
   // Marcar todos los campos como validados
   form.classList.add('was-validated');

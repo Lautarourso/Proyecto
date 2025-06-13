@@ -35,8 +35,8 @@ document.getElementById('sesionForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const usuario = {
-    email: document.getElementById('email').value,
-    password: document.getElementById('password').value
+    email: document.getElementById('Iemail').value,
+    password: document.getElementById('Ipassword').value
   };
 
   try {
