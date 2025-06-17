@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../db.js";
+import { Videos } from "./videos.model.js"; // IMPORTANTE
 
 export class Usuarios extends Model {}
 
@@ -35,3 +36,6 @@ Usuarios.init(
         timestamps: false,
     }
 );
+Usuarios.hasMany(Videos, {
+  foreignKey: "user_id",
+});
