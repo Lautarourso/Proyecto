@@ -5,5 +5,5 @@ import { verifyToken, verifyAdmin } from "../middlewares/auth.middleware.js";
 const router = Router();
 
 router.post("/", verifyToken, VideoController.UploadV);
-router.get("/videos", verifyToken, VideoController)
+router.get("/videos", verifyToken, VideoController.GetV)
 export default router;
