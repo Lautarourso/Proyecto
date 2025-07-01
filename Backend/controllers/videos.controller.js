@@ -15,4 +15,13 @@ const UploadV = async (req,res) => {
     }
 };
 
-export default { UploadV};
+const GetV = async (req, res) => {
+    try {
+        const videos = await videosService.getVideosById(decoded.id);
+        res.json(videos);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+export default { UploadV, GetV};
