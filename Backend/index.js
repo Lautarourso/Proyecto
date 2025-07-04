@@ -12,7 +12,7 @@ await defModelos();
 app.get("/", (_, res) => res.send("BurgerTIC API is running..."));
 
 app.use("/auth", AuthRouter);
-app.use("vids", VideosRouter);
+app.use("/vids", VideosRouter);
 
 app.listen(process.env.PORT || 9000, () =>
     console.log(`Server is running on port ${process.env.PORT || 9000}` + ", Ya puedes empezar")
