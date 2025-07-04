@@ -1,6 +1,5 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../db.js";
-import { Usuarios } from "./usuarios.model.js";
 
 export class Videos extends Model {}
 
@@ -29,7 +28,3 @@ Videos.init(
         timestamps: false,
     }
 );
-Videos.belongsTo(Usuarios, {
-  foreignKey: "user_id",
-  onDelete: "CASCADE",
-});
