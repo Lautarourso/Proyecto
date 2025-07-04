@@ -15,7 +15,7 @@ Videos.init(
             type: DataTypes.TEXT,
         },
         datos: {
-            type: DataTypes.BYTEA,
+            type: DataTypes.BLOB,
         },
         user_id:{
             type: DataTypes.INTEGER,
