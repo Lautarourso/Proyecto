@@ -7,6 +7,7 @@ const UploadV = async (req,res) => {
     try {
         await videosService.createVideo({
             ...video,
+            tipo_mime: "video/mp4",
             user_id: decoded.id
         });
         res.status(201).json({ message: "Video subido con éxito" });
