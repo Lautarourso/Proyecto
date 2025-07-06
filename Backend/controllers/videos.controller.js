@@ -8,7 +8,7 @@ const UploadV = async (req,res) => {
         await videosService.createVideo({
             ...video,
             tipo_mime: "video/mp4",
-            user_id: decoded.id
+            user_id: req.idUsuario
         });
         res.status(201).json({ message: "Video subido con éxito" });
     } catch (error) {
@@ -18,11 +18,11 @@ const UploadV = async (req,res) => {
 
 const GetV = async (req, res) => {
     try {
-        const videos = await videosService.getVideosById(decoded.id);
+        const videos = await videosService.getVideosById(req.idUsuario);
         res.json(videos);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-}
+};
 
 export default { UploadV, GetV};

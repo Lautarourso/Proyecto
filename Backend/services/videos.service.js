@@ -5,7 +5,7 @@ const createVideo = async (video) => {
 };
 
 const getVideosById = async (id) => {
-    return await Videos.findAll({ where: { id_usuario: id } });
+    return await Videos.findAll({ where: { user_id: id } });
   };
   
 
