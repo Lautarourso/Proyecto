@@ -137,3 +137,43 @@ body {
   z-index: 9999;
   transition: width 0.1s ease-out;
 }
+
+/* Estilos para validación */
+.was-validated .form-control:invalid {
+  border-color: #dc3545;
+}
+
+.was-validated .form-control:valid {
+  border-color: #28a745;
+}
+
+.invalid-feedback {
+  display: none;
+  color: #dc3545;
+}
+
+.was-validated .form-control:invalid ~ .invalid-feedback,
+.was-validated .form-control:valid ~ .invalid-feedback.dynamic-error {
+  display: block;
+}
+
+/* Estilos para los placeholders de video */
+.video-placeholder {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.video-placeholder:hover {
+  transform: scale(1.02);
+}
+
+/* Estilos para el botón de cerrar sesión */
+.btn-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
