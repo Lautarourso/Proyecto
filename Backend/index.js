@@ -1,10 +1,18 @@
 import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 import AuthRouter from "./routes/auth.router.js";
 import VideosRouter from "./routes/vids.router.js";
 import cors from "cors";
 import "dotenv/config";
 import { defModelos } from "./models/models.js";
 const app = express();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.static(path.join(__dirname, '../Frontend')));
+
 
 app.use(express.json());
 app.use(cors());

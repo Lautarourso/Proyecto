@@ -247,19 +247,20 @@
 
         const data = await response.json();
 
-        if (response.ok) {
-          await showAlert('success', 'Inicio de sesión exitoso', 'Bienvenido a CalibraX');
-          // Guardar token y redirigir
-          localStorage.setItem('authToken', data.token);
-          window.location.href = "videos.html";
-        } else {
-          await showAlert('error', 'Error', data.message || 'Error al iniciar sesión');
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        await showAlert('error', 'Error', 'Error en el servidor');
-      }
+          if (response.ok) {
+      await showAlert('success', 'Inicio de sesión exitoso', 'Bienvenido a CalibraX');
+      localStorage.setItem('authToken', data.token);
+      window.location.href = "http://localhost:9000/videos.html";
+    } else {
+      await showAlert('error', 'Error', data.message || 'Error al iniciar sesión');
     }
+  } catch (error) {
+    console.error("Error:", error);
+    await showAlert('error', 'Error', 'Error en el servidor');
+  }
+
+  return false; // 👈 asegura que nunca haga submit normal
+}
 
     // Funciones para mostrar modales
     function mostrarRegistro() {
