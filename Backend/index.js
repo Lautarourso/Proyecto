@@ -37,4 +37,7 @@ app.listen(process.env.PORT || 9000, () =>
 "email": "lautarourso@gmail.com",
 "password": "Lautaro"
 
+
+npm install express cors dotenv jsonwebtoken sequelize mysql2
+
 */
