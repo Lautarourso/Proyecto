@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CalibraX</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600&family=Racing+Sans+One&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
-  <!-- SweetAlert para mensajes -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
-
-<!-- Barra de progreso -->
-<div id="progressBar" class="progress-bar-custom"></div>
-
   <!-- HEADER -->
   <header class="header-custom">
     <div class="container d-flex justify-content-between align-items-center py-3">
@@ -41,77 +36,23 @@
     </div>
   </section>
 
-  <!-- INFO SECTION -->
-  <section class="info-section py-5">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-6">
-          <h2 class="title-custom mb-4">Ofrecemos soluciones para compañias del sector gasifico y petrolero</h2>
-          <p class="roboto-text">CalibraX nació en 2025 con la idea de modernizar la industria del gas y el petróleo. Nuestra propuesta busca resolver una falla común en la construcción de gasoductos: las deformaciones internas que pueden dañar equipos costosos y generar problemas ambientales. Desarrollamos un dispositivo capaz de detectar dónde, cómo y cuándo ocurren estas fallas antes de que sea tarde. Apuntamos a que empresas como BAHISA puedan trabajar con más seguridad, ahorrar plata y evitar problemas que antes eran casi inevitables. Nuestra meta es simple: hacer que algo tan técnico como un gasoducto también pueda ser inteligente.</p>
-          <button class="btn-orange-custom mt-3">Ver trabajos</button>
-        </div>
-        <div class="col-md-6 mt-4 mt-md-0">
-          <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
-              <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
-              <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
-            </div>
-            <div class="carousel-inner rounded">
-              <div class="carousel-item active">
-                <img src="img/imagen1.jpg" class="d-block w-100" alt="Sistema de monitoreo">
-              </div>
-              <div class="carousel-item">
-                <img src="img/imagen2.jpg" class="d-block w-100" alt="Tecnología aplicada">
-              </div>
-              <div class="carousel-item">
-                <img src="img/imagen3.jpg" class="d-block w-100" alt="Equipo trabajando">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACTO -->
-  <section class="contact-section text-center py-5">
-    <div class="container">
-      <h2 class="contact-title mb-4">¿Dudas? ¿Consultas?<br>¡Contactanos!</h2>
-      <button class="btn-orange-custom">Contacto</button>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer-custom py-4">
-    <div class="container d-flex justify-content-between align-items-center">
-      <img src="img/logo.png" alt="Logo CalibraX" height="40">
-      <p class="mb-0 footer-text">© 2025 CALIBRAX - TODOS LOS DERECHOS RESERVADOS</p>
-      <div>
-        <a href="#" class="footer-link me-3">Inicio</a>
-        <a href="#" class="footer-link me-3">Servicios</a>
-        <a href="#" class="footer-link">Contacto</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Modal Inicio sesion -->
+  <!-- MODAL LOGIN -->
   <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header modal-header-custom">
           <h5 class="modal-title">INICIAR SESIÓN</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <form id="sesionForm" onsubmit="Iniciosesion(event)">
+          <form id="sesionForm">
             <div class="mb-3">
               <label class="form-label">MAIL</label>
-              <input type="email" class="form-control" id="Iemail" required>
+              <input type="email" class="form-control" id="Iemail" required />
             </div>
             <div class="mb-3">
               <label class="form-label">CONTRASEÑA</label>
-              <input type="password" class="form-control" id="Ipassword" required>
+              <input type="password" class="form-control" id="Ipassword" required />
             </div>
             <button type="submit" class="btn-orange-custom w-100">Iniciar</button>
           </form>
@@ -126,176 +67,43 @@
       <div class="modal-content">
         <div class="modal-header modal-header-custom">
           <h5 class="modal-title">REGISTRO</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <form id="registroForm" onsubmit="validarRegistro(event)">
+          <form id="registroForm">
             <div class="mb-3">
               <label class="form-label">NOMBRE</label>
               <input type="text" class="form-control" id="nombre" required>
-              <div class="invalid-feedback">Por favor ingresa tu nombre</div>
             </div>
             <div class="mb-3">
               <label class="form-label">APELLIDO</label>
               <input type="text" class="form-control" id="apellido" required>
-              <div class="invalid-feedback">Por favor ingresa tu apellido</div>
             </div>
             <div class="mb-3">
-              <label class="form-label">DOCUMENTO DE IDENTIDAD NACIONAL</label>
+              <label class="form-label">DNI</label>
               <input type="text" class="form-control" id="dni" required>
-              <div class="invalid-feedback">Por favor ingresa tu documento</div>
             </div>
             <div class="mb-3">
               <label class="form-label">MAIL</label>
               <input type="email" class="form-control" id="email" required>
-              <div class="invalid-feedback">Por favor ingresa un email válido</div>
             </div>
             <div class="mb-3">
               <label class="form-label">CONTRASEÑA</label>
-              <input type="password" class="form-control" id="password" required minlength="6">
-              <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres</div>
+              <input type="password" class="form-control" id="password" required>
             </div>
             <div class="mb-3">
               <label class="form-label">CONFIRMAR CONTRASEÑA</label>
               <input type="password" class="form-control" id="confirmPassword" required>
-              <div class="invalid-feedback">Las contraseñas no coinciden</div>
             </div>
-            <button type="submit" class="btn-orange-custom w-100">CONTINUAR</button>
+            <button type="submit" class="btn-orange-custom w-100">Registrarse</button>
           </form>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- BOOTSTRAP & TU JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Función para mostrar mensajes con SweetAlert
-    function showAlert(icon, title, text) {
-      return Swal.fire({
-        icon: icon,
-        title: title,
-        text: text,
-        confirmButtonColor: '#E24B16'
-      });
-    }
-
-    // Función para registrar usuario
-    async function validarRegistro(event) {
-      event.preventDefault();
-      
-      const form = document.getElementById('registroForm');
-      const formData = {
-        nombre: document.getElementById('nombre').value,
-        apellido: document.getElementById('apellido').value,
-        dni: document.getElementById('dni').value,
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value,
-        confirmPassword: document.getElementById('confirmPassword').value
-      };
-
-      form.classList.add('was-validated');
-
-      // Validación de contraseñas
-      if (formData.password !== formData.confirmPassword) {
-        document.getElementById('confirmPassword').classList.add('is-invalid');
-        return false;
-      }
-
-      if (!form.checkValidity()) return false;
-
-      try {
-        const response = await fetch("http://localhost:9000/auth/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData)
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          await showAlert('success', 'Registro exitoso', 'Tu cuenta ha sido creada correctamente');
-          // Cerrar modal y abrir login
-          bootstrap.Modal.getInstance(document.getElementById('registroModal')).hide();
-          mostrarLogin();
-        } else {
-          await showAlert('error', 'Error', data.message || 'Error al registrar');
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        await showAlert('error', 'Error', 'Error en el servidor');
-      }
-    }
-
-    // Función para iniciar sesión
-    async function Iniciosesion(event) {
-      event.preventDefault();
-      
-      const form = document.getElementById('sesionForm');
-      const formData = {
-        email: document.getElementById('Iemail').value,
-        password: document.getElementById('Ipassword').value
-      };
-
-      form.classList.add('was-validated');
-      if (!form.checkValidity()) return false;
-
-      try {
-        const response = await fetch("http://localhost:9000/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData)
-        });
-
-        const data = await response.json();
-
-          if (response.ok) {
-      await showAlert('success', 'Inicio de sesión exitoso', 'Bienvenido a CalibraX');
-      localStorage.setItem('authToken', data.token);
-      window.location.href = "http://localhost:9000/videos.html";
-    } else {
-      await showAlert('error', 'Error', data.message || 'Error al iniciar sesión');
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    await showAlert('error', 'Error', 'Error en el servidor');
-  }
-
-  return false; // 👈 asegura que nunca haga submit normal
-}
-
-    // Funciones para mostrar modales
-    function mostrarRegistro() {
-      const form = document.getElementById('registroForm');
-      form.classList.remove('was-validated');
-      form.reset();
-      new bootstrap.Modal(document.getElementById('registroModal')).show();
-    }
-
-    function mostrarLogin() {
-      const form = document.getElementById('sesionForm');
-      form.classList.remove('was-validated');
-      form.reset();
-      new bootstrap.Modal(document.getElementById('loginModal')).show();
-    }
-
-    // Barra de progreso al hacer scroll
-    window.addEventListener('scroll', function() {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      document.getElementById('progressBar').style.width = scrolled + '%';
-      
-      const progressBar = document.getElementById('progressBar');
-      if (winScroll > 100) {
-        progressBar.style.opacity = '1';
-      } else {
-        progressBar.style.opacity = '0';
-      }
-    });
-
-    // Inicializar la barra como invisible
-    document.getElementById('progressBar').style.opacity = '0';
-  </script>
+  <script src="app.main.js"></script>
 </body>
-<script src="app.main.js"></script>
 </html>
