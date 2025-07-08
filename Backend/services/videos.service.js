@@ -1,15 +1,21 @@
-import { Videos } from '../models/videos.model.js';
+    import { Videos } from '../models/videos.model.js';
 
-const createVideo = async (video) => {
-    return await Videos.create(video);
+    const createVideo = async (video) => {
+        return await Videos.create(video);
+    };
+
+   const getVideosById = async (id) => {
+  return await Videos.findAll({
+    where: { user_id: id },
+    attributes: ['id', 'tipo_mime', 'datos'], // incluir el BLOB
+  });
 };
 
-const getVideosById = async (id) => {
-    return await Videos.findAll({ where: { user_id: id } });
-  };
-  
 
-export default {
-    createVideo,
-    getVideosById,
-};
+    
+   
+
+    export default {
+        createVideo,
+        getVideosById,
+    };

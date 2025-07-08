@@ -39,6 +39,7 @@ app.listen(process.env.PORT || 9000, () =>
 
 pip install node
 npm install express cors dotenv jsonwebtoken sequelize mysql2
+npm install multer
 
 http://localhost:9000/mainpage.html
 
