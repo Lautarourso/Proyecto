@@ -20,11 +20,14 @@ const UploadV = async (req,res) => {
 const GetV = async (req, res) => {
   try {
     const videos = await videosService.getVideosById(req.idUsuario);
+    console.log("Videos encontrados:", videos);
     res.json(videos);
   } catch (error) {
+    console.error("Error al obtener videos:", error);
     res.status(500).json({ message: error.message });
   }
 };
+
 
 
 

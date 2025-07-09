@@ -31,32 +31,40 @@ document.addEventListener("DOMContentLoaded", async () => {
     info.style.display = "none";
 
     videos.forEach(video => {
+  // Validar que el campo datos exista y tenga buffer
   if (!video.datos || !video.datos.data) {
     console.warn("Video sin datos:", video);
     return;
   }
 
-  // 1. Convertir el buffer a Uint8Array
+  // Convertir el buffer a Uint8Array (para usarlo como Blob)
   const byteArray = new Uint8Array(video.datos.data);
-
-  // 2. Crear un Blob desde el array binario
   const blob = new Blob([byteArray], { type: video.tipo_mime });
 
-  // 3. Crear una URL temporal desde el Blob
+  // Crear una URL temporal para el video
   const videoURL = URL.createObjectURL(blob);
 
-  // 4. Insertar el video en el DOM
+  // Formatear la fecha
+  const fecha = new Date(video.fecha).toLocaleString('es-AR');
+
+  // Crear el contenedor del video
   const div = document.createElement("div");
   div.classList.add("video-placeholder");
+
   div.innerHTML = `
-    <video controls width="100%" height="100%">
-      <source src="${videoURL}" type="${video.tipo_mime}">
-      Tu navegador no soporta video HTML5.
-    </video>
-    <p class="mt-2 text-center">Video #${video.id}</p>
-  `;
+  <video controls width="100%" height="100%">
+    <source src="${videoURL}" type="${video.tipo_mime}">
+    Tu navegador no soporta video HTML5.
+  </video>
+  <div class="mt-2 text-center">
+    <p class="mb-1">Video #${video.id}</p>
+    <p class="text-muted small">${fecha}</p>
+  </div>
+`;
+
   container.appendChild(div);
 });
+
 
 
 

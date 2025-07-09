@@ -19,7 +19,11 @@ Videos.init(
         user_id:{
             type: DataTypes.INTEGER,
             allowNull: false
-        }
+        },
+        fecha: {
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW // ✔️ Se autocompleta al crear el video
+  }
        
     },
     {

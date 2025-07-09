@@ -7,7 +7,7 @@
    const getVideosById = async (id) => {
   return await Videos.findAll({
     where: { user_id: id },
-    attributes: ['id', 'tipo_mime', 'datos'], // incluir el BLOB
+    attributes: ['id', 'tipo_mime', 'datos', 'fecha'], // incluir el BLOB
   });
 };
 
