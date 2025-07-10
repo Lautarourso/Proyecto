@@ -1,20 +1,30 @@
 import videosService from "../services/videos.service.js";
+import fs from 'fs/promises'; // al principio del archivo
 
-const UploadV = async (req,res) => {
-    const video = req.body;
+const UploadV = async (req, res) => {
+  const video = req.body;
 
-    
-    try {
-        await videosService.createVideo({
-            ...video,
-            datos: req.file.buffer,   // BLOB
-            tipo_mime: "video/mp4",
-            user_id: req.idUsuario
-        });
-        res.status(201).json({ message: "Video subido con éxito" });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+  try {
+    const filePath = req.file.path;
+
+    // Leer el archivo como buffer
+    const buffer = await fs.readFile(filePath);
+
+    await videosService.createVideo({
+      ...video,
+      datos: buffer,
+      tipo_mime: req.file.mimetype,
+      user_id: req.idUsuario
+    });
+
+    // Opcional: eliminar archivo temporal luego de guardarlo
+    await fs.unlink(filePath);
+
+    res.status(201).json({ message: "Video subido con éxito" });
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 const GetV = async (req, res) => {
