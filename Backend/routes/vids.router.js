@@ -1,7 +1,7 @@
 import Router from "express";
 import VideoController from "../controllers/videos.controller.js";
 import { verifyToken, verifyAdmin } from "../middlewares/auth.middleware.js";
-import { upload } from "../middlewares/vids.middleware.js";
+import  upload  from "../middlewares/vids.middleware.js";
 
 const router = Router();
 

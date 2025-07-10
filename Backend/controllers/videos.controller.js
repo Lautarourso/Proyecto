@@ -1,31 +1,42 @@
 import videosService from "../services/videos.service.js";
-import fs from 'fs/promises'; // al principio del archivo
+import cloudinary from "../config/cloudinary.js";
 
 const UploadV = async (req, res) => {
-  const video = req.body;
-
   try {
-    const filePath = req.file.path;
+    if (!req.file) {
+      return res.status(400).json({ message: "No se envió ningún archivo." });
+    }
 
-    // Leer el archivo como buffer
-    const buffer = await fs.readFile(filePath);
+    // Subir a Cloudinary
+    const uploadResult = await cloudinary.uploader.upload_stream(
+      { resource_type: "video", folder: "tus_videos" },
+      async (error, result) => {
+        if (error) {
+          console.error(error);
+          return res.status(500).json({ message: "Error subiendo a Cloudinary" });
+        }
+        const video = req.body
+        // Guarda solo la URL en la DB
+        await videosService.createVideo({
+          ...video,
+          url: result.secure_url,
+          tipo_mime: result.resource_type,
+          user_id: req.idUsuario
+        });
 
-    await videosService.createVideo({
-      ...video,
-      datos: buffer,
-      tipo_mime: req.file.mimetype,
-      user_id: req.idUsuario
-    });
+        res.status(201).json({ message: "Video subido con éxito", url: result.secure_url });
+      }
+    );
 
-    // Opcional: eliminar archivo temporal luego de guardarlo
-    await fs.unlink(filePath);
-
-    res.status(201).json({ message: "Video subido con éxito" });
+    // Pipe para enviarle los datos
+    uploadResult.end(req.file.buffer);
 
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error(error);
+    res.status(500).json({ message: "Error interno del servidor." });
   }
 };
+
 
 const GetV = async (req, res) => {
   try {

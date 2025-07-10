@@ -1,11 +1,12 @@
-import "dotenv/config";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const config = {
-    url: "postgresql://pig_owner:npg_Vh1Im7ZHlDXz@ep-shrill-thunder-acbvarc0-pooler.sa-east-1.aws.neon.tech/pig?sslmode=require",
-    user: "Lautaro", // Tu usuario de base de datos
-    host: "ep-shrill-thunder-acbvarc0-pooler.sa-east-1.aws.neon.tech", // El host de la base de datos
-    database: "pig", // El nombre de tu base de datos
-    password: "npg_Vh1Im7ZHlDXz", // La contraseña de tu base de datos
+    url: "psql 'postgresql://neondb_owner:npg_8AKpoRnSYN0x@ep-green-dawn-acc9cczp-pooler.sa-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'",
+    user: "LAUTARO", // Tu usuario de base de datos
+    host: "ep-green-dawn-acc9cczp-pooler.sa-east-1.aws.neon.tech", // El host de la base de datos
+    database: "neondb", // El nombre de tu base de datos
+    password: "npg_8AKpoRnSYN0x", // La contraseña de tu base de datos
     port: 3000, // El puerto de PostgreSQL (por defecto es 5432)
     ssl: true, // SSL habilitado para conexiones seguras
 };
@@ -13,9 +14,16 @@ export const config = {
 
 import { Sequelize } from "sequelize";
 
-export const sequelize = new Sequelize(
-    config.url
-);
+export const sequelize = new Sequelize(process.env.DB_URL, {
+    dialect: "postgres",
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    },
+    logging: false
+  });
 
 try {
     await sequelize.authenticate();

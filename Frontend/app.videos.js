@@ -31,39 +31,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     info.style.display = "none";
 
     videos.forEach(video => {
-  // Validar que el campo datos exista y tenga buffer
-  if (!video.datos || !video.datos.data) {
-    console.warn("Video sin datos:", video);
-    return;
-  }
-
-  // Convertir el buffer a Uint8Array (para usarlo como Blob)
-  const byteArray = new Uint8Array(video.datos.data);
-  const blob = new Blob([byteArray], { type: video.tipo_mime });
-
-  // Crear una URL temporal para el video
-  const videoURL = URL.createObjectURL(blob);
-
-  // Formatear la fecha
-  const fecha = new Date(video.fecha).toLocaleString('es-AR');
-
-  // Crear el contenedor del video
-  const div = document.createElement("div");
-  div.classList.add("video-placeholder");
-
-  div.innerHTML = `
-  <video controls width="100%" height="100%">
-    <source src="${videoURL}" type="${video.tipo_mime}">
-    Tu navegador no soporta video HTML5.
-  </video>
-  <div class="mt-2 text-center">
-    <p class="mb-1">Video #${video.id}</p>
-    <p class="text-muted small">${fecha}</p>
-  </div>
-`;
-
-  container.appendChild(div);
-});
+      // Validar que haya una URL de Cloudinary
+      if (!video.url) {
+        console.warn("Video sin URL:", video);
+        return;
+      }
+    
+      // Formatear la fecha
+      const fecha = new Date(video.fecha).toLocaleString('es-AR');
+    
+      // Crear el contenedor del video
+      const div = document.createElement("div");
+      div.classList.add("video-placeholder");
+    
+      div.innerHTML = `
+        <video controls width="100%" height="100%">
+          <source src="${video.url}" type="video/mp4">
+          Tu navegador no soporta video HTML5.
+        </video>
+        <div class="mt-2 text-center">
+          <p class="mb-1">Video #${video.id}</p>
+          <p class="text-muted small">${fecha}</p>
+        </div>
+      `;
+    
+      container.appendChild(div);
+    });
+    
 
 
 

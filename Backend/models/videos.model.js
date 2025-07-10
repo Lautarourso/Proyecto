@@ -13,8 +13,8 @@ Videos.init(
         tipo_mime: {
             type: DataTypes.TEXT,
         },
-        datos: {
-            type: DataTypes.BLOB,
+        url: {
+            type: DataTypes.TEXT,
         },
         user_id:{
             type: DataTypes.INTEGER,
