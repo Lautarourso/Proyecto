@@ -4,64 +4,130 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CalibraX</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="css/style.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600&family=Racing+Sans+One&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
 
+  <!-- Preconexiones y fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600&family=Racing+Sans+One&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Estilos personalizados -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- Favicon -->
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+</head>
 <body>
+  <!-- Barra de progreso -->
+  <div id="progressBar" class="progress-bar-custom"></div>
+
   <!-- HEADER -->
-  <header class="header-custom">
+  <header class="header-custom sticky-top">
     <div class="container d-flex justify-content-between align-items-center py-3">
-      <img src="img/logo.png" alt="Logo CalibraX" height="50">
-      <nav>
-        <a href="#" class="nav-link-custom mx-3">Servicios</a>
-        <a href="#" class="nav-link-custom mx-3">Quienes somos</a>
-        <a href="#" class="nav-link-custom mx-3">Contacto</a>
+      <a href="#" class="d-flex align-items-center text-decoration-none">
+        <img src="img/logo.png" alt="Logo CalibraX" height="50" class="d-inline-block align-top me-2">
+        <span class="fs-4 fw-bold text-dark d-none d-md-inline">CALIBRAX</span>
+      </a>
+      <button class="navbar-toggler d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <i class="bi bi-list" style="font-size: 1.5rem;"></i>
+      </button>
+      <nav class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+        <div class="d-flex flex-column flex-md-row align-items-center">
+          <a href="#" class="nav-link-custom mx-2 mx-md-3">Servicios</a>
+          <a href="#" class="nav-link-custom mx-2 mx-md-3">Quiénes somos</a>
+          <a href="#" class="nav-link-custom mx-2 mx-md-3">Contacto</a>
+          <div class="d-flex mt-2 mt-md-0">
+            <button class="btn btn-sm btn-outline-orange mx-1" onclick="mostrarLogin()">Ingresar</button>
+            <button class="btn btn-sm btn-orange-custom mx-1" onclick="mostrarRegistro()">Registrarse</button>
+          </div>
+        </div>
       </nav>
     </div>
   </header>
 
   <!-- HERO -->
   <section class="hero-section text-center text-light py-5">
-    <div class="container">
-      <h2 class="mb-0">Bienvenido a</h2>
-      <h1 class="display-4 fw-bold my-3">CalibraX</h1>
-      <div class="mt-4">
-        <button class="btn btn-light mx-2 px-4" onclick="mostrarLogin()">Iniciar Sesión</button>
-        <button class="btn btn-light mx-2 px-4" onclick="mostrarRegistro()">Registrarse</button>
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="mb-3 animate__animated animate__fadeInDown">Bienvenido a</h2>
+          <h1 class="display-3 fw-bold my-3 animate__animated animate__fadeIn animate__delay-1s">CALIBRAX</h1>
+          <div class="mt-4 d-flex justify-content-center gap-3">
+            <button class="btn btn-light px-4 py-2 animate__animated animate__fadeInUp animate__delay-1s" onclick="mostrarLogin()">
+              <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
+            </button>
+            <button class="btn btn-outline-light px-4 py-2 animate__animated animate__fadeInUp animate__delay-1s" onclick="mostrarRegistro()">
+              <i class="bi bi-person-plus me-2"></i>Registrarse
+            </button>
+          </div>
+          <p class="racing-text mt-4 animate__animated animate__fadeIn animate__delay-2s">El futuro de las cañerías, hoy</p>
+        </div>
       </div>
-      <p class="racing-text mt-4">El futuro de las cañerías, hoy</p>
     </div>
   </section>
-<!-- INFO SECTION -->
+
+  <!-- INFO SECTION -->
   <section class="info-section py-5">
     <div class="container">
       <div class="row align-items-center">
-        <div class="col-md-6">
-          <h2 class="title-custom mb-4">Ofrecemos soluciones para compañias del sector gasifico y petrolero</h2>
-          <p class="roboto-text">CalibraX nació en 2025 con la idea de modernizar la industria del gas y el petróleo. Nuestra propuesta busca resolver una falla común en la construcción de gasoductos: las deformaciones internas que pueden dañar equipos costosos y generar problemas ambientales. Desarrollamos un dispositivo capaz de detectar dónde, cómo y cuándo ocurren estas fallas antes de que sea tarde. Apuntamos a que empresas como BAHISA puedan trabajar con más seguridad, ahorrar plata y evitar problemas que antes eran casi inevitables. Nuestra meta es simple: hacer que algo tan técnico como un gasoducto también pueda ser inteligente.</p>
-          <button class="btn-orange-custom mt-3">Ver trabajos</button>
+        <div class="col-lg-6 order-lg-1 order-2">
+          <h2 class="title-custom mb-4">Soluciones para el sector gasífero y petrolero</h2>
+          <p class="roboto-text mb-4">CalibraX nació en 2025 con la idea de modernizar la industria del gas y el petróleo. Nuestra propuesta busca resolver una falla común en la construcción de gasoductos: las deformaciones internas que pueden dañar equipos costosos y generar problemas ambientales.</p>
+          <div class="d-flex align-items-center mb-3">
+            <div class="me-3 text-orange">
+              <i class="bi bi-check-circle-fill fs-4"></i>
+            </div>
+            <div>Sensores de alta precisión</div>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <div class="me-3 text-orange">
+              <i class="bi bi-check-circle-fill fs-4"></i>
+            </div>
+            <div>Monitoreo en tiempo real</div>
+          </div>
+          <div class="d-flex align-items-center mb-4">
+            <div class="me-3 text-orange">
+              <i class="bi bi-check-circle-fill fs-4"></i>
+            </div>
+            <div>Alertas inmediatas</div>
+          </div>
+          <button class="btn-orange-custom mt-3">
+            <i class="bi bi-eye-fill me-2"></i>Ver trabajos
+          </button>
         </div>
-        <div class="col-md-6 mt-4 mt-md-0">
-          <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="col-lg-6 order-lg-2 order-1 mb-4 mb-lg-0">
+          <div id="mainCarousel" class="carousel slide carousel-fade shadow-lg" data-bs-ride="carousel">
             <div class="carousel-indicators">
               <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
               <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
               <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
             </div>
-            <div class="carousel-inner rounded">
+            <div class="carousel-inner rounded-3 overflow-hidden">
               <div class="carousel-item active">
-                <img src="img/imagen1.jpg" class="d-block w-100" alt="Sistema de monitoreo">
+                <img src="img/imagen1.jpg" class="d-block w-100" alt="Sistema de monitoreo" loading="lazy">
               </div>
               <div class="carousel-item">
-                <img src="img/imagen2.jpg" class="d-block w-100" alt="Tecnología aplicada">
+                <img src="img/imagen2.jpg" class="d-block w-100" alt="Tecnología de sensores" loading="lazy">
               </div>
               <div class="carousel-item">
-                <img src="img/imagen3.jpg" class="d-block w-100" alt="Equipo trabajando">
+                <img src="img/imagen3.jpg" class="d-block w-100" alt="Equipo de CalibraX trabajando" loading="lazy">
               </div>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
           </div>
         </div>
       </div>
@@ -70,17 +136,19 @@
 
   <!-- CONTACTO -->
   <section class="contact-section text-center py-5">
-    <div class="container">
-      <h2 class="contact-title mb-4">¿Dudas? ¿Consultas?<br>¡Contactanos!</h2>
-      <button class="btn-orange-custom">Contacto</button>
+    <div class="container py-4">
+      <h2 class="contact-title mb-4">¿Dudas? ¿Consultas?<br>¡Contáctanos!</h2>
+      <button class="btn-orange-custom px-5" onclick="showAlert('info', 'Contacto', 'Este botón se puede personalizar o enlazar a un formulario')">
+        <i class="bi bi-envelope-fill me-2"></i>Contacto
+      </button>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- FOOTER con enlaces -->
   <footer class="footer-custom py-4">
-    <div class="container d-flex justify-content-between align-items-center">
+    <div class="container d-flex justify-content-between align-items-center flex-column flex-md-row">
       <img src="img/logo.png" alt="Logo CalibraX" height="40">
-      <p class="mb-0 footer-text">© 2025 CALIBRAX - TODOS LOS DERECHOS RESERVADOS</p>
+      <p class="mb-2 mb-md-0 footer-text">© 2025 CALIBRAX - TODOS LOS DERECHOS RESERVADOS</p>
       <div>
         <a href="#" class="footer-link me-3">Inicio</a>
         <a href="#" class="footer-link me-3">Servicios</a>
@@ -89,9 +157,8 @@
     </div>
   </footer>
 
-  <!-- Modal Inicio sesion -->
-  <!-- MODAL LOGIN -->
-  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+  <!-- MODALES compatibles con app.main.js -->
+  <div id="loginModal" class="modal fade" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header modal-header-custom">
@@ -115,8 +182,7 @@
     </div>
   </div>
 
-  <!-- MODAL REGISTRO -->
-  <div class="modal fade" id="registroModal" tabindex="-1" aria-hidden="true">
+  <div id="registroModal" class="modal fade" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header modal-header-custom">
@@ -156,38 +222,22 @@
     </div>
   </div>
 
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.main.js"></script>
   <script>
-    // Función para mostrar mensajes con SweetAlert
-    function showAlert(icon, title, text) {
-      return Swal.fire({
-        icon: icon,
-        title: title,
-        text: text,
-        confirmButtonColor: '#E24B16'
-      });
-    }
-
-    
-  window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function() {
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = (winScroll / height) * 100;
-      document.getElementById('progressBar').style.width = scrolled + '%';
-      
       const progressBar = document.getElementById('progressBar');
-      if (winScroll > 100) {
-        progressBar.style.opacity = '1';
-      } else {
-        progressBar.style.opacity = '0';
-      }
+      progressBar.style.width = scrolled + '%';
+      progressBar.style.opacity = winScroll > 100 ? '1' : '0';
     });
 
-    // Inicializar la barra como invisible
-    document.getElementById('progressBar').style.opacity = '0';
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('progressBar').style.opacity = '0';
+    });
   </script>
-
-  <!-- BOOTSTRAP & TU JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="app.main.js"></script>
 </body>
 </html>
