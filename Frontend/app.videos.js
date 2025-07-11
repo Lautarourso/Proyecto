@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     
       // Crear el contenedor del video
       const div = document.createElement("div");
-      div.classList.add("video-placeholder");
     
       div.innerHTML = `
         <video controls width="100%" height="100%">
