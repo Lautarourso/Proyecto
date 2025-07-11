@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import AuthRouter from "./routes/auth.router.js";
+import AnalisisRouter from "./routes/analisis.router.js";
 import VideosRouter from "./routes/vids.router.js";
 import cors from "cors";
 import "dotenv/config";
@@ -22,6 +23,8 @@ app.get("/", (_, res) => res.send("BurgerTIC API is running..."));
 
 app.use("/auth", AuthRouter);
 app.use("/vids", VideosRouter);
+app.use("/analisis", AnalisisRouter);
+
 
 app.listen(process.env.PORT || 9000, () =>
     console.log(`Server is running on port ${process.env.PORT || 9000}` + ", Ya puedes empezar")

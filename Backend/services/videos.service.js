@@ -10,10 +10,10 @@
     attributes: ['id', 'tipo_mime', 'url', 'fecha'], 
   });
 };
-
-
-    
    
+
+
+
 
     export default {
         createVideo,
