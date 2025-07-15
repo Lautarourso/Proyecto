@@ -49,8 +49,7 @@ npm install multer
 npm install cloudinary multer
 
 
-http://localhost:9000/mainpage.html
-
+http://10.4.13.29:9000/
 
 cp .env.example .env
 
