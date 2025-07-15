@@ -19,14 +19,16 @@ app.use(express.static(path.join(__dirname, '../Frontend')));
 app.use(express.json());
 app.use(cors());
 await defModelos();
-app.get("/", (_, res) => res.send("BurgerTIC API is running..."));
-
+app.get("/", (_, res) =>
+    res.sendFile(path.join(__dirname, '../Frontend/mainpage.html'))
+  );
+  
 app.use("/auth", AuthRouter);
 app.use("/vids", VideosRouter);
 app.use("/analisis", AnalisisRouter);
 
 
-app.listen(process.env.PORT || 9000, () =>
+app.listen(process.env.PORT || 9000, '0.0.0.0',  () =>
     console.log(`Server is running on port ${process.env.PORT || 9000}` + ", Ya puedes empezar")
 );
 
