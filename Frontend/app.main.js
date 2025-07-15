@@ -72,7 +72,7 @@ document.getElementById('sesionForm').addEventListener('submit', async (e) => {
   const password = document.getElementById('Ipassword').value;
 
   try {
-    const res = await fetch('http://10.4.13.29:9000//auth/login', {
+    const res = await fetch('http://10.4.13.29:9000/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
