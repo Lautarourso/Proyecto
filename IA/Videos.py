@@ -38,16 +38,20 @@ if response.status_code != 200:
 
 videos = response.json()
 
+
 if not videos:
     print("No hay videos para este usuario.")
 else:
-    latest_video = sorted(videos, key=lambda v: v['fecha'])[-1]
-    video_url = latest_video['url']
-    print("Descargando desde:", video_url)
-
     out_folder = "descargadas"
     os.makedirs(out_folder, exist_ok=True)
-    destino = os.path.join(out_folder, f"{latest_video['id']}.mp4")
+    
+    for video in videos:
+        video_url = video['url']
+        video_id = video['id']
+        destino = os.path.join(out_folder, f"{video_id}.mp4")
+        
+        print(f"Descargando video ID {video_id} desde {video_url}")
+        urlretrieve(video_url, destino)
+        print(f"Video ID {video_id} guardado en: {destino}")
 
-    urlretrieve(video_url, destino)
-    print("Video guardado en:", destino)
+print("Descarga de todos los videos completada.")
