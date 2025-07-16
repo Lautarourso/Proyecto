@@ -7,22 +7,26 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
+login_url = "http://localhost:9000/auth/login"
+api_url = "http://localhost:9000/vids/videos"
+
 email = os.getenv("USER_EMAIL")
 password = os.getenv("USER_PASS")
 
-res = requests.post("http://localhost:9000/auth/login", json={
+resp = requests.post(login_url, json={
     "email": email,
     "password": password
 })
 
-resp = requests.post(login_url, json=credentials)
+
+
 if resp.status_code != 200:
     print("Error al loguearse:", resp.text)
     exit()
 
 token = resp.json()["token"]
 print("Token recibido:", token)
-api_url = "http://localhost:9000/vids/videos"
 
 
 

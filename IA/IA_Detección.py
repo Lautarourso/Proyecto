@@ -37,6 +37,8 @@ class DatasetConfig:
     IMG_HEIGHT:  int = 224
     IMG_WIDTH:   int = 224
     CHANNELS:    int = 3
+    DATA_ROOT_TRAIN: str = "C:\Users\Administrador\Downloads\Proyecto-nuevo-proyecto\Proyecto\IA\Dataset\Train_Dataset"
+    DATA_ROOT_VALID: str =  "C:\Users\Administrador\Downloads\Proyecto-nuevo-proyecto\Proyecto\IA\Dataset\Validation_Dataset"
 
 #@dataclass(frozen=True)
 class TrainingConfig:
@@ -45,6 +47,23 @@ class TrainingConfig:
     LEARNING_RATE:    float = 0.0001
     DROPOUT:          float = 0.6
     LAYERS_FINE_TUNE: int   = 8 
+
+
+train_dataset = image_dataset_from_directory(directory=DatasetConfig.DATA_ROOT_TRAIN,
+                                             batch_size=TrainingConfig.BATCH_SIZE,
+                                             shuffle=True,
+                                             seed=SEED_VALUE,
+                                             label_mode='int', # integer encoding (No One-Hot)
+                                             image_size=(DatasetConfig.IMG_HEIGHT, DatasetConfig.IMG_WIDTH),
+                                            )
+
+valid_dataset = image_dataset_from_directory(directory=DatasetConfig.DATA_ROOT_VALID,
+                                             batch_size=TrainingConfig.BATCH_SIZE,
+                                             shuffle=True,
+                                             seed=SEED_VALUE,
+                                             label_mode='int', 
+                                             image_size=(DatasetConfig.IMG_HEIGHT, DatasetConfig.IMG_WIDTH),
+                                            )
 
 
 input_shape = (DatasetConfig.IMG_HEIGHT, DatasetConfig.IMG_WIDTH, DatasetConfig.CHANNELS)
