@@ -1,14 +1,19 @@
 import requests
 import os
 from urllib.request import urlretrieve
+from dotenv import load_dotenv
 
-# Token JWT que obtuviste al loguearte (obligatorio para autenticar la petición)
+# Obtener el token de autenticación para logearse, y descargar el video
 
-login_url = "http://localhost:9000/auth/login"  
-credentials = {
-    "email": "lautarourso@gmail.com",     
-    "password": "Lautaro"               
-}
+load_dotenv()
+
+email = os.getenv("USER_EMAIL")
+password = os.getenv("USER_PASS")
+
+res = requests.post("http://localhost:9000/auth/login", json={
+    "email": email,
+    "password": password
+})
 
 resp = requests.post(login_url, json=credentials)
 if resp.status_code != 200:
@@ -17,7 +22,7 @@ if resp.status_code != 200:
 
 token = resp.json()["token"]
 print("Token recibido:", token)
-api_url = "http://localhost:9000/auth/videos"
+api_url = "http://localhost:9000/vids/videos"
 
 
 
