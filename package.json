@@ -2,7 +2,7 @@
   "name": "burgertic",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "Backend/index.js",
   "type": "module",
   "scripts": {
     "start": "node Backend/index.js",
