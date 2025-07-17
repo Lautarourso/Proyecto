@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cors());
 await defModelos();
 app.get("/", (req, res) => {
-  res.sendFile("index.html", { root: "Frontend" });
+  res.sendFile("mainpage.html", { root: "Frontend" });
 });
   
 app.use("/auth", AuthRouter);
@@ -49,8 +49,7 @@ npm install multer
 npm install cloudinary multer
 
 
-http://10.4.13.29:9000/
-
+http://10.8.5.99:9000/
 cp .env.example .env
 
 
