@@ -92,3 +92,25 @@ document.getElementById('sesionForm').addEventListener('submit', async (e) => {
     await showAlert('error', 'Error', 'Error al conectar con el servidor');
   }
 });
+
+function mostrarOpcionesContacto() {
+  Swal.fire({
+    title: '¿Cómo querés contactarnos?',
+    icon: 'question',
+    showCancelButton: true,
+    showDenyButton: true,
+    confirmButtonText: '<i class="bi bi-instagram"></i> Instagram',
+    denyButtonText: '<i class="bi bi-whatsapp"></i> WhatsApp',
+    cancelButtonText: 'Cancelar',
+    confirmButtonColor: '#E1306C',
+    denyButtonColor: '#25D366',
+    cancelButtonColor: '#aaa'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.open('https://www.instagram.com/donatosantino/', '_blank');
+    } else if (result.isDenied) {
+      // Aquí más adelante podés agregar acción de WhatsApp
+      showAlert('info', 'Próximamente', 'La opción de WhatsApp estará disponible pronto.');
+    }
+  });
+}
