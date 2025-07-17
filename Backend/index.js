@@ -7,30 +7,38 @@ import VideosRouter from "./routes/vids.router.js";
 import cors from "cors";
 import "dotenv/config";
 import { defModelos } from "./models/models.js";
-const app = express();
-
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(express.static("Frontend"));
+const app = express();
 
+async function startServer() {
+  app.use(express.static("Frontend"));
+  app.use(express.json());
+  app.use(cors());
 
-app.use(express.json());
-app.use(cors());
-await defModelos();
-app.get("/", (req, res) => {
-  res.sendFile("mainpage.html", { root: "Frontend" });
+  await defModelos(); // <- ahora sí lo podés usar
+
+  app.get("/", (req, res) => {
+    res.sendFile("mainpage.html", { root: "Frontend" });
+  });
+
+  app.use("/auth", AuthRouter);
+  app.use("/vids", VideosRouter);
+  app.use("/analisis", AnalisisRouter);
+
+  const PORT = process.env.PORT || 9000;
+  app.listen(PORT, "0.0.0.0", () =>
+    console.log(`Server is running on port ${PORT}, Ya puedes empezar`)
+  );
+}
+
+startServer().catch((err) => {
+  console.error("Error al iniciar el servidor:", err);
+  process.exit(1);
 });
-  
-app.use("/auth", AuthRouter);
-app.use("/vids", VideosRouter);
-app.use("/analisis", AnalisisRouter);
 
-
-app.listen(process.env.PORT || 9000, '0.0.0.0',  () =>
-    console.log(`Server is running on port ${process.env.PORT || 9000}` + ", Ya puedes empezar")
-);
 
 /*
 "nombre": "a",
