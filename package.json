@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node Backend/index.js",
-    "dev": "npx nodemon index.js"
+    "dev": "npx  Backend/index.js"
   },
   "keywords": [],
   "author": "",

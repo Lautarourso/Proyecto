@@ -11,7 +11,7 @@ export { Usuarios, Videos, Analisis };
 export const defModelos = async () => {
   try {
     await sequelize.authenticate();
-    console.log("✔ Connection OK!");
+    console.log("Connection OK!");
 
     // 🔑 Aquí sincronizás los modelos:
     await sequelize.sync({ alter: true }); // crea tablas si no existen

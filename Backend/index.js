@@ -13,15 +13,15 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(express.static(path.join(__dirname, '../Frontend')));
+app.use(express.static("Frontend"));
 
 
 app.use(express.json());
 app.use(cors());
 await defModelos();
-app.get("/", (_, res) =>
-    res.sendFile(path.join(__dirname, '../Frontend/mainpage.html'))
-  );
+app.get("/", (req, res) => {
+  res.sendFile("index.html", { root: "Frontend" });
+});
   
 app.use("/auth", AuthRouter);
 app.use("/vids", VideosRouter);
