@@ -51,7 +51,6 @@ startServer().catch((err) => {
 "email": "lautarourso@gmail.com",
 "password": "Lautaro"
 
-pip install node
 npm install express cors dotenv jsonwebtoken sequelize mysql2
 npm install multer
 npm install cloudinary multer
