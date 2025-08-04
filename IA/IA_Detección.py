@@ -33,7 +33,7 @@ tf.random.set_seed(SEED_VALUE)
 
 #@dataclass(frozen=True)
 class DatasetConfig:
-    NUM_CLASSES: int = 43
+    NUM_CLASSES: int = 3
     IMG_HEIGHT:  int = 224
     IMG_WIDTH:   int = 224
     CHANNELS:    int = 3
