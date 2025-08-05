@@ -10,18 +10,19 @@ import { defModelos } from "./models/models.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const frontendPath = path.join(__dirname, "../Frontend");
 
 const app = express();
 
 async function startServer() {
-  app.use(express.static("Frontend"));
+  app.use(express.static(frontendPath));
   app.use(express.json());
   app.use(cors());
 
   await defModelos(); // <- ahora sí lo podés usar
 
   app.get("/", (req, res) => {
-    res.sendFile("mainpage.html", { root: "Frontend" });
+    res.sendFile("mainpage.html", { root: frontendPath });
   });
 
   app.use("/auth", AuthRouter);
