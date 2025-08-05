@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const response = await fetch("http://10.8.5.99:9000/vids/videos", {
+    const response = await fetch("http://10.4.12.104:9000/vids/videos", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`
