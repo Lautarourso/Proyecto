@@ -75,7 +75,7 @@ document.getElementById('sesionForm').addEventListener('submit', async (e) => {
   const password = document.getElementById('Ipassword').value;
 
   try {
-    const res = await fetch('https://proyecto-production-c233.up.railway.app/auth/register/auth/login', {
+    const res = await fetch('https://proyecto-production-c233.up.railway.app/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
