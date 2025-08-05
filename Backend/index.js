@@ -19,9 +19,7 @@ async function startServer() {
   app.use(express.json());
   app.use(cors());
 
-  app.get("/", (req, res) => {
-    res.send("Servidor activo");
-  });
+
   
   await defModelos(); // <- ahora sí lo podés usar
 
