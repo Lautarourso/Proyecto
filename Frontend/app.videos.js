@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const response = await fetch("http://10.4.12.104:9000/vids/videos", {
+    const response = await fetch("https://proyecto-production-c233.up.railway.app/auth/register/vids/videos", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`

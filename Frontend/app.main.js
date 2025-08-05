@@ -10,6 +10,9 @@ function showAlert(icon, title, text) {
   });
 }
 
+const API_BASE = "https://proyecto-production-c233.up.railway.app";
+
+
 function mostrarLogin() {
   const form = document.getElementById('sesionForm');
   form.reset();
@@ -41,7 +44,7 @@ document.getElementById('registroForm').addEventListener('submit', async (e) => 
   }
 
   try {
-    const res = await fetch('http://10.4.12.104:9000/auth/register', {
+    const res = await fetch("https://proyecto-production-c233.up.railway.app/auth/register", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombre, apellido, dni, email, password })
@@ -72,7 +75,7 @@ document.getElementById('sesionForm').addEventListener('submit', async (e) => {
   const password = document.getElementById('Ipassword').value;
 
   try {
-    const res = await fetch('http://10.4.12.104:9000/auth/login', {
+    const res = await fetch('https://proyecto-production-c233.up.railway.app/auth/register/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
