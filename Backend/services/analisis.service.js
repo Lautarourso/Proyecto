@@ -5,7 +5,9 @@ const createAnalisis = async (analisis) => {
   };
 
   const GetAnalisis = async (analisis) => {
-    return await Analisis.create(analisis);
+    return await Analisis.findAll({
+      where: { id_usuario: id },
+      analisis});
   };
 
   export default {createAnalisis, GetAnalisis};

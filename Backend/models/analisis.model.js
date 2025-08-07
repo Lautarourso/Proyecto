@@ -15,8 +15,30 @@ Analisis.init(
       },
       Duracion: {
         type: DataTypes.INTEGER
-      }
+      },
+      video_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "videos",
+        key: "id",
+      },
     },
+    usuario_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "usuarios",
+        key: "id",
+      },
+    },
+    proyecto_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "proyectos",
+        key: "id",
+      },
+    }
+  },
+
     {
       sequelize,
       modelName: "analisis",
