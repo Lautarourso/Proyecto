@@ -13,4 +13,12 @@ const UploadT = async (req, res) => {
   }
 };
 
-export default { UploadT};
+const GetT = async (req, res) => {
+   try{ const analisis = await Analisis.GetAnalisis();
+    res.json(analisis);
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+};
+
+export default { UploadT, GetT};

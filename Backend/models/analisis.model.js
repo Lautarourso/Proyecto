@@ -13,6 +13,9 @@ Analisis.init(
       tiempo: {
         type: DataTypes.INTEGER,
       },
+      Duracion: {
+        type: DataTypes.INTEGER
+      }
     },
     {
       sequelize,

@@ -5,5 +5,6 @@ const router = Router();
 
 
 router.post("/uptiempo", Analisis.UploadT);
+router.get("/gettiempo", Analisis.GetT);
 
 export default router;
