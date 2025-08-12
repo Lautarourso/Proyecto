@@ -1,13 +1,21 @@
 import Proyectos from "../services/proyectos.service.js";
 
 const UploadP = async (req, res) => {
-    const proyectos = req.body
+  const { analisisData } = req.body;
+
+  if (!analisisData || analisisData.length === 0) {
+    return res.status(400).json({ message: "No se enviaron datos de análisis" });
+  }
+
     try {
       await Proyectos.createProyectos({
-          ...proyectos,
-          Usuario_id: req.idUsuario
+          Usuario_id: req.idUsuario,
+          analisisData
       });
-      res.status(201).json({ message: "Usuario registrado con éxito" });
+      res.status(201).json({
+      message: "Proyecto y análisis creados con éxito",
+      proyecto_id: proyecto.id
+    });
   } catch (error) {
       res.status(500).json({ message: error.message });
   }
