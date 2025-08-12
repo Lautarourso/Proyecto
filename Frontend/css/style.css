@@ -177,3 +177,55 @@ body {
   background-color: #dc3545;
   color: white;
 }
+
+/* Fondo gradiente animado */
+#background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(-45deg, #002244, #003366, #001933, #002b4d);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  z-index: -2;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Typewriter */
+.typewriter {
+  overflow: hidden;
+  border-right: .15em solid var(--naranja);
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink .75s step-end infinite;
+}
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+@keyframes blink {
+  50% { border-color: transparent }
+}
+
+/* Botones hover pro */
+.btn-orange-custom, .btn-outline-light, .btn-light {
+  transition: all 0.3s ease;
+}
+.btn-orange-custom:hover, .btn-outline-light:hover, .btn-light:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Transición al cargar */
+body {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+body.loaded {
+  opacity: 1;
+}
