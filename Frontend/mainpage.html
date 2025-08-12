@@ -27,8 +27,8 @@
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 <body>
-  <!-- Fondo animado -->
-  <div id="background-animation"></div>
+  <!-- Fondo de partículas -->
+  <div id="particles-js"></div>
 
   <!-- Barra de progreso -->
   <div id="progressBar" class="progress-bar-custom"></div>
@@ -230,25 +230,37 @@
   <script src="app.main.js"></script>
 
   <!-- Partículas -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    particlesJS("background-animation", {
-      particles: {
-        number: { value: 60 },
-        color: { value: "#ffffff" },
-        shape: { type: "circle" },
-        opacity: { value: 0.3 },
-        size: { value: 3 },
-        move: { enable: true, speed: 1 }
-      },
-      interactivity: {
-        events: { onhover: { enable: true, mode: "repulse" } }
-      }
-    });
+    document.addEventListener('DOMContentLoaded', function() {
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#ffffff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1 } },
+          size: { value: 3, random: true, anim: { enable: true, speed: 2, size_min: 0.1 } },
+          line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+          move: { enable: true, speed: 1, direction: "none", random: true, straight: false }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+            resize: true
+          },
+          modes: {
+            repulse: { distance: 100, duration: 0.4 },
+            push: { particles_nb: 4 }
+          }
+        },
+        retina_detect: true
+      });
 
-    document.body.classList.add("loaded");
-    document.getElementById('progressBar').style.opacity = '0';
+      document.body.classList.add("loaded");
+      document.getElementById('progressBar').style.opacity = '0';
+    });
 
     window.addEventListener('scroll', function() {
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -258,7 +270,6 @@
       progressBar.style.width = scrolled + '%';
       progressBar.style.opacity = winScroll > 100 ? '1' : '0';
     });
-  });
   </script>
 </body>
 </html>

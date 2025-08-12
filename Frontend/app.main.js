@@ -12,7 +12,6 @@ function showAlert(icon, title, text) {
 
 const API_BASE = "https://proyecto-production-c233.up.railway.app";
 
-
 function mostrarLogin() {
   const form = document.getElementById('sesionForm');
   form.reset();
@@ -112,7 +111,6 @@ function mostrarOpcionesContacto() {
     if (result.isConfirmed) {
       window.open('https://www.instagram.com/donatosantino/', '_blank');
     } else if (result.isDenied) {
-      // Aquí más adelante podés agregar acción de WhatsApp
       showAlert('info', 'Próximamente', 'La opción de WhatsApp estará disponible pronto.');
     }
   });
