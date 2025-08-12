@@ -232,32 +232,32 @@
   <!-- Partículas -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
   <script>
-  particlesJS("background-animation", {
-    particles: {
-      number: { value: 60 },
-      color: { value: "#ffffff" },
-      shape: { type: "circle" },
-      opacity: { value: 0.3 },
-      size: { value: 3 },
-      move: { enable: true, speed: 1 }
-    },
-    interactivity: {
-      events: { onhover: { enable: true, mode: "repulse" } }
-    }
-  });
-
   document.addEventListener("DOMContentLoaded", () => {
+    particlesJS("background-animation", {
+      particles: {
+        number: { value: 60 },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.3 },
+        size: { value: 3 },
+        move: { enable: true, speed: 1 }
+      },
+      interactivity: {
+        events: { onhover: { enable: true, mode: "repulse" } }
+      }
+    });
+
     document.body.classList.add("loaded");
     document.getElementById('progressBar').style.opacity = '0';
-  });
 
-  window.addEventListener('scroll', function() {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    const progressBar = document.getElementById('progressBar');
-    progressBar.style.width = scrolled + '%';
-    progressBar.style.opacity = winScroll > 100 ? '1' : '0';
+    window.addEventListener('scroll', function() {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      const progressBar = document.getElementById('progressBar');
+      progressBar.style.width = scrolled + '%';
+      progressBar.style.opacity = winScroll > 100 ? '1' : '0';
+    });
   });
   </script>
 </body>
