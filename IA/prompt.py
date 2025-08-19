@@ -4,12 +4,12 @@ from Analisis import construir_prompt_completo
 client = genai.Client(api_key="AIzaSyBWJ0hPb9E5G54J74kpQjWeDm-P2SpicJQ")
 
 tipo_falla = "Abolladura"
-ubicacion = 123.4 
-longitud = 500 
-profundidad_min = 2.3
-profundidad_max = 3.8 
+ubicacion = 2 
+longitud = 50 
+profundidad_min = 1.1
+profundidad_max = 1.5 
 delga = "D4"
-tiempo_impacto = 800 
+tiempo_impacto = 150 
 espesor_gasoducto = 12.7 
 presion_gas = 16 
 zona = "despoblada"
