@@ -1,6 +1,0 @@
-[build]
-builder = "nixpacks"
-
-[build.nixpacksConfig]
-providers = ["python"]
-pythonVersion = "3.10"

@@ -10,7 +10,7 @@ function showAlert(icon, title, text) {
   });
 }
 
-const API_BASE = "https://proyecto-production-c233.up.railway.app";
+const API_BASE = "https://proyecto-zvzl.onrender.com";
 
 function mostrarLogin() {
   const form = document.getElementById('sesionForm');
@@ -43,7 +43,7 @@ document.getElementById('registroForm').addEventListener('submit', async (e) => 
   }
 
   try {
-    const res = await fetch("https://proyecto-production-c233.up.railway.app/auth/register", {
+    const res = await fetch("https://proyecto-zvzl.onrender.com/auth/register", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombre, apellido, dni, email, password })
@@ -74,7 +74,7 @@ document.getElementById('sesionForm').addEventListener('submit', async (e) => {
   const password = document.getElementById('Ipassword').value;
 
   try {
-    const res = await fetch('https://proyecto-production-c233.up.railway.app/auth/login', {
+    const res = await fetch('https://proyecto-zvzl.onrender.com/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
