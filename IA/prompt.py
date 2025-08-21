@@ -1,7 +1,7 @@
 from google import genai
 from Analisis import construir_prompt_completo
 
-client = genai.Client(api_key="AIzaSyBWJ0hPb9E5G54J74kpQjWeDm-P2SpicJQ")
+client = genai.Client(api_key="AIzaSyCBvo4j-OCu_0WYvL6F4UwfWWf2zlEjUBo")
 
 tipo_falla = "Abolladura"
 ubicacion = 2 
