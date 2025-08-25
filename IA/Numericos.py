@@ -6,8 +6,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # URLs de la API
-login_url = "https://proyecto-production-c233.up.railway.app/auth/login"
-datos_url = "https://proyecto-production-c233.up.railway.app/analisis/gettiempo"
+login_url = "https://proyecto-zvzl.onrender.com/auth/login"
+datos_url = "https://proyecto-zvzl.onrender.com/analisis/gettiempo"
+
 
 # Credenciales
 email = os.getenv("USER_EMAIL")

@@ -8,8 +8,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-login_url = "https://proyecto-production-c233.up.railway.app/auth/login"
-api_url = "https://proyecto-production-c233.up.railway.app/vids/videos"
+login_url = "https://proyecto-zvzl.onrender.com/auth/login"
+api_url = "https://proyecto-zvzl.onrender.com/vids/videos"
 
 email = os.getenv("USER_EMAIL")
 password = os.getenv("USER_PASS")
