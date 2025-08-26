@@ -27,10 +27,10 @@ const createProyectos = async (Usuario_id, analisisData) => {
   }
 };
 
-  const getProyectos = async (proyectos) => {
-    return await Proyectos.findAll({
-      where: { id_usuario: id },
-      proyectos});
-  };
+const getProyectos = async (proyectos) => {
+  return await Proyectos.findAll({
+    where: { id_usuario: id },
+    proyectos});
+};
 
   export default {createProyectos, getProyectos};
