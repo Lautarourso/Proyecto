@@ -10,6 +10,7 @@ const createProyectos = async (Usuario_id, analisisData) => {
       { transaction: t }
     );
 
+    const dataArray = Array.isArray(analisisData) ? analisisData : [analisisData];
     // 2. Agregar proyecto_id a cada análisis
     const datosConProyecto = analisisData.map(item => ({
       ...item,
