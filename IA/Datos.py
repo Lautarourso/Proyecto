@@ -1,13 +1,33 @@
-# distancia_min_mm = 4
-# distancia_max_mm = 5
-# distancia_imp_mm = distancia_max_mm - distancia_min_mm
-tiempo_imp_ms = 300
-tiempo_imp_s = tiempo_imp_ms * 100
+import json
+from Numericos import ruta_salida
+
+with open(ruta_salida, "r", encoding="utf-8") as f:
+    casos = json.load(f)
+
+for caso in casos:
+    # acá usás el valor que viene del JSON
+    tiempo_imp_ms = caso["tiempo"]
+    duracion_ms = caso["duracion"]
 # velocidad_imp = distancia_imp_mm/tiempo_imp_ms
 velocidad_imp_MS = 4
 
 def longitud_falla(tiempo_imp_s, velocidad_imp_MS):
-    return tiempo_imp_s * velocidad_imp_MS  
+    tiempo_imp_s = tiempo_imp_ms / 1000  
+    
+    # longitud en metros
+    longitud_m = tiempo_imp_s * velocidad_imp_MS  
+    
+    # paso a milímetros
+    return longitud_m * 1000
 
 
+tipo_falla= "abolladura"
+ubicacion= 4.3
+longitud = longitud_falla(tiempo_imp_ms, velocidad_imp_MS)
+profundidad_min=1.1
+profundidad_max=1.5      
+espesor_gasoducto=12.7 
+presion_gas=16
+zona="despoblada"
+material_gasoducto="Acero al carbono de alta resistencia"
 

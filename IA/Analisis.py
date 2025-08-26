@@ -28,7 +28,7 @@ Datos del caso actual:
 - Ubicación: {ubicacion} metros
 - Longitud estimada: {longitud} mm
 - Profundidad: entre {profundidad_min} mm y {profundidad_max} mm
-- Delga afectada: {delga}
+- Delga afectada: D{delga}
 - Duración del impacto: {tiempo_impacto} ms
 - Espesor del gasoducto: {espesor_gasoducto} mm
 - Presion habitual del gas: {presion_gas} bares
