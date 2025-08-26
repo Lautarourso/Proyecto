@@ -1,14 +1,14 @@
 import Proyectos from "../services/proyectos.service.js";
 
 const UploadP = async (req, res) => {
-  const { analisisData } = req.body;
+  const analisisData = req.body;
 
   if (!analisisData || analisisData.length === 0) {
     return res.status(400).json({ message: "No se enviaron datos de análisis" });
   }
 
     try {
-      await Proyectos.createProyectos({
+      const proyecto = await Proyectos.createProyectos({
           Usuario_id: req.idUsuario,
           analisisData
       });

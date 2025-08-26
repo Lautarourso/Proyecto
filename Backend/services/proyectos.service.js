@@ -6,7 +6,7 @@ const createProyectos = async (Usuario_id, analisisData) => {
   const t = await sequelize.transaction();
   try {
     const proyecto = await Proyectos.create(
-      { Usuario_id: usuarioId },
+      { usuario_id: Usuario_id },
       { transaction: t }
     );
 
