@@ -8,10 +8,10 @@ const UploadP = async (req, res) => {
   }
 
     try {
-      const proyecto = await Proyectos.createProyectos({
-          Usuario_id: req.idUsuario,
-          analisisData
-      });
+      const proyecto = await Proyectos.createProyectos(
+        req.idUsuario,   // primer parámetro
+        analisisData     // segundo parámetro
+      );      
       res.status(201).json({
       message: "Proyecto y análisis creados con éxito",
       proyecto_id: proyecto.id
