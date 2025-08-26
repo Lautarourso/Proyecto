@@ -2,6 +2,7 @@ import requests
 import os
 from dotenv import load_dotenv
 
+
 # Cargar credenciales del archivo .env
 load_dotenv()
 
