@@ -10,12 +10,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const response = await fetch("https://proyecto-zvzl.onrender.com/vids/videos", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+   const response = await fetch("https://proyecto-zvzl.onrender.com/vids/videos", {
+  method: "GET",
+  headers: { Authorization: `Bearer ${token}` }
+});
 
     if (!response.ok) {
       throw new Error("Error al obtener los videos.");
@@ -44,15 +42,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       const div = document.createElement("div");
     
       div.innerHTML = `
-        <video controls width="100%" height="100%">
-          <source src="${video.url}" type="video/mp4">
-          Tu navegador no soporta video HTML5.
-        </video>
-        <div class="mt-2 text-center">
-          <p class="mb-1">Video #${video.id}</p>
-          <p class="text-muted small">${fecha}</p>
-        </div>
-      `;
+  <video controls width="100%" height="100%">
+    <source src="${video.url}" type="video/mp4">
+    Tu navegador no soporta video HTML5.
+  </video>
+  <div class="mt-2 text-center">
+    <p class="mb-1">Video #${video.id}</p>
+    <p class="text-muted small">${fecha}</p>
+  </div>
+`;
     
       container.appendChild(div);
     });
