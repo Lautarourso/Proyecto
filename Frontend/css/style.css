@@ -10,7 +10,7 @@
 
 /* ESTILOS GENERALES */
 body {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Hanson', sans-serif;
   color: var(--gris-claro);
   min-width: 1200px;
   margin: 0;
@@ -41,7 +41,8 @@ body {
 
 .nav-link-custom {
   color: var(--negro) !important;
-  font-weight: 600;
+  font-family: 'Basement Grotesque', sans-serif;
+  font-weight: 700;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -54,12 +55,27 @@ body {
 
 /* HERO SECTION */
 .hero-section {
-  background-color: var(--azul-oscuro);
-  padding: 6rem 0;
+  position: relative;
+  background-color: #0d1b2a;
+  overflow: hidden;
+}
+
+#particles-js {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero-section > .container {
+  position: relative;
+  z-index: 1;
 }
 
 .racing-text {
-  font-family: 'Racing Sans One', cursive;
+  font-family: 'Hanson', sans-serif;
   font-size: 1.5rem;
   letter-spacing: 1px;
 }
@@ -69,14 +85,15 @@ body {
   background-color: var(--azul);
 }
 
-.title-custom {
+.title-custom, h1, .display-3 {
+  font-family: 'Mango Grotesque', sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   color: var(--gris-claro);
 }
 
 .roboto-text {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Hanson', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
 }
@@ -85,7 +102,8 @@ body {
 .btn-orange-custom {
   background-color: var(--naranja);
   color: var(--blanco);
-  font-weight: 600;
+  font-family: 'Basement Grotesque', sans-serif;
+  font-weight: 700;
   border: none;
   padding: 10px 25px;
   text-transform: uppercase;
@@ -104,6 +122,7 @@ body {
 }
 
 .contact-title {
+  font-family: 'Basement Grotesque', sans-serif;
   color: var(--negro);
   font-weight: 700;
   text-transform: uppercase;
@@ -115,15 +134,14 @@ body {
   border-top: 2px solid var(--naranja);
 }
 
-.footer-text {
+.footer-text, .footer-link {
+  font-family: 'Queering', sans-serif;
   color: var(--negro);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .footer-link {
-  color: var(--negro) !important;
-  text-decoration: none;
-  font-weight: 600;
+  text-decoration: none !important;
 }
 
 /* MODALES */
@@ -162,10 +180,12 @@ body {
 
 /* Typewriter */
 .typewriter {
+  display: inline-block;       /* hace que el ancho se ajuste al contenido */
   overflow: hidden;
   border-right: .15em solid var(--naranja);
   white-space: nowrap;
   animation: typing 3.5s steps(40, end), blink .75s step-end infinite;
+  vertical-align: bottom;      /* opcional, ajusta la posición del cursor */
 }
 @keyframes typing {
   from { width: 0 }
@@ -210,4 +230,15 @@ body.loaded {
 .was-validated .form-control:invalid ~ .invalid-feedback,
 .was-validated .form-control:valid ~ .invalid-feedback.dynamic-error {
   display: block;
+}
+
+/* Animación flotante infinita para hero */
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
 }
