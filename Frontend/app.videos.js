@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("authToken");
-  const container = document.querySelector(".video-container");
+  const container = document.getElementById("videosContainer"); // Cambiado a ID
   const info = document.getElementById("videosInfo");
 
   if (!token) {
@@ -42,14 +42,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       const fecha = new Date(video.fecha).toLocaleString('es-AR');
 
       const div = document.createElement("div");
+      div.className = "video-card"; // Añade la clase para el estilo
       div.innerHTML = `
-        <video controls style="width:100%; height:auto; border-radius:8px;">
+        <video class="video-player" controls>
           <source src="${video.url}">
           Tu navegador no soporta video HTML5.
         </video>
-        <div class="mt-2 text-center">
-          <p class="mb-1">Video #${video.id}</p>
-          <p class="text-muted small">${fecha}</p>
+        <div class="video-info">
+          <p class="video-title">Video #${video.id}</p>
+          <p class="video-date">${fecha}</p>
         </div>
       `;
 

@@ -17,14 +17,6 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- Favicon -->
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-  <style>
-    .video-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
-  </style>
 </head>
 <body>
   <!-- Barra de progreso -->
@@ -52,11 +44,13 @@
   <div class="container my-5">
     <div class="row">
       <div class="col-12">
-        <h2 class="mb-4">Videos Disponibles</h2>
+        <h2 class="mb-4 text-light">Videos Disponibles</h2>
         <div id="videosInfo" class="alert alert-info">
           Cargando videos...
         </div>
-        <div class="video-container"></div>
+        <div class="videos-grid" id="videosContainer">
+          <!-- Los videos se cargarán aquí dinámicamente -->
+        </div>
       </div>
     </div>
   </div>
