@@ -42,8 +42,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       const div = document.createElement("div");
     
       div.innerHTML = `
-  <video controls width="100%" height="100%">
-    <source src="${video.url}" type="video/mp4">
+  <video controls style="width:100%; height:auto; border-radius:8px;">
+    <source src="${video.url}">"
     Tu navegador no soporta video HTML5.
   </video>
   <div class="mt-2 text-center">
@@ -51,7 +51,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     <p class="text-muted small">${fecha}</p>
   </div>
 `;
-    
+    console.log("Agregando video al DOM:", video.url);
+
       container.appendChild(div);
     });
     
