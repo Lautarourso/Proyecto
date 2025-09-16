@@ -3,8 +3,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.querySelector(".video-container");
   const info = document.getElementById("videosInfo");
 
-  console.log("Token en videos.html:", token);
-
   if (!token) {
     info.classList.replace("alert-info", "alert-danger");
     info.textContent = "No estás autenticado. Iniciá sesión primero.";
@@ -14,27 +12,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const response = await fetch("https://proyecto-zvzl.onrender.com/vids/videos", {
       method: "GET",
-      headers: { 
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
-      }
+      headers: { Authorization: `Bearer ${token}` }
     });
 
-    console.log("Response status:", response.status);
-
-    const text = await response.text();
-    console.log("Response text:", text);
-
-    let videos;
-    try {
-      videos = JSON.parse(text);
-    } catch (err) {
-      throw new Error("No se pudo parsear la respuesta JSON: " + err.message);
+    if (!response.ok) {
+      throw new Error(`Error de servidor: ${response.status}`);
     }
 
-    console.log("Videos parseados:", videos);
+    const data = await response.json();
+    console.log("Datos recibidos de la API:", data);
 
-    if (!Array.isArray(videos) || videos.length === 0) {
+    // Manejar ambos casos: array directo o objeto con 'videos'
+    const videos = Array.isArray(data) ? data : data.videos || [];
+
+    if (videos.length === 0) {
       info.classList.replace("alert-info", "alert-warning");
       info.textContent = "No tenés videos disponibles.";
       return;
