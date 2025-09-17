@@ -10,10 +10,12 @@ load_dotenv()
 login_url = "https://proyecto-zvzl.onrender.com/auth/login"
 datos_url = "https://proyecto-zvzl.onrender.com/analisis/gettiempo"
 
+email = "lautarourso@gmail.com"
+password = "Lautaro"
 
 # Credenciales
-email = os.getenv("USER_EMAIL")
-password = os.getenv("USER_PASS")
+#email = os.getenv("USER_EMAIL")
+#password = os.getenv("USER_PASS")
 
 # Login para obtener el token
 resp = requests.post(login_url, json={

@@ -1,4 +1,5 @@
 import json
+#import google.generativeai as genai
 from google import genai
 from Analisis import construir_prompt_completo
 from Numericos import ruta_salida
