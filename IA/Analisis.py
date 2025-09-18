@@ -72,12 +72,12 @@ def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, 
 
     1.  **Clasificación:** Determina si la abolladura es simple, aguda o con concentrador, basándote en la descripción de la NAG-10 y en los datos del impacto (duración, longitud). Justifica tu elección.
     2.  **Cálculos:** Calcula la relación de profundidad (profundidad_max / diametro_gasoducto) y la tensión circunferencial (hoop stress) del gasoducto. Luego, compara la tensión de operación con el 40% de la TFME para determinar qué reglas de la NAG-10 debes aplicar.
-    3.  **Evaluación de la gravedad:** Basándote en los cálculos y la clasificación, usa los criterios de la NAG-10 para determinar la gravedad. Si la abolladura cae en una categoría que requiere ser eliminada, la gravedad es **alta**. Si puede ser reparada o monitoreada, es **moderada** o **baja**.
-    4.  **Recomendación:** La recomendación debe ser específica y técnica, basada en la NAG-10. Por ejemplo, si es de gravedad alta, la recomendación es la **eliminación del tramo afectado**.
+    3.  **Evaluación de la gravedad:** Basándote en los cálculos, la clasificación y la aproximación a la población, usa los criterios de la NAG-10, combinado con tus conocimientos de ingenieria para determinar la gravedad. Si la abolladura cae en una categoría que requiere ser eliminada, la gravedad es **alta**. Si puede ser reparada o monitoreada, es **moderada** o **baja**.
+    4.  **Recomendación:** La recomendación debe ser específica y técnica, basada en la NAG-10 y tus conocimientos de ingenieria. Por ejemplo, si es de gravedad alta, la recomendación es la **eliminación del tramo afectado**.
 
     
     
-    Generá un informe técnico respetando estrictamente el formato y reglas del ejemplo siguiente:
+    Generá un informe técnico respetando estrictamente el formato y reglas del ejemplo siguiente, sin especificar por escrito las instrucciones ni los cálculos hechos:
     
 
     1. Tipo de falla: Abolladura
