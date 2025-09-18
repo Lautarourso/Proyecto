@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const div = document.createElement("div");
       div.className = "video-card"; // Añade la clase para el estilo
-      iv.innerHTML = `
+      div.innerHTML = `
   <video class="video-player" controls preload="metadata" crossorigin="anonymous">
     <source src="${video.url}" type="video/mp4">
     Tu navegador no soporta video HTML5.
