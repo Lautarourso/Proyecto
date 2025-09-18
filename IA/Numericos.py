@@ -21,7 +21,7 @@ password = "Lautaro"
 resp = requests.post(login_url, json={
     "email": email,
     "password": password
-})
+}, verify=False)
 
 if resp.status_code != 200:
     print("Error al loguearse:", resp.text)
@@ -36,7 +36,7 @@ headers = {
 }
 
 # Obtener datos numéricos
-response = requests.get(datos_url, headers=headers)
+response = requests.get(datos_url, headers=headers, verify=False)
 
 if response.status_code != 200:
     print("Error al obtener datos:", response.status_code, response.text)

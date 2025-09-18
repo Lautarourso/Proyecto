@@ -68,7 +68,7 @@ def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, 
 
     
 
-    Instrucciones específicas para tu análisis:
+    Instrucciones específicas para tu análisis, pero no las incluyas en el informe final escrito:
 
     1.  **Clasificación:** Determina si la abolladura es simple, aguda o con concentrador, basándote en la descripción de la NAG-10 y en los datos del impacto (duración, longitud). Justifica tu elección.
     2.  **Cálculos:** Calcula la relación de profundidad (profundidad_max / diametro_gasoducto) y la tensión circunferencial (hoop stress) del gasoducto. Luego, compara la tensión de operación con el 40% de la TFME para determinar qué reglas de la NAG-10 debes aplicar.
@@ -76,9 +76,9 @@ def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, 
     4.  **Recomendación:** La recomendación debe ser específica y técnica, basada en la NAG-10. Por ejemplo, si es de gravedad alta, la recomendación es la **eliminación del tramo afectado**.
 
     
-    Generá un informe técnico respetando el formato y reglas del ejemplo siguiente:
     
-    Ejemplo de informe de inspección:
+    Generá un informe técnico respetando estrictamente el formato y reglas del ejemplo siguiente:
+    
 
     1. Tipo de falla: Abolladura
     2. Ubicación: 123.4 m
@@ -89,6 +89,8 @@ def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, 
     7. Gravedad: Moderada
     8. Recomendación: Se identificó una abolladura simple con una profundidad de 1.3 mm, lo que equivale a un 4.0% del diámetro nominal. Esto es menor al 6% permitido por la normativa NAG-10 y otros estándares. No representa un riesgo inminente para la operación. Sin embargo, se recomienda realizar un monitoreo de la situación mediante una inspección visual o una nueva corrida de herramienta de inspección en los próximos 12 meses. Si se observan signos de corrosión, fatiga o se agrava la deformación, se deberá considerar el reemplazo o reparación del tramo afectado mediante soldadura de recubrimiento o refuerzo de la zona.
     
+    Fin del ejemplo.
+
     Datos del caso actual:
     - Tipo de falla: {tipo_falla}
     - Material: {material_gasoducto}
