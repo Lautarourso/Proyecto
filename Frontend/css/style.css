@@ -19,7 +19,7 @@ body {
   background: linear-gradient(-45deg, #002244, #003366, #001933, #002b4d);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
-  z-index: -2;
+  /*z-index: -2;*/
 }
 
 /* Partículas */
