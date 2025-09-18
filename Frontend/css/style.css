@@ -265,6 +265,7 @@ body.loaded {
 #videosContainer {
   position: relative;
   z-index: 1;
+  border: 2px solid red; /* para ver el contenedor */
 }
 
 .video-card {
