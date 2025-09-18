@@ -262,6 +262,10 @@ body.loaded {
   gap: 25px;
   margin-top: 30px;
 }
+#videosContainer {
+  position: relative;
+  z-index: 1;
+}
 
 .video-card {
   background: rgba(255, 255, 255, 0.05);
