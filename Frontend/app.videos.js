@@ -43,16 +43,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const div = document.createElement("div");
       div.className = "video-card"; // Añade la clase para el estilo
-      div.innerHTML = `
-        <video class="video-player" controls>
-          <source src="${video.url}">
-          Tu navegador no soporta video HTML5.
-        </video>
-        <div class="video-info">
-          <p class="video-title">Video #${video.id}</p>
-          <p class="video-date">${fecha}</p>
-        </div>
-      `;
+      iv.innerHTML = `
+  <video class="video-player" controls preload="metadata" crossorigin="anonymous">
+    <source src="${video.url}" type="video/mp4">
+    Tu navegador no soporta video HTML5.
+  </video>
+  <div class="video-info">
+    <p class="video-title">Video #${video.id}</p>
+    <p class="video-date">${fecha}</p>
+  </div>
+`;
 
       console.log("Agregando al DOM:", video.url);
       container.appendChild(div);

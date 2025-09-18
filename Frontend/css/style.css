@@ -334,3 +334,16 @@ body.loaded {
     gap: 15px;
   }
 }
+.video-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.video-info {
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--gris-claro);
+  padding: 10px 12px;
+}
