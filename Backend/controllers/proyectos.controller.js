@@ -5,8 +5,15 @@ import proyectosService from "../services/proyectos.service.js";
 export const UploadP = async (req, res) => {
   try {
     const { analisisData, videoData } = req.body;
-
-    if (!analisisData || analisisData.length === 0) {
+    
+    try {
+      analisisData = JSON.parse(analisisData);
+      videoData = videoData ? JSON.parse(videoData) : null;
+    } catch (err) {
+      return res.status(400).json({ message: "analisisData o videoData no son JSON válidos" });
+    }
+    
+    if (!analisisData || !Array.isArray(analisisData) || analisisData.length === 0) {
       return res.status(400).json({ message: "No se enviaron datos de análisis" });
     }
 
