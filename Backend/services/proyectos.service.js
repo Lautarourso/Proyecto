@@ -42,9 +42,6 @@ const createProyectos = async (Usuario_id, analisisData, videoData, file) => {
   }
 };
 
-export default { createProyectoCompleto };
-
-
 const getProyectos = async (proyectos) => {
   return await Proyectos.findAll({
     where: { id_usuario: id },
