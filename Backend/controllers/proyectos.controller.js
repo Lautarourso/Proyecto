@@ -24,7 +24,7 @@ export const UploadP = async (req, res) => {
         }
     });
 
-    const proyecto = await proyectosService.createProyectoCompleto(
+    const proyecto = await proyectosService.createProyectos(
       req.idUsuario,
       analisisData,
       videoData,
