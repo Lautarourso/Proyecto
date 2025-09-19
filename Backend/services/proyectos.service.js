@@ -17,8 +17,6 @@ const createProyectos = async (Usuario_id, analisisData, videoData, file) => {
     const video = await Videos.create(
       {
         ...videoData,
-        url: videoUpload.secure_url,
-        tipo_mime: videoUpload.resource_type,
         usuario_id: Usuario_id
       },
       { transaction: t }
