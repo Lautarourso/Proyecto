@@ -1,11 +1,7 @@
-import { Proyectos } from '../models/proyectos.model.js';
-import { Analisis as AnalisisModel } from "../models/analisis.model.js";
 import { sequelize } from "../db.js";
-
-import { sequelize } from "../db.js";
-import { Proyectos } from "../models/Proyectos.js";
-import { Analisis } from "../models/Analisis.js";
-import { Videos } from "../models/Videos.js";
+import { Proyectos } from "../models/proyectos.model.js";
+import { Analisis } from "../models/analisis.model.js";
+import { Videos } from '../models/videos.model.js';
 import cloudinary from "../config/cloudinary.js";
 
 const createProyectos = async (Usuario_id, analisisData, videoData, file) => {
