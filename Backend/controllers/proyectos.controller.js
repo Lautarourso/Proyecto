@@ -5,10 +5,9 @@ import proyectosService from "../services/proyectos.service.js";
 export const UploadP = async (req, res) => {
   try {
     const { analisisData, videoData } = req.body;
-    
+
     try {
       analisisData = JSON.parse(analisisData);
-      videoData = videoData ? JSON.parse(videoData) : null;
     } catch (err) {
       return res.status(400).json({ message: "analisisData o videoData no son JSON válidos" });
     }
