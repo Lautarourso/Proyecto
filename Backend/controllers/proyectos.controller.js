@@ -23,11 +23,15 @@ export const UploadP = async (req, res) => {
           return res.status(500).json({ message: "Error subiendo a Cloudinary" });
         }
     });
+    const tipo_mime= result.resource_type
 
+    const url= result.secure_url
     const proyecto = await proyectosService.createProyectos(
       req.idUsuario,
       analisisData,
       videoData,
+      url,
+      tipo_mime,
       req.file
     );
 

@@ -3,7 +3,7 @@ import { Proyectos } from "../models/proyectos.model.js";
 import { Analisis } from "../models/analisis.model.js";
 import { Videos } from '../models/videos.model.js';
 
-const createProyectos = async (Usuario_id, analisisData, videoData, file) => {
+const createProyectos = async (Usuario_id, analisisData, videoData, url, tipo_mime ,file) => {
   const t = await sequelize.transaction();
 
   try {
@@ -17,6 +17,8 @@ const createProyectos = async (Usuario_id, analisisData, videoData, file) => {
     const video = await Videos.create(
       {
         ...videoData,
+        url,
+        tipo_mime,
         user_id: Usuario_id
       },
       { transaction: t }
