@@ -2,7 +2,6 @@ import { sequelize } from "../db.js";
 import { Proyectos } from "../models/proyectos.model.js";
 import { Analisis } from "../models/analisis.model.js";
 import { Videos } from '../models/videos.model.js';
-import cloudinary from "../config/cloudinary.js";
 
 const createProyectos = async (Usuario_id, analisisData, videoData, file) => {
   const t = await sequelize.transaction();
@@ -12,19 +11,7 @@ const createProyectos = async (Usuario_id, analisisData, videoData, file) => {
     const proyecto = await Proyectos.create(
       { usuario_id: Usuario_id },
       { transaction: t }
-    );
-
-    // 2. Subir video a Cloudinary
-    const videoUpload = await new Promise((resolve, reject) => {
-      const upload = cloudinary.uploader.upload_stream(
-        { resource_type: "video", folder: "tus_videos" },
-        (error, result) => {
-          if (error) reject(error);
-          else resolve(result);
-        }
-      );
-      upload.end(file.buffer);
-    });
+    );    
 
     // 3. Guardar video en DB
     const video = await Videos.create(
