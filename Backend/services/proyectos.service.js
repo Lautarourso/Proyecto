@@ -14,7 +14,8 @@ const createProyectos = async (Usuario_id, analisisData) => {
     // 2. Agregar proyecto_id a cada análisis
     const datosConProyecto = analisisData.map(item => ({
       ...item,
-      proyecto_id: proyecto.id
+      proyecto_id: proyecto.id,
+      usuario_id: Usuario_id
     }));
 
     // 3. Insertar análisis
