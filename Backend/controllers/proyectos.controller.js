@@ -1,25 +1,36 @@
 import Proyectos from "../services/proyectos.service.js";
 
-const UploadP = async (req, res) => {
-  const analisisData = req.body;
+import proyectosService from "../services/proyectos.service.js";
 
-  if (!analisisData || analisisData.length === 0) {
-    return res.status(400).json({ message: "No se enviaron datos de análisis" });
-  }
+export const UploadP = async (req, res) => {
+  try {
+    const { analisisData, videoData } = req.body;
 
-    try {
-      const proyecto = await Proyectos.createProyectos(
-        req.idUsuario,   // primer parámetro
-        analisisData     // segundo parámetro
-      );      
-      res.status(201).json({
-      message: "Proyecto y análisis creados con éxito",
+    if (!analisisData || analisisData.length === 0) {
+      return res.status(400).json({ message: "No se enviaron datos de análisis" });
+    }
+
+    if (!req.file) {
+      return res.status(400).json({ message: "No se envió ningún archivo de video." });
+    }
+
+    const proyecto = await proyectosService.createProyectoCompleto(
+      req.idUsuario,
+      analisisData,
+      videoData,
+      req.file
+    );
+
+    res.status(201).json({
+      message: "Proyecto, análisis y video creados con éxito",
       proyecto_id: proyecto.id
     });
   } catch (error) {
-      res.status(500).json({ message: error.message });
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 };
+
 
 const GetP = async (req, res) => {
    try{ const proyectos = await Proyectos.GetProyectos(req. idUsuario);
