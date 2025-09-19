@@ -15,21 +15,20 @@ export const UploadP = async (req, res) => {
       return res.status(400).json({ message: "No se envió ningún archivo de video." });
     }
 
-    const uploadResult = await cloudinary.uploader.upload_stream(
-      { resource_type: "video", folder: "tus_videos" },
-      async (error, result) => {
-        if (error) {
-          console.error(error);
-          return res.status(500).json({ message: "Error subiendo a Cloudinary" });
-        }
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      resource_type: "video",
+      folder: "tus_videos"
     });
     
+    const tipo_mime= result.resource_type
+
+    const url= result.secure_url
     const proyecto = await proyectosService.createProyectos(
       req.idUsuario,
       analisisData,
       videoData,
-      url= result.secure_url,
-      tipo_mime= result.resource_type,
+      url,
+      tipo_mime,
       req.file
     );
 
