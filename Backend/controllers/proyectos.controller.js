@@ -1,5 +1,5 @@
 import Proyectos from "../services/proyectos.service.js";
-
+import cloudinary from "../config/cloudinary.js";
 import proyectosService from "../services/proyectos.service.js";
 
 export const UploadP = async (req, res) => {
