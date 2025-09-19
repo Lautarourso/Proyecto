@@ -17,7 +17,7 @@ const createProyectos = async (Usuario_id, analisisData, videoData, file) => {
     const video = await Videos.create(
       {
         ...videoData,
-        usuario_id: Usuario_id
+        user_id: Usuario_id
       },
       { transaction: t }
     );
