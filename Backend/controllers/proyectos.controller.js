@@ -6,11 +6,13 @@ export const UploadP = async (req, res) => {
   try {
     const { analisisData, videoData } = req.body;
 
-    try {
-      analisisData = JSON.parse(analisisData);
-    } catch (err) {
-      return res.status(400).json({ message: "analisisData o videoData no son JSON válidos" });
-    }
+    let parsedAnalisis;
+      try {
+        parsedAnalisis = JSON.parse(analisisData);
+      } catch (err) {
+        return res.status(400).json({ message: "analisisData no es JSON válido" });
+      
+}
     
     if (!analisisData || !Array.isArray(analisisData) || analisisData.length === 0) {
       return res.status(400).json({ message: "No se enviaron datos de análisis" });
@@ -40,7 +42,7 @@ export const UploadP = async (req, res) => {
     const url= result.secure_url
     const proyecto = await proyectosService.createProyectos(
       req.idUsuario,
-      analisisData,
+      parsedAnalisis,
       videoData,
       url,
       tipo_mime,
