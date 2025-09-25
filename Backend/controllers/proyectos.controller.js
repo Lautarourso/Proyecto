@@ -14,11 +14,6 @@ export const UploadP = async (req, res) => {
       
 }
     
-    if (!analisisData || !Array.isArray(analisisData) || analisisData.length === 0) {
-      return res.status(400).json({ message: "No se enviaron datos de análisis" });
-    }
-
-    
     if (!req.file) {
       return res.status(400).json({ message: "No se envió ningún archivo de video." });
     }
