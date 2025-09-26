@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     Tu navegador no soporta video HTML5.
   </video>
   <div class="video-info">
-    <p class="video-title">#${video.name}</p>
+    <p class="video-title">${video.name}</p>
     <p class="video-date">${fecha}</p>
   </div>
 `;
