@@ -4,7 +4,7 @@ import proyectosService from "../services/proyectos.service.js";
 
 export const UploadP = async (req, res) => {
   try {
-    const { analisisData, videoData } = req.body;
+    const { analisisData, videoData, videoName } = req.body;
 
     let parsedAnalisis;
       try {
@@ -14,8 +14,8 @@ export const UploadP = async (req, res) => {
       
 }
     
-    if (!req.file) {
-      return res.status(400).json({ message: "No se envió ningún archivo de video." });
+    if (!req.file || !analisisData || !videoName) {
+      return res.status(400).json({ message: "Faltan datos" });
     }
 
     const streamUpload = (fileBuffer) => {
@@ -41,7 +41,8 @@ export const UploadP = async (req, res) => {
       videoData,
       url,
       tipo_mime,
-      req.file
+      req.file,
+      videoName
     );
 
     res.status(201).json({

@@ -19,6 +19,9 @@ Proyectos.hasMany(Analisis, { foreignKey: "proyecto_id" });
 Proyectos.belongsTo(Usuarios, { foreignKey: "usuario_id", onDelete: "CASCADE" });
 Usuarios.hasMany(Proyectos, { foreignKey: "usuario_id" });
 
+Proyectos.hasOne(Videos, { foreignKey: "proyecto_id", onDelete: "CASCADE" });
+Videos.belongsTo(Proyectos, { foreignKey: "proyecto_id", onDelete: "CASCADE" });
+
 export { Usuarios, Videos, Analisis, Proyectos };
 
 export const defModelos = async () => {
