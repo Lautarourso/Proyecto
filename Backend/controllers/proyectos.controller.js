@@ -41,8 +41,8 @@ export const UploadP = async (req, res) => {
       videoData,
       url,
       tipo_mime,
-      req.file,
-      videoName
+      videoName,
+      req.file
     );
 
     res.status(201).json({
