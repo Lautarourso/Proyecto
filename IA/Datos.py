@@ -22,14 +22,17 @@ def longitud_falla(tiempo_imp_s, velocidad_imp_MS):
 
 
 tipo_falla= "Abolladura con quemadura de arco"
-ubicacion= 4.3
+ubicacion= 20.3
 longitud = longitud_falla(tiempo_imp_ms, velocidad_imp_MS)
 profundidad_max=1.3      
 espesor_gasoducto=12.7 
 diametro_gasoducto=10
 tmfe = 241 
 presion_gas=16
-zona="Poblado chico a 1KM"
+latitud_in = -38.656277
+longitud_in = -62.276122
+latitud_fin = -38.654282 
+longitud_fin = -62.267444 
 material_gasoducto="Acero API 5L Grado B"
 antiguedad_gasoducto=20
 presion_max_op = 32

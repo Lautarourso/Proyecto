@@ -1,4 +1,4 @@
-def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, delga, tiempo_impacto, espesor_gasoducto, presion_gas, zona, material_gasoducto, diametro_gasoducto, tmfe, antiguedad_gasoducto, presion_max_op):
+def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, delga, tiempo_impacto, espesor_gasoducto, presion_gas, material_gasoducto, diametro_gasoducto, tmfe, antiguedad_gasoducto, presion_max_op, latitud_in, latitud_fin, longitud_in, longitud_fin):
     
     # Define la variable `prompt` aquí, antes de usarla.
     prompt = f"""
@@ -92,15 +92,31 @@ def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, 
     cañería.
 
 
-
+    Riesgo social:
     
+    IGEM/TD/1, sección 6.7.1: Tipos de áreas: 
 
+    Tipo "R" (Rural): Densidad de población baja, menor a 2.5 personas por hectarea.
+    Tipo "S" (Suburbana): Áreas Densidad de población baja a media (Entre 2.5 y 30 personas por hectárea), y que sean mas desarrolladas, con zonas residenciales, comercios, escuelas, hospitales, entre otras infraestructuras críticas. 
+    Tipo "H" : Áreas con alta densidad de población, superior a 30 personas por hectárea, que no son Áreas Tipo T. Estas áreas están asociadas con un desarrollo progresivo cerca de ubicaciones de Áreas Tipo S, por ejemplo, donde se ha construido un centro comercial, un centro de entretenimiento, un estadio deportivo, un hospital, un edificio de varios pisos cerca de un oleoducto o se ha reutilizado un edificio industrial o comercial para uso residencial. 
+    Tipo "T" (Urbana): Áreas centrales de ciudades o pueblos, con una alta densidad de población resultante, por ejemplo, de una combinación de edificios de varios pisos, hospitales, grandes centros de transporte, lugares de reunión públicos, etc.
+
+    Tipo "R": Riesgo Aceptable. El impacto se enfoca en el medio ambiente y en pérdidas económicas bajas. Gravedad de la falla: Baja
+    Tipo "S": Riesgo Reducible. El impacto en la salud pública es significativo. La mitigación debe ser considerada: Gravedad de la falla: Moderada
+    Tipo "H": Riesgo ALTO/Reducible. La consecuencia es muy alta debido a la dificultad de evacuación y la alta concentración de personas. Se acerca al límite de lo Intolerable. Gravedad de la falla: Moderada a Alta
+    Tipo "T": Riesgo CRÍTICO/Intolerable. El riesgo social es inaceptable. Cualquier falla requiere acción inmediata. Gravedad de la falla: Alta
+
+    ---------------
     Instrucciones específicas para tu análisis, pero no las incluyas en el informe final escrito:
 
     1.  **Clasificación:** Determina si la abolladura es simple, aguda o con concentrador, basándote en la descripción de la NAG-10 y en los datos del impacto (duración, longitud). Justifica tu elección.
     2.  **Cálculos:** Calcula la relación de profundidad (profundidad_max / diametro_gasoducto) y la tensión circunferencial (hoop stress) del gasoducto. Luego, compara la tensión de operación con el 40% de la TFME para determinar qué reglas de la NAG-10 debes aplicar.
-    3.  **Evaluación de la gravedad:** Basándote en los cálculos, la clasificación y la aproximación a la población, usa los criterios de la NAG-10, combinado con tus conocimientos de ingenieria para determinar la gravedad. Si la abolladura cae en una categoría que requiere ser eliminada, la gravedad es **alta**. Si puede ser reparada o monitoreada, es **moderada** o **baja**.
-    4.  **Recomendación:** La recomendación debe ser específica y técnica, basada en la NAG-10 y tus conocimientos de ingenieria. Por ejemplo, si es de gravedad alta, la recomendación es la **eliminación del tramo afectado**.
+    3.  **Evaluación de la gravedad:** Basándote en los cálculos, la clasificación y la aproximación a la población, tuilizando las coordenadas de inicio del tramo y las coordenadas del final del tramo, usa los criterios de la NAG-10 e IGEM/TD/1  SECCIÓN 6.7.1, combinado con tus conocimientos de ingenieria para determinar la gravedad. Si la abolladura cae en una categoría que requiere ser eliminada, la gravedad es **alta**. Si puede ser reparada o monitoreada, es **moderada** o **baja**.
+    4.  **Recomendación:** La recomendación debe ser específica y técnica, basada en la NAG-10, en la IGEM/TD/1 y tus conocimientos de ingenieria. Por ejemplo, si es de gravedad alta, la recomendación es la **eliminación del tramo afectado**.
+    5.  **Regla de Prioridad de Gravedad (Conservadora): La clasificación de Gravedad de la falla debe ser el resultado más alto entre el análisis de la Profundidad/Geometría (criterios NAG-10) y el análisis de la Ubicación/Consecuencia (criterios Tipo R, S, H, T). Por ejemplo, si una abolladura es técnicamente Baja (por su profundidad) pero está en un Área Tipo T (Consecuencia Alta), la Gravedad Final debe ser clasificada como **Alta**.
+    Tener en cuenta, EN PRIMERA INSTANCIA, el riesgo social. En caso de que el riesgo social sea mas bajo, priorizar las caracteristicas técnicas de la falla.
+    6.  **Priorizar la Seguridad: Si un dato (ej. abolladura en soldadura) resulta en gravedad **alta**, no importa si otro dato (ej. baja presión) sugiere gravedad **baja**. La IA debe elegir siempre la conclusión más conservadora.
+    7.  **Justificar la Combinación de Riesgos: La recomendación debe reflejar cómo se combinan los factores. Por ejemplo: "La abolladura es superficial (0.5% del diámetro), pero el gasoducto es antiguo (35 años) y opera con ciclos de presión. Por lo tanto, se recomienda el **monitoreo de la situación para mitigar el riesgo de fatiga**, aplicando el principio ALARP."
 
     
     
@@ -112,9 +128,10 @@ def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, 
     3. Longitud: 500 mm
     4. Profundidad: 1.3 mm
     5. Espesor gasoducto: 12.7 mm
-    6. Zona: Despoblada
+    6. Delga afectada: D4
+    6. Área: Tipo "R" (Rural)
     7. Gravedad: Moderada
-    8. Recomendación: Se identificó una abolladura simple con una profundidad de 1.3 mm, lo que equivale a un 4.0% del diámetro nominal. Esto es menor al 6% permitido por la normativa NAG-10 y otros estándares. No representa un riesgo inminente para la operación. Sin embargo, se recomienda realizar un monitoreo de la situación mediante una inspección visual o una nueva corrida de herramienta de inspección en los próximos 12 meses. Si se observan signos de corrosión, fatiga o se agrava la deformación, se deberá considerar el reemplazo o reparación del tramo afectado mediante soldadura de recubrimiento o refuerzo de la zona.
+    8. Recomendación: Se identificó una abolladura simple con una profundidad de 1.3 mm, lo que equivale a un 4.0% del diámetro nominal. Esto es menor al 6% permitido por la normativa NAG-10 y otros estándares. Al no estar el gasoducto en una zona poblada, no representa un riesgo inminente para la operación. Sin embargo, se recomienda realizar un monitoreo de la situación mediante una inspección visual o una nueva corrida de herramienta de inspección en los próximos 12 meses. Si se observan signos de corrosión, fatiga o se agrava la deformación, se deberá considerar el reemplazo o reparación del tramo afectado mediante soldadura de recubrimiento o refuerzo de la zona.
     
     Fin del ejemplo.
 
@@ -132,7 +149,11 @@ def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, 
     - Presión máxima de la operación (PMO): {presion_max_op} bares
     - Tensión de Fluencia Mínima Especificada (TFME): {tmfe} MPa
     - Antiguedad del gasoducto: {antiguedad_gasoducto} años
-    - Zona: {zona}
+    - Latitud de inicio del gasoducto: {latitud_in}
+    - Longitud de inicio del gasoducto: {longitud_in}
+    - Latitud de fin del gasoducto: {latitud_fin}
+    - Longitud de fin del gasoducto: {longitud_fin}
+
     
     
     Redactá el informe final, claro y profesional.
