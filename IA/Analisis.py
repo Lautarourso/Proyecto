@@ -109,7 +109,7 @@ def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, 
     ---------------
     Instrucciones específicas para tu análisis, pero no las incluyas en el informe final escrito:
 
-    1.  **Clasificación:** Determina si la abolladura es simple, aguda o con concentrador, basándote en la descripción de la NAG-10 y en los datos del impacto (duración, longitud). Justifica tu elección.
+    1.  **Clasificación:** Determina si la abolladura es simple, aguda o con concentrador, basándote en la descripción de la NAG-10. Para determinar si es Aguda, la IA debe utilizar la Profundidad y la Longitud estimada de la abolladura para inferir el Radio de Curvatura Mínimo. Si este es igual o menor a cinco veces el espesor del caño (R≤5×Espesor), clasifícala como Aguda, lo que lleva la Gravedad a Alta (Sección 309.b.2). Justifica tu elección.
     2.  **Cálculos:** Calcula la relación de profundidad (profundidad_max / diametro_gasoducto) y la tensión circunferencial (hoop stress) del gasoducto. Luego, compara la tensión de operación con el 40% de la TFME para determinar qué reglas de la NAG-10 debes aplicar.
     3.  **Evaluación de la gravedad:** Basándote en los cálculos, la clasificación y la aproximación a la población, tuilizando las coordenadas de inicio del tramo y las coordenadas del final del tramo, usa los criterios de la NAG-10 e IGEM/TD/1  SECCIÓN 6.7.1, combinado con tus conocimientos de ingenieria para determinar la gravedad. Si la abolladura cae en una categoría que requiere ser eliminada, la gravedad es **alta**. Si puede ser reparada o monitoreada, es **moderada** o **baja**.
     4.  **Recomendación:** La recomendación debe ser específica y técnica, basada en la NAG-10, en la IGEM/TD/1 y tus conocimientos de ingenieria. Por ejemplo, si es de gravedad alta, la recomendación es la **eliminación del tramo afectado**.
@@ -129,9 +129,9 @@ def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, 
     4. Profundidad: 1.3 mm
     5. Espesor gasoducto: 12.7 mm
     6. Delga afectada: D4
-    6. Área: Tipo "R" (Rural)
+    6. Área: Tipo "T" (Urbana)
     7. Gravedad: Moderada
-    8. Recomendación: Se identificó una abolladura simple con una profundidad de 1.3 mm, lo que equivale a un 4.0% del diámetro nominal. Esto es menor al 6% permitido por la normativa NAG-10 y otros estándares. Al no estar el gasoducto en una zona poblada, no representa un riesgo inminente para la operación. Sin embargo, se recomienda realizar un monitoreo de la situación mediante una inspección visual o una nueva corrida de herramienta de inspección en los próximos 12 meses. Si se observan signos de corrosión, fatiga o se agrava la deformación, se deberá considerar el reemplazo o reparación del tramo afectado mediante soldadura de recubrimiento o refuerzo de la zona.
+    8. Recomendación: Se identificó una abolladura simple con una profundidad de 1.3 mm, lo que equivale a un 4.0% del diámetro nominal. Esto es menor al 6% permitido por la normativa NAG-10 y otros estándares. Sin embargo, al estar el gasoducto en una zona urbana, la gravedad pasa a ser alta. Se debe implementar un plan de reparación de la abolladura a traves de amolado suave. 
     
     Fin del ejemplo.
 
@@ -144,7 +144,7 @@ def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, 
     - Delga afectada: D{delga}
     - Duración del impacto: {tiempo_impacto} ms
     - Espesor del gasoducto: {espesor_gasoducto} mm
-    - Diámetro del gasoducto: {diametro_gasoducto} cm
+    - Diámetro del gasoducto: {diametro_gasoducto} mm
     - Presión habitual del gas: {presion_gas} bares
     - Presión máxima de la operación (PMO): {presion_max_op} bares
     - Tensión de Fluencia Mínima Especificada (TFME): {tmfe} MPa
