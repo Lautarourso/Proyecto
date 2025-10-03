@@ -14,7 +14,7 @@ export const UploadP = async (req, res) => {
       
 }
     
-    if (!req.file || !analisisData || !videoName) {
+    if (/*!req.file ||*/ !analisisData /*|| !videoName*/) {
       return res.status(400).json({ message: "Faltan datos" });
     }
 
