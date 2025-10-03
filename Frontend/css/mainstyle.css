@@ -285,6 +285,33 @@ body.loaded {
   100% { transform: scale(1); }
 }
 
+/* MODALES - COLOR DE ETIQUETAS */
+#loginModal .form-label,
+#registroModal .form-label {
+  color: #000000 !important;
+  font-weight: 600;
+  font-family: 'Basement Grotesque', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+/* Mejorar visibilidad de los inputs */
+#loginModal .form-control,
+#registroModal .form-control {
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid #ccc;
+  color: #000000;
+  padding: 10px 12px;
+}
+
+#loginModal .form-control:focus,
+#registroModal .form-control:focus {
+  background-color: #ffffff;
+  border-color: var(--naranja);
+  box-shadow: 0 0 0 0.2rem rgba(226, 75, 22, 0.25);
+}
+
 /* Responsividad */
 @media (max-width: 768px) {
   .hero-section h1 {
