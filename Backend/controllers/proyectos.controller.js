@@ -13,8 +13,8 @@ export const UploadP = async (req, res) => {
         return res.status(400).json({ message: "analisisData no es JSON válido" });
       
 }
-    
-    if (/*!req.file ||*/ !analisisData /*|| !videoName*/) {
+  /*  
+    if (!req.file || !analisisData || !videoName) {
       return res.status(400).json({ message: "Faltan datos" });
     }
 
@@ -35,14 +35,15 @@ export const UploadP = async (req, res) => {
     const tipo_mime= result.resource_type
 
     const url= result.secure_url
+    */
     const proyecto = await proyectosService.createProyectos(
       req.idUsuario,
       parsedAnalisis,
-      videoData,
-      url,
-      tipo_mime,
-      videoName,
-      req.file
+      //videoData,
+      //url,
+      //tipo_mime,
+      //videoName,
+      //req.file
     );
 
     res.status(201).json({
