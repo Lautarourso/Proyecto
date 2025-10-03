@@ -13,7 +13,7 @@ Analisis.init(
       tiempo: {
         type: DataTypes.INTEGER,
       },
-      duracion: {
+      distancia: {
         type: DataTypes.INTEGER
       },
       video_id: {
