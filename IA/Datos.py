@@ -7,7 +7,7 @@ with open(ruta_salida, "r", encoding="utf-8") as f:
 for caso in casos:
     # acá usás el valor que viene del JSON
     tiempo_imp_ms = caso["tiempo"]
-    duracion_ms = caso["duracion"]
+    duracion_ms = caso["distancia"]
 # velocidad_imp = distancia_imp_mm/tiempo_imp_ms
 velocidad_imp_MS = 4
 

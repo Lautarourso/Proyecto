@@ -141,7 +141,6 @@ def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, 
     - Ubicación: {ubicacion} metros
     - Longitud estimada: {longitud} mm 
     - Profundidad: {profundidad_max} mm
-    - Delga afectada: D{delga}
     - Duración del impacto: {tiempo_impacto} ms
     - Espesor del gasoducto: {espesor_gasoducto} mm
     - Diámetro del gasoducto: {diametro_gasoducto} mm
