@@ -10,6 +10,10 @@ client = genai.Client(api_key="AIzaSyCVyNFqp3XpOXW5h4XCk9ozSDPU6zGzUdg")
 with open(ruta_salida, "r", encoding="utf-8") as f:
     casos = json.load(f)
 
+
+
+
+
 for caso in casos:
     prompt = construir_prompt_completo(
         tipo_falla=tipo_falla,
