@@ -42,31 +42,37 @@ function setupRegistroForm() {
 async function handleRegistroSubmit(e) {
   e.preventDefault();
   e.stopPropagation();
-
+  
   const nombre = document.getElementById('nombre').value;
   const apellido = document.getElementById('apellido').value;
   const dni = document.getElementById('dni').value;
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
   const confirmPassword = document.getElementById('confirmPassword').value;
-
+  
   if (password !== confirmPassword) {
     await showAlert('error', 'Error', 'Las contraseñas no coinciden');
     return;
   }
-
+  
   try {
     const res = await fetch(`${API_BASE}/auth/register`, {
       method: 'POST',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify({ nombre, apellido, dni, email, password })
+      body: JSON.stringify({
+        nombre,
+        apellido,
+        dni,
+        email,
+        password
+      })
     });
-
+    
     const data = await res.json();
-
+    
     if (res.ok) {
       await showAlert('success', 'Registro Exitoso', 'Ahora inicia sesión');
       const modal = bootstrap.Modal.getInstance(document.getElementById('registroModal'));
@@ -97,33 +103,33 @@ function setupLoginForm() {
 async function handleLoginSubmit(e) {
   e.preventDefault();
   e.stopPropagation();
-
+  
   const email = document.getElementById('Iemail').value;
   const password = document.getElementById('Ipassword').value;
-
+  
   try {
     const res = await fetch(`${API_BASE}/auth/login`, {
       method: 'POST',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({
+        email,
+        password
+      })
     });
-
+    
     const data = await res.json();
-
+    
     if (res.ok) {
       localStorage.setItem('authToken', data.token);
       localStorage.setItem('userEmail', email);
-      
       await showAlert('success', 'Sesión iniciada', 'Redirigiendo a videos...');
-      
       // Redirección después de 1.5 segundos para que se vea el mensaje
       setTimeout(() => {
         window.location.href = "videos.html";
       }, 1500);
-      
     } else {
       await showAlert('error', 'Error', data.message || 'No se pudo iniciar sesión');
     }

@@ -4,43 +4,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CalibraX</title>
-
+  
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Mango+Grotesque:wght@700&family=Basement+Grotesque:wght@700&family=Hanson:wght@400;700&family=Queering:wght@400;700&display=swap" rel="stylesheet">
-
+  
   <!-- Bootstrap CSS + Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-
+  
   <!-- Animate.css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
+  
   <!-- AOS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
-
+  
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+  
   <!-- Estilos personalizados -->
   <link href="css/mainstyle.css" rel="stylesheet" />
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
+
 <body>
   <!-- Barra de progreso -->
   <div id="progressBar" class="progress-bar-custom"></div>
-
+  
   <!-- HEADER -->
   <header class="header-custom sticky-top animate__animated animate__fadeInDown">
     <div class="container d-flex justify-content-between align-items-center py-3">
       <a href="#" class="d-flex align-items-center text-decoration-none">
         <img src="img/LOGOPROYECTO1.png" alt="Logo CalibraX" height="50" class="d-inline-block align-top me-2 pulse">
-        <span class="fs-4 fw-bold text-dark d-none d-md-inline">CALIBRAX</span>
+        <span class="fs-4 fw-bold text-light d-none d-md-inline">CALIBRAX</span>
       </a>
+      
       <button class="navbar-toggler d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-        <i class="bi bi-list" style="font-size: 1.5rem;"></i>
+        <i class="bi bi-list text-light" style="font-size: 1.5rem;"></i>
       </button>
+      
       <nav class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
         <div class="d-flex flex-column flex-md-row align-items-center">
           <a href="#" class="nav-link-custom mx-2 mx-md-3">Servicios</a>
@@ -55,105 +58,108 @@
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero-section text-center text-light py-5 position-relative">
-    <!-- Partículas solo en hero -->
-    <div id="particles-js"></div>
-
-    <div class="container py-5">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <h2 class="mb-3 animate__animated animate__fadeInDown">Bienvenido a</h2>
-          <h1 class="display-3 fw-bold my-3 animate__animated animate__zoomIn animate__delay-1s">CALIBRAX</h1>
-          <div class="mt-4 d-flex justify-content-center gap-3">
-            <button class="btn btn-light px-4 py-2 animate__animated animate__fadeInUp animate__delay-1s" onclick="mostrarLogin()">
-              <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
-            </button>
-            <button class="btn btn-outline-light px-4 py-2 animate__animated animate__fadeInUp animate__delay-2s" onclick="mostrarRegistro()">
-              <i class="bi bi-person-plus me-2"></i>Registrarse
-            </button>
-          </div>
-          <p class="racing-text mt-4 typewriter">El futuro de las cañerías, hoy</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- INFO SECTION -->
-  <section class="info-section py-5">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6 order-lg-1 order-2" data-aos="fade-right">
-          <h2 class="title-custom mb-4">Soluciones para el sector gasífero y petrolero</h2>
-          <p class="roboto-text mb-4">CalibraX nació en 2025 con la idea de modernizar la industria del gas y el petróleo. Nuestra propuesta busca resolver una falla común en la construcción de gasoductos: las deformaciones internas que pueden dañar equipos costosos y generar problemas ambientales.</p>
-          <div class="d-flex align-items-center mb-3">
-            <div class="me-3 text-orange"><i class="bi bi-check-circle-fill fs-4"></i></div>
-            <div>Sensores de alta precisión</div>
-          </div>
-          <div class="d-flex align-items-center mb-3">
-            <div class="me-3 text-orange"><i class="bi bi-check-circle-fill fs-4"></i></div>
-            <div>Monitoreo en tiempo real</div>
-          </div>
-          <div class="d-flex align-items-center mb-4">
-            <div class="me-3 text-orange"><i class="bi bi-check-circle-fill fs-4"></i></div>
-            <div>Alertas inmediatas</div>
-          </div>
-          <button class="btn-orange-custom mt-3 float">
-            <i class="bi bi-eye-fill me-2"></i>Ver trabajos
-          </button>
-        </div>
-        <div class="col-lg-6 order-lg-2 order-1 mb-4 mb-lg-0" data-aos="fade-left">
-          <div id="mainCarousel" class="carousel slide carousel-fade shadow-lg" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
-              <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
-              <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
+  <!-- Canvas para efecto Thermal Vision -->
+  <canvas id="thermalCanvas"></canvas>
+  
+  <!-- Contenido principal -->
+  <div class="content-wrapper">
+    <!-- HERO -->
+    <section class="hero-section text-center text-light py-5 position-relative">
+      <div class="container py-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <h2 class="mb-3 animate__animated animate__fadeInDown">Bienvenido a</h2>
+            <h1 class="display-3 fw-bold my-3 animate__animated animate__zoomIn animate__delay-1s">CALIBRAX</h1>
+            <div class="mt-4 d-flex justify-content-center gap-3">
+              <button class="btn btn-light px-4 py-2 animate__animated animate__fadeInUp animate__delay-1s" onclick="mostrarLogin()">
+                <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
+              </button>
+              <button class="btn btn-outline-light px-4 py-2 animate__animated animate__fadeInUp animate__delay-2s" onclick="mostrarRegistro()">
+                <i class="bi bi-person-plus me-2"></i>Registrarse
+              </button>
             </div>
-            <div class="carousel-inner rounded-3 overflow-hidden">
-              <div class="carousel-item active">
-                <img src="img/imagen1.jpg" class="d-block w-100 animate__animated animate__fadeIn" alt="Sistema de monitoreo" loading="lazy">
-              </div>
-              <div class="carousel-item">
-                <img src="img/imagen2.jpg" class="d-block w-100 animate__animated animate__fadeIn" alt="Tecnología de sensores" loading="lazy">
-              </div>
-              <div class="carousel-item">
-                <img src="img/imagen3.jpg" class="d-block w-100 animate__animated animate__fadeIn" alt="Equipo de CalibraX trabajando" loading="lazy">
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </button>
+            <p class="racing-text mt-4 typewriter">El futuro de las cañerías, hoy</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CONTACTO -->
-  <section class="contact-section text-center py-5" data-aos="zoom-in">
-    <div class="container py-4">
-      <h2 class="contact-title mb-4">¿Dudas? ¿Consultas?<br>¡Contáctanos!</h2>
-      <button class="btn-orange-custom px-5 pulse" onclick="mostrarOpcionesContacto()">
-        <i class="bi bi-envelope-fill me-2"></i>Contacto
-      </button>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer-custom py-4 animate__animated animate__fadeInUp">
-    <div class="container d-flex justify-content-between align-items-center flex-column flex-md-row">
-      <img src="img/LOGOPROYECTO1.png" alt="Logo CalibraX" height="40">
-      <p class="mb-2 mb-md-0 footer-text">© 2025 CALIBRAX - TODOS LOS DERECHOS RESERVADOS</p>
-      <div>
-        <a href="#" class="footer-link me-3">Inicio</a>
-        <a href="#" class="footer-link me-3">Servicios</a>
-        <a href="#" class="footer-link">Contacto</a>
+    <!-- INFO SECTION -->
+    <section class="info-section py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 order-lg-1 order-2" data-aos="fade-right">
+            <h2 class="title-custom mb-4">Soluciones para el sector gasífero y petrolero</h2>
+            <p class="roboto-text mb-4">CalibraX nació en 2025 con la idea de modernizar la industria del gas y el petróleo. Nuestra propuesta busca resolver una falla común en la construcción de gasoductos: las deformaciones internas que pueden dañar equipos costosos y generar problemas ambientales.</p>
+            <div class="d-flex align-items-center mb-3">
+              <div class="me-3 text-orange"><i class="bi bi-check-circle-fill fs-4"></i></div>
+              <div class="text-light">Sensores de alta precisión</div>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+              <div class="me-3 text-orange"><i class="bi bi-check-circle-fill fs-4"></i></div>
+              <div class="text-light">Monitoreo en tiempo real</div>
+            </div>
+            <div class="d-flex align-items-center mb-4">
+              <div class="me-3 text-orange"><i class="bi bi-check-circle-fill fs-4"></i></div>
+              <div class="text-light">Alertas inmediatas</div>
+            </div>
+            <button class="btn-orange-custom mt-3 float">
+              <i class="bi bi-eye-fill me-2"></i>Ver trabajos
+            </button>
+          </div>
+          <div class="col-lg-6 order-lg-2 order-1 mb-4 mb-lg-0" data-aos="fade-left">
+            <div id="mainCarousel" class="carousel slide carousel-fade shadow-lg" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner rounded-3 overflow-hidden">
+                <div class="carousel-item active">
+                  <img src="img/imagen1.jpg" class="d-block w-100 animate__animated animate__fadeIn" alt="Sistema de monitoreo" loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img src="img/imagen2.jpg" class="d-block w-100 animate__animated animate__fadeIn" alt="Tecnología de sensores" loading="lazy">
+                </div>
+                <div class="carousel-item">
+                  <img src="img/imagen3.jpg" class="d-block w-100 animate__animated animate__fadeIn" alt="Equipo de CalibraX trabajando" loading="lazy">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </footer>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contact-section text-center py-5" data-aos="zoom-in">
+      <div class="container py-4">
+        <h2 class="contact-title mb-4">¿Dudas? ¿Consultas?<br>¡Contáctanos!</h2>
+        <button class="btn-orange-custom px-5 pulse" onclick="mostrarOpcionesContacto()">
+          <i class="bi bi-envelope-fill me-2"></i>Contacto
+        </button>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-custom py-4 animate__animated animate__fadeInUp">
+      <div class="container d-flex justify-content-between align-items-center flex-column flex-md-row">
+        <img src="img/LOGOPROYECTO1.png" alt="Logo CalibraX" height="40">
+        <p class="mb-2 mb-md-0 footer-text">© 2025 CALIBRAX - TODOS LOS DERECHOS RESERVADOS</p>
+        <div>
+          <a href="#" class="footer-link me-3">Inicio</a>
+          <a href="#" class="footer-link me-3">Servicios</a>
+          <a href="#" class="footer-link">Contacto</a>
+        </div>
+      </div>
+    </footer>
+  </div>
 
   <!-- MODALES -->
   <div id="loginModal" class="modal fade" tabindex="-1" aria-hidden="true">
@@ -224,37 +230,17 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="app.main.js"></script>
-
-  <!-- Partículas -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      AOS.init({ duration: 1000, once: true });
-      particlesJS('particles-js', {
-        particles: {
-          number: { value: 80, density: { enable: true, value_area: 800 } },
-          color: { value: "#ffffff" },
-          shape: { type: "circle" },
-          opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1 } },
-          size: { value: 3, random: true, anim: { enable: true, speed: 2, size_min: 0.1 } },
-          line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
-          move: { enable: true, speed: 1, direction: "none", random: true, straight: false }
-        },
-        interactivity: {
-          detect_on: "canvas",
-          events: {
-            onhover: { enable: true, mode: "repulse" },
-            onclick: { enable: true, mode: "push" },
-            resize: true
-          },
-          modes: {
-            repulse: { distance: 100, duration: 0.4 },
-            push: { particles_nb: 4 }
-          }
-        },
-        retina_detect: true
+      AOS.init({
+        duration: 1000,
+        once: true
       });
-
+      
+      // Inicializar efecto Thermal Vision
+      initThermalVision();
+      
       document.body.classList.add("loaded");
       document.getElementById('progressBar').style.opacity = '0';
     });
@@ -267,6 +253,132 @@
       progressBar.style.width = scrolled + '%';
       progressBar.style.opacity = winScroll > 100 ? '1' : '0';
     });
+
+    // Efecto Thermal Vision
+    function initThermalVision() {
+      const canvas = document.getElementById('thermalCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Configurar canvas para cubrir toda la pantalla
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      
+      // Configuración del efecto
+      const particles = [];
+      const particleCount = 100;
+      const colors = [
+        '#000000', // Negro
+        '#001122', // Azul muy oscuro
+        '#002244', // Azul oscuro
+        '#003366', // Azul medio
+        '#004488', // Azul
+        '#0055AA', // Azul claro
+        '#0066CC', // Azul más claro
+        '#0077EE', // Azul brillante
+        '#0088FF'  // Azul muy brillante
+      ];
+      
+      // Crear partículas
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 3 + 1,
+          speedX: (Math.random() - 0.5) * 0.5,
+          speedY: (Math.random() - 0.5) * 0.5,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          opacity: Math.random() * 0.5 + 0.2
+        });
+      }
+      
+      // Función de animación
+      function animate() {
+        // Limpiar canvas con un fondo negro semitransparente
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Dibujar y actualizar partículas
+        particles.forEach(particle => {
+          // Actualizar posición
+          particle.x += particle.speedX;
+          particle.y += particle.speedY;
+          
+          // Rebotar en los bordes
+          if (particle.x <= 0 || particle.x >= canvas.width) particle.speedX *= -1;
+          if (particle.y <= 0 || particle.y >= canvas.height) particle.speedY *= -1;
+          
+          // Dibujar partícula
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+          ctx.fillStyle = particle.color;
+          ctx.globalAlpha = particle.opacity;
+          ctx.fill();
+        });
+        
+        // Dibujar líneas entre partículas cercanas
+        ctx.globalAlpha = 0.2;
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < 100) {
+              ctx.beginPath();
+              ctx.strokeStyle = '#0088FF';
+              ctx.lineWidth = 0.5;
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+        
+        // Dibujar efecto de calor
+        drawHeatEffect();
+        
+        requestAnimationFrame(animate);
+      }
+      
+      // Efecto de calor (ondas)
+      function drawHeatEffect() {
+        const time = Date.now() * 0.001;
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        
+        // Crear gradiente radial para el efecto de calor
+        const gradient = ctx.createRadialGradient(
+          centerX, centerY, 0,
+          centerX, centerY, Math.min(canvas.width, canvas.height) * 0.8
+        );
+        
+        gradient.addColorStop(0, 'rgba(0, 136, 255, 0.1)');
+        gradient.addColorStop(0.5, 'rgba(0, 85, 170, 0.05)');
+        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        
+        ctx.globalAlpha = 0.3;
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Ondas de calor
+        ctx.globalAlpha = 0.1;
+        for (let i = 0; i < 3; i++) {
+          const radius = 100 + Math.sin(time * 0.5 + i) * 50;
+          ctx.beginPath();
+          ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+          ctx.strokeStyle = '#00AAFF';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+      }
+      
+      animate();
+    }
   </script>
 </body>
 </html>
