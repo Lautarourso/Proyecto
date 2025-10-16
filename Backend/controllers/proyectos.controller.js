@@ -4,7 +4,7 @@ import proyectosService from "../services/proyectos.service.js";
 
 export const UploadP = async (req, res) => {
   try {
-    const { analisisData, videoData, videoName } = req.body;
+    const { analisisData, Name } = req.body;
 
     let parsedAnalisis;
       try {
@@ -14,7 +14,7 @@ export const UploadP = async (req, res) => {
       
 }
   
-    if (!analisisData ) {
+    if (!analisisData || !Name ) {
       return res.status(400).json({ message: "Faltan datos" });
     }
 
@@ -22,6 +22,7 @@ export const UploadP = async (req, res) => {
     const proyecto = await proyectosService.createProyectos(
       req.idUsuario,
       parsedAnalisis,
+      Name,
     );
 
     res.status(201).json({
