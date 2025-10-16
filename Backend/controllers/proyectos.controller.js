@@ -10,17 +10,9 @@ export const UploadP = async (req, res) => {
       return res.status(400).json({ message: "Faltan datos" });
     }
 
-    let parsedAnalisis;
-    try {
-      parsedAnalisis = JSON.parse(analisisData);
-    } catch (err) {
-      return res
-        .status(400)
-        .json({ message: "analisisData no es JSON válido" });
-    }
-
+    // ✅ Como viene en RAW JSON, NO se parsea
+    let parsedAnalisis = analisisData; 
     let parsedName = Name;
-    
 
     const proyecto = await proyectosService.createProyectos(
       req.idUsuario,
