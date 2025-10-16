@@ -10,10 +10,19 @@
   });
 };
    
-
-
+  const Createvideo = async (video, url, tipo_mime, user_id) => {
+  return await Videos.create(
+        {
+          video,
+          url,
+          tipo_mime,
+          user_id  
+        },
+      );
+    }
 
 
     export default {
         getVideosById,
+        Createvideo
     };

@@ -4,50 +4,33 @@ import proyectosService from "../services/proyectos.service.js";
 
 export const UploadP = async (req, res) => {
   try {
-    const { analisisData, videoData, videoName } = req.body;
+    const { analisisData, Name } = req.body;
 
-    let parsedAnalisis;
-      try {
-        parsedAnalisis = JSON.parse(analisisData);
-      } catch (err) {
-        return res.status(400).json({ message: "analisisData no es JSON válido" });
-      
-}
-    
-    if (/*!req.file ||*/ !analisisData /*|| !videoName*/) {
+    if (!analisisData || !Name) {
       return res.status(400).json({ message: "Faltan datos" });
     }
 
-    const streamUpload = (fileBuffer) => {
-      return new Promise((resolve, reject) => {
-        const stream = cloudinary.uploader.upload_stream(
-          { resource_type: "video", folder: "tus_videos" },
-          (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-          }
-        );
-        stream.end(fileBuffer); // **muy importante** enviar el buffer
-      });
-    };
-    
-    const result = await streamUpload(req.file.buffer);
-    const tipo_mime= result.resource_type
+    let parsedAnalisis;
+    try {
+      parsedAnalisis = JSON.parse(analisisData);
+    } catch (err) {
+      return res
+        .status(400)
+        .json({ message: "analisisData no es JSON válido" });
+    }
 
-    const url= result.secure_url
+    let parsedName = Name;
+    
+
     const proyecto = await proyectosService.createProyectos(
       req.idUsuario,
       parsedAnalisis,
-      videoData,
-      url,
-      tipo_mime,
-      videoName,
-      req.file
+      parsedName
     );
 
     res.status(201).json({
       message: "Proyecto, análisis y video creados con éxito",
-      proyecto_id: proyecto.id
+      proyecto_id: proyecto.id,
     });
   } catch (error) {
     console.error(error);
@@ -55,13 +38,13 @@ export const UploadP = async (req, res) => {
   }
 };
 
-
-const GetP = async (req, res) => {
-   try{ const proyectos = await Proyectos.GetProyectos(req. idUsuario);
+export const GetP = async (req, res) => {
+  try {
+    const proyectos = await Proyectos.GetProyectos(req.idUsuario);
     res.json(proyectos);
   } catch (error) {
-      res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
-export default { UploadP, GetP};
+export default { UploadP, GetP };

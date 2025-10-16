@@ -18,6 +18,10 @@ Proyectos.init (
         key: "id",
       },
     },
+
+    name: {
+      type: DataTypes.TEXT
+    },
 },
 
  {

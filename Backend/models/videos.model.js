@@ -24,9 +24,7 @@ Videos.init(
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW // ✔️ Se autocompleta al crear el video
         },
-        name: {
-            type: DataTypes.TEXT
-        },
+        
         proyecto_id:{
             type: DataTypes.INTEGER,
             allowNull: false

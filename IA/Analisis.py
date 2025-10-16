@@ -1,4 +1,4 @@
-def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, delga, tiempo_impacto, espesor_gasoducto, presion_gas, material_gasoducto, diametro_gasoducto, tmfe, antiguedad_gasoducto, presion_max_op, latitud_in, latitud_fin, longitud_in, longitud_fin):
+def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, tiempo_impacto, espesor_gasoducto, presion_gas, material_gasoducto, diametro_gasoducto, tmfe, antiguedad_gasoducto, presion_max_op, latitud_in, latitud_fin, longitud_in, longitud_fin):
     
     # Define la variable `prompt` aquí, antes de usarla.
     prompt = f"""
@@ -141,7 +141,6 @@ def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, 
     - Ubicación: {ubicacion} metros
     - Longitud estimada: {longitud} mm 
     - Profundidad: {profundidad_max} mm
-    - Delga afectada: D{delga}
     - Duración del impacto: {tiempo_impacto} ms
     - Espesor del gasoducto: {espesor_gasoducto} mm
     - Diámetro del gasoducto: {diametro_gasoducto} mm

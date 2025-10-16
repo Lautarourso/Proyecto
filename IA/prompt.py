@@ -5,10 +5,14 @@ from Analisis import construir_prompt_completo
 from Numericos import ruta_salida
 from Datos import tipo_falla, ubicacion, longitud, profundidad_max, espesor_gasoducto, diametro_gasoducto, presion_gas, tmfe, material_gasoducto, antiguedad_gasoducto, presion_max_op, latitud_in, latitud_fin, longitud_in, longitud_fin
 
-client = genai.Client(api_key="AIzaSyCBvo4j-OCu_0WYvL6F4UwfWWf2zlEjUBo")
+client = genai.Client(api_key="AIzaSyCVyNFqp3XpOXW5h4XCk9ozSDPU6zGzUdg")
 
 with open(ruta_salida, "r", encoding="utf-8") as f:
     casos = json.load(f)
+
+
+
+
 
 for caso in casos:
     prompt = construir_prompt_completo(
@@ -16,8 +20,7 @@ for caso in casos:
         ubicacion=ubicacion,
         longitud=longitud, 
         profundidad_max=profundidad_max,
-        delga=4,
-        tiempo_impacto=caso["duracion"], 
+        tiempo_impacto=caso["distancia"], 
         espesor_gasoducto=espesor_gasoducto, 
         diametro_gasoducto=diametro_gasoducto,
         presion_gas=presion_gas,
