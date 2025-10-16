@@ -16,13 +16,6 @@ Analisis.init(
       distancia: {
         type: DataTypes.DOUBLE
       },
-      video_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "videos",
-        key: "id",
-      },
-    },
     usuario_id: {
       type: DataTypes.INTEGER,
       references: {
