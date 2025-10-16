@@ -9,8 +9,8 @@ const createProyectos = async (Usuario_id, analisisData, parsedName) => {
   try {
     // 1. Crear proyecto
     const proyecto = await Proyectos.create(
-      { usuario_id: Usuario_id },
-      { name: parsedName},
+      { usuario_id: Usuario_id,
+      name: parsedName},
       { transaction: t }
     );    
 
