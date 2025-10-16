@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CalibraX - Proyecto</title>
+    
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mango+Grotesque:wght@700&family=Basement+Grotesque:wght@700&family=Hanson:wght@400;700&family=Queering:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
+    <!-- Estilo personalizado -->
+    <link href="css/styleproyecto.css" rel="stylesheet" />
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Barra de progreso -->
+    <div id="progressBar" class="progress-bar-custom"></div>
+
+    <!-- HEADER -->
+    <header class="header-custom sticky-top">
+        <div class="container d-flex justify-content-between align-items-center py-3">
+            <a href="videos.html" class="d-flex align-items-center text-decoration-none">
+                <img src="img/LOGOPROYECTO1.png" alt="Logo CalibraX" height="50" class="me-2">
+                <span class="fs-4 fw-bold text-light d-none d-md-inline">CALIBRAX</span>
+            </a>
+            <nav class="d-flex align-items-center">
+                <button class="btn btn-sm btn-outline-orange ms-3" onclick="logout()">
+                    <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="text-light mb-1" id="nombreProyecto">Cargando...</h2>
+                    <p class="text-muted mb-0" id="infoProyecto"></p>
+                </div>
+                <button class="btn btn-orange-custom" onclick="subirVideo()">
+                    <i class="bi bi-cloud-upload me-2"></i>Subir Video
+                </button>
+            </div>
+            
+            <div id="videosInfo" class="alert alert-info">
+                Cargando videos del proyecto...
+            </div>
+            
+            <div class="videos-grid" id="videosContainer">
+                <!-- Los videos se cargarán aquí dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-custom py-4">
+        <div class="container text-center">
+            <p class="small mb-0">© 2025 CalibraX. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        let proyectoActual = null;
+        let videosProyecto = [];
+
+        function logout() {
+            localStorage.removeItem('authToken');
+            window.location.href = "mainpage.html";
+        }
+
+        function subirVideo() {
+            // Simular subida de video
+            Swal.fire({
+                title: 'Subir Video',
+                text: 'Esta funcionalidad estará disponible pronto',
+                icon: 'info',
+                confirmButtonColor: '#E24B16'
+            });
+        }
+
+        function cargarDatosVideo(videoId) {
+            window.location.href = `datosvideos.html?proyecto=${proyectoActual.id}&video=${videoId}`;
+        }
+
+        window.addEventListener('scroll', function () {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = scrolled + '%';
+            progressBar.style.opacity = winScroll > 100 ? '1' : '0';
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('progressBar').style.opacity = '0';
+            
+            // Obtener ID del proyecto de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const proyectoId = urlParams.get('id');
+            
+            if (!proyectoId) {
+                window.location.href = "videos.html";
+                return;
+            }
+            
+            cargarProyecto(proyectoId);
+        });
+
+        async function cargarProyecto(proyectoId) {
+            // Simular carga de proyecto desde "base de datos"
+            const proyectos = [
+                { id: 1, nombre: "Gasoducto Norte", fechaCreacion: "2024-01-15" },
+                { id: 2, nombre: "Proyecto Sur", fechaCreacion: "2024-01-10" },
+                { id: 3, nombre: "Tramo Central", fechaCreacion: "2024-01-05" }
+            ];
+            
+            proyectoActual = proyectos.find(p => p.id == proyectoId);
+            
+            if (!proyectoActual) {
+                window.location.href = "videos.html";
+                return;
+            }
+            
+            document.getElementById('nombreProyecto').textContent = proyectoActual.nombre;
+            document.getElementById('infoProyecto').textContent = `Creado el ${formatearFecha(proyectoActual.fechaCreacion)}`;
+            
+            // Cargar videos del proyecto
+            cargarVideosProyecto(proyectoId);
+        }
+
+        function cargarVideosProyecto(proyectoId) {
+            const container = document.getElementById("videosContainer");
+            const info = document.getElementById("videosInfo");
+            
+            // Videos de ejemplo (simulando base de datos)
+            const todosVideos = [
+                { id: 1, proyectoId: 1, nombre: "Video Inspección Tramo A", fecha: "2024-01-20T10:30:00", url: "videos/video1.mp4" },
+                { id: 2, proyectoId: 1, nombre: "Video Inspección Tramo B", fecha: "2024-01-18T14:20:00", url: "videos/video2.mp4" },
+                { id: 3, proyectoId: 1, nombre: "Video Inspección Tramo C", fecha: "2024-01-16T09:15:00", url: "videos/video3.mp4" },
+                { id: 4, proyectoId: 2, nombre: "Video Proyecto Sur", fecha: "2024-01-12T11:45:00", url: "videos/video4.mp4" }
+            ];
+            
+            videosProyecto = todosVideos.filter(v => v.proyectoId == proyectoId);
+            
+            if (videosProyecto.length === 0) {
+                info.classList.replace("alert-info", "alert-warning");
+                info.textContent = "No hay videos en este proyecto.";
+                container.innerHTML = '';
+                return;
+            }
+            
+            info.style.display = "none";
+            container.innerHTML = '';
+            
+            videosProyecto.forEach(video => {
+                const div = document.createElement("div");
+                div.className = "video-card";
+                
+                div.innerHTML = `
+                    <video class="video-player" controls preload="metadata">
+                        <source src="${video.url}" type="video/mp4">
+                        Tu navegador no soporta video HTML5.
+                    </video>
+                    <div class="video-info">
+                        <h4 class="video-title">${video.nombre}</h4>
+                        <p class="video-date">${formatearFechaHora(video.fecha)}</p>
+                        <button class="btn btn-orange-custom btn-sm w-100 mt-2" onclick="cargarDatosVideo(${video.id})">
+                            <i class="bi bi-clipboard-data me-1"></i>Cargar Datos
+                        </button>
+                    </div>
+                `;
+                
+                container.appendChild(div);
+            });
+        }
+
+        function formatearFecha(fechaStr) {
+            const fecha = new Date(fechaStr);
+            return fecha.toLocaleDateString('es-AR');
+        }
+
+        function formatearFechaHora(fechaStr) {
+            const fecha = new Date(fechaStr);
+            return fecha.toLocaleString('es-AR');
+        }
+    </script>
+</body>
+</html>

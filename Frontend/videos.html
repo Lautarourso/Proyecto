@@ -1,91 +1,120 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CalibraX - Videos</title>
-  <!-- Preconexiones -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
-  <!-- Animate.css -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <!-- Estilo personalizado -->
-  <link href="css/videosstyle.css" rel="stylesheet" />
-  <!-- Favicon -->
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CalibraX - Proyectos</title>
+    
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mango+Grotesque:wght@700&family=Basement+Grotesque:wght@700&family=Hanson:wght@400;700&family=Queering:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
+    <!-- Estilo personalizado -->
+    <link href="css/videosstyle.css" rel="stylesheet" />
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 <body>
-  <!-- Barra de progreso -->
-  <div id="progressBar" class="progress-bar-custom"></div>
+    <!-- Barra de progreso -->
+    <div id="progressBar" class="progress-bar-custom"></div>
 
-  <!-- HEADER -->
-  <header class="header-custom sticky-top">
-    <div class="container d-flex justify-content-between align-items-center py-3">
-      <a href="mainpage.html" class="d-flex align-items-center text-decoration-none">
-        <img src="img/LOGOPROYECTO1.png" alt="Logo CalibraX" height="50" class="me-2">
-        <span class="fs-4 fw-bold text-dark d-none d-md-inline">CALIBRAX</span>
-      </a>
-      <nav class="d-flex align-items-center">
-        <a href="#" class="nav-link-custom mx-2">Servicios</a>
-        <a href="#" class="nav-link-custom mx-2">Quiénes somos</a>
-        <a href="#" class="nav-link-custom mx-2">Contacto</a>
-        <button class="btn btn-sm btn-outline-danger ms-3" onclick="logout()">
-          <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
-        </button>
-      </nav>
-    </div>
-  </header>
-
-  <!-- CONTENIDO PRINCIPAL -->
-  <div class="container my-5">
-    <div class="row">
-      <div class="col-12">
-        <h2 class="mb-4 text-light">Videos Disponibles</h2>
-        <div id="videosInfo" class="alert alert-info">
-          Cargando videos...
+    <!-- HEADER -->
+    <header class="header-custom sticky-top">
+        <div class="container d-flex justify-content-between align-items-center py-3">
+            <a href="mainpage.html" class="d-flex align-items-center text-decoration-none">
+                <img src="img/LOGOPROYECTO1.png" alt="Logo CalibraX" height="50" class="me-2">
+                <span class="fs-4 fw-bold text-light d-none d-md-inline">CALIBRAX</span>
+            </a>
+            <nav class="d-flex align-items-center">
+                <a href="#" class="nav-link-custom mx-2">Servicios</a>
+                <a href="#" class="nav-link-custom mx-2">Quiénes somos</a>
+                <a href="#" class="nav-link-custom mx-2">Contacto</a>
+                <button class="btn btn-sm btn-outline-orange ms-3" onclick="logout()">
+                    <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                </button>
+            </nav>
         </div>
-        <div class="videos-grid" id="videosContainer">
-          <!-- Los videos se cargarán aquí dinámicamente -->
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-between align-items-center mb-4">
+                <h2 class="text-light mb-0">Mis Proyectos</h2>
+                <button class="btn btn-orange-custom" onclick="mostrarCrearProyecto()">
+                    <i class="bi bi-plus-circle me-2"></i>Crear Proyecto
+                </button>
+            </div>
+            
+            <div id="proyectosInfo" class="alert alert-info">
+                Cargando proyectos...
+            </div>
+            
+            <div class="proyectos-grid" id="proyectosContainer">
+                <!-- Los proyectos se cargarán aquí dinámicamente -->
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Footer simple -->
-  <footer class="footer-custom py-4">
-    <div class="container text-center">
-      <p class="small mb-0">© 2025 CalibraX. Todos los derechos reservados.</p>
+    <!-- MODAL CREAR PROYECTO -->
+    <div id="crearProyectoModal" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-custom">
+                    <h5 class="modal-title">CREAR NUEVO PROYECTO</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="crearProyectoForm">
+                        <div class="mb-3">
+                            <label class="form-label">NOMBRE DEL PROYECTO</label>
+                            <input type="text" class="form-control" id="nombreProyecto" required>
+                        </div>
+                        <button type="submit" class="btn-orange-custom w-100">Crear Proyecto</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-  </footer>
 
-  <!-- Scripts -->
-  <script>
-    function logout() {
-      localStorage.removeItem('authToken');
-      window.location.href = "mainpage.html";
-    }
+    <!-- Footer -->
+    <footer class="footer-custom py-4">
+        <div class="container text-center">
+            <p class="small mb-0">© 2025 CalibraX. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
-    window.addEventListener('scroll', function () {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      const progressBar = document.getElementById('progressBar');
-      progressBar.style.width = scrolled + '%';
-      progressBar.style.opacity = winScroll > 100 ? '1' : '0';
-    });
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="app.proyectos.js"></script>
+    <script>
+        function logout() {
+            localStorage.removeItem('authToken');
+            window.location.href = "mainpage.html";
+        }
 
-    document.addEventListener('DOMContentLoaded', function () {
-      document.getElementById('progressBar').style.opacity = '0';
-    });
-  </script>
+        function mostrarCrearProyecto() {
+            const modal = new bootstrap.Modal(document.getElementById('crearProyectoModal'));
+            modal.show();
+        }
 
-  <!-- Bootstrap Bundle JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- App para cargar videos -->
-  <script src="app.videos.js"></script>
+        window.addEventListener('scroll', function () {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = scrolled + '%';
+            progressBar.style.opacity = winScroll > 100 ? '1' : '0';
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('progressBar').style.opacity = '0';
+        });
+    </script>
 </body>
 </html>

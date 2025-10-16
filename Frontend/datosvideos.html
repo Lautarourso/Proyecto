@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CalibraX - Cargar Datos</title>
+    
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mango+Grotesque:wght@700&family=Basement+Grotesque:wght@700&family=Hanson:wght@400;700&family=Queering:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
+    <!-- Estilo personalizado -->
+    <link href="css/styledatos.css" rel="stylesheet" />
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Barra de progreso -->
+    <div id="progressBar" class="progress-bar-custom"></div>
+
+    <!-- HEADER -->
+    <header class="header-custom sticky-top">
+        <div class="container d-flex justify-content-between align-items-center py-3">
+            <a href="#" onclick="volverAlProyecto()" class="d-flex align-items-center text-decoration-none">
+                <img src="img/LOGOPROYECTO1.png" alt="Logo CalibraX" height="50" class="me-2">
+                <span class="fs-4 fw-bold text-light d-none d-md-inline">CALIBRAX</span>
+            </a>
+            <nav class="d-flex align-items-center">
+                <button class="btn btn-sm btn-outline-orange ms-3" onclick="logout()">
+                    <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <h2 class="text-light mb-2">Cargar Datos del Video</h2>
+                <p class="text-muted" id="infoVideo">Cargando información del video...</p>
+            </div>
+            
+            <div class="col-lg-6 mb-4">
+                <div class="video-container">
+                    <video id="videoPlayer" controls preload="metadata" class="w-100">
+                        <source src="" type="video/mp4">
+                        Tu navegador no soporta video HTML5.
+                    </video>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="form-container">
+                    <h4 class="text-light mb-4">Datos Técnicos</h4>
+                    <form id="datosForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Material Gasoducto</label>
+                                <input type="text" class="form-control" name="material" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Espesor Gasoducto (mm)</label>
+                                <input type="number" class="form-control" name="espesor" step="0.1" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Diámetro Gasoducto (mm)</label>
+                                <input type="number" class="form-control" name="diametro" step="0.1" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Antigüedad (años)</label>
+                                <input type="number" class="form-control" name="antiguedad" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label class="form-label">Tensión Fluencia Mín Especificada (MPa)</label>
+                                <input type="number" class="form-control" name="tension_fluencia" step="0.1" required>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Latitud Inicial</label>
+                                <input type="text" class="form-control" name="lat_inicial" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Latitud Final</label>
+                                <input type="text" class="form-control" name="lat_final" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Longitud Inicial</label>
+                                <input type="text" class="form-control" name="long_inicial" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Longitud Final</label>
+                                <input type="text" class="form-control" name="long_final" required>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Presión Habitual del Gas (bar)</label>
+                                <input type="number" class="form-control" name="presion_habitual" step="0.1" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Presión Máx de Operación (bar)</label>
+                                <input type="number" class="form-control" name="presion_max" step="0.1" required>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <button type="button" class="btn btn-outline-light me-md-2" onclick="volverAlProyecto()">
+                                <i class="bi bi-arrow-left me-1"></i>Volver
+                            </button>
+                            <button type="submit" class="btn btn-orange-custom">
+                                <i class="bi bi-save me-1"></i>Guardar Datos
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-custom py-4">
+        <div class="container text-center">
+            <p class="small mb-0">© 2025 CalibraX. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        let videoActual = null;
+        let proyectoId = null;
+
+        function logout() {
+            localStorage.removeItem('authToken');
+            window.location.href = "mainpage.html";
+        }
+
+        function volverAlProyecto() {
+            if (proyectoId) {
+                window.location.href = `proyecto.html?id=${proyectoId}`;
+            } else {
+                window.location.href = "videos.html";
+            }
+        }
+
+        window.addEventListener('scroll', function () {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = scrolled + '%';
+            progressBar.style.opacity = winScroll > 100 ? '1' : '0';
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('progressBar').style.opacity = '0';
+            
+            // Obtener parámetros de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            proyectoId = urlParams.get('proyecto');
+            const videoId = urlParams.get('video');
+            
+            if (!proyectoId || !videoId) {
+                window.location.href = "videos.html";
+                return;
+            }
+            
+            cargarVideo(proyectoId, videoId);
+            setupFormulario();
+        });
+
+        function cargarVideo(proyectoId, videoId) {
+            // Simular carga de video desde "base de datos"
+            const todosVideos = [
+                { id: 1, proyectoId: 1, nombre: "Video Inspección Tramo A", fecha: "2024-01-20T10:30:00", url: "videos/video1.mp4" },
+                { id: 2, proyectoId: 1, nombre: "Video Inspección Tramo B", fecha: "2024-01-18T14:20:00", url: "videos/video2.mp4" },
+                { id: 3, proyectoId: 1, nombre: "Video Inspección Tramo C", fecha: "2024-01-16T09:15:00", url: "videos/video3.mp4" },
+                { id: 4, proyectoId: 2, nombre: "Video Proyecto Sur", fecha: "2024-01-12T11:45:00", url: "videos/video4.mp4" }
+            ];
+            
+            videoActual = todosVideos.find(v => v.id == videoId && v.proyectoId == proyectoId);
+            
+            if (!videoActual) {
+                window.location.href = "videos.html";
+                return;
+            }
+            
+            document.getElementById('infoVideo').textContent = videoActual.nombre;
+            document.getElementById('videoPlayer').querySelector('source').src = videoActual.url;
+            document.getElementById('videoPlayer').load();
+        }
+
+        function setupFormulario() {
+            const form = document.getElementById('datosForm');
+            if (form) {
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    await guardarDatos();
+                });
+            }
+        }
+
+        async function guardarDatos() {
+            const form = document.getElementById('datosForm');
+            const formData = new FormData(form);
+            const datos = Object.fromEntries(formData.entries());
+            
+            try {
+                // Simular envío a API
+                console.log('Datos a guardar:', {
+                    videoId: videoActual.id,
+                    proyectoId: proyectoId,
+                    ...datos
+                });
+                
+                await showAlert('success', 'Éxito', 'Datos guardados correctamente');
+                
+                // Volver al proyecto después de guardar
+                setTimeout(() => {
+                    volverAlProyecto();
+                }, 1500);
+                
+            } catch (err) {
+                console.error('Error guardando datos:', err);
+                await showAlert('error', 'Error', 'No se pudieron guardar los datos');
+            }
+        }
+
+        // Función de ayuda para alertas
+        function showAlert(icon, title, text) {
+            return Swal.fire({
+                icon,
+                title,
+                text,
+                confirmButtonColor: '#E24B16'
+            });
+        }
+    </script>
+</body>
+</html>
