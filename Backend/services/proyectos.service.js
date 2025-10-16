@@ -3,14 +3,14 @@ import { Proyectos } from "../models/proyectos.model.js";
 import { Analisis } from "../models/analisis.model.js";
 import { Videos } from '../models/videos.model.js';
 
-const createProyectos = async (Usuario_id, analisisData, Name) => {
+const createProyectos = async (Usuario_id, analisisData, parsedName) => {
   const t = await sequelize.transaction();
 
   try {
     // 1. Crear proyecto
     const proyecto = await Proyectos.create(
       { usuario_id: Usuario_id },
-      { name: Name},
+      { name: parsedName},
       { transaction: t }
     );    
 
