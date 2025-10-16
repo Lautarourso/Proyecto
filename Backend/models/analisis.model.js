@@ -11,10 +11,10 @@ Analisis.init(
         primaryKey: true,
       },
       tiempo: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DOUBLE,
       },
       distancia: {
-        type: DataTypes.INTEGER
+        type: DataTypes.DOUBLE
       },
       video_id: {
       type: DataTypes.INTEGER,
