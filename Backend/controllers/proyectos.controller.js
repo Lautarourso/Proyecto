@@ -19,12 +19,8 @@ export const UploadP = async (req, res) => {
         .json({ message: "analisisData no es JSON válido" });
     }
 
-    let parsedName;
-    try {
-      parsedName = JSON.parse(Name);
-    } catch (err) {
-      return res.status(400).json({ message: "Name no es JSON válido" });
-    }
+    let parsedName = Name;
+    
 
     const proyecto = await proyectosService.createProyectos(
       req.idUsuario,
