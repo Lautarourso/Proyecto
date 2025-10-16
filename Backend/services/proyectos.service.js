@@ -14,18 +14,7 @@ const createProyectos = async (Usuario_id, analisisData/*, videoData, url, tipo_
     );    
 
     /* 3. Guardar video en DB
-    const video = await Videos.create(
-      {
-        ...videoData,
-        url,
-        tipo_mime,
-        user_id: Usuario_id,
-        name: videoName,
-        proyecto_id: proyecto.id,
-
-      },
-      { transaction: t }
-    );
+    
     */
     // 4. Insertar análisis con referencias a proyecto y video
     const datosConRelaciones = (Array.isArray(analisisData) ? analisisData : [analisisData]).map(item => ({

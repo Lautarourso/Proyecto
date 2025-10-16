@@ -13,37 +13,15 @@ export const UploadP = async (req, res) => {
         return res.status(400).json({ message: "analisisData no es JSON válido" });
       
 }
-  /*  
-    if (!req.file || !analisisData || !videoName) {
+  
+    if (!analisisData ) {
       return res.status(400).json({ message: "Faltan datos" });
     }
 
-    const streamUpload = (fileBuffer) => {
-      return new Promise((resolve, reject) => {
-        const stream = cloudinary.uploader.upload_stream(
-          { resource_type: "video", folder: "tus_videos" },
-          (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-          }
-        );
-        stream.end(fileBuffer); // **muy importante** enviar el buffer
-      });
-    };
     
-    const result = await streamUpload(req.file.buffer);
-    const tipo_mime= result.resource_type
-
-    const url= result.secure_url
-    */
     const proyecto = await proyectosService.createProyectos(
       req.idUsuario,
       parsedAnalisis,
-      //videoData,
-      //url,
-      //tipo_mime,
-      //videoName,
-      //req.file
     );
 
     res.status(201).json({
