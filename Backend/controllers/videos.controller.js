@@ -7,6 +7,8 @@ const UploadV = async (req, res) => {
       return res.status(400).json({ message: "No se envió ningún archivo." });
     }
 
+    const { proyecto_id } = req.body; // <-- importantísimo
+
     // Subir a Cloudinary
     const uploadResult = await cloudinary.uploader.upload_stream(
       { resource_type: "video", folder: "tus_videos" },
@@ -31,6 +33,12 @@ const UploadV = async (req, res) => {
     // Pipe para enviarle los datos
     uploadResult.end(req.file.buffer);
 
+      if (proyecto_id) {
+        await proyectosService.asociarVideoAProyecto(
+          proyecto_id,
+          videoCreado.id
+        );
+      }
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error interno del servidor." });
