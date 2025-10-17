@@ -6,6 +6,7 @@ import  upload  from "../middlewares/vids.middleware.js";
 const router = Router();
 
 router.get("/videos", verifyToken, VideoController.GetV); // sin multer
-
+router.post("/upload", upload.single("video"),   VideoController.UploadV  
+);
 
 export default router;
