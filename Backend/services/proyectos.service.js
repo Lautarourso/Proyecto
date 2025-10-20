@@ -35,17 +35,22 @@ const createProyectos = async (Usuario_id, analisisData) => {
 };
 
 const getProyectos = async (Usuario_id) => {
-  try{
+  try {
+    console.log("🟦 [Service] Buscando proyectos del usuario:", Usuario_id);
+
     const proyectos = await Proyectos.findAll({
       where: { usuario_id: Usuario_id },
       attributes: ["id", "name", "video_id"],
-  });
+    });
+
+    console.log("🟩 [Service] Proyectos encontrados:", proyectos.length);
     return proyectos;
   } catch (error) {
-    console.error("❌ Error en getProyectos:", error);
+    console.error("❌ [Service] Error en getProyectos:", error);
     throw error;
   }
 };
+
 
 
 const renameProyectos = async (parsedName, proyecto_id) =>{

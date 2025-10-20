@@ -1,4 +1,3 @@
-import Proyectos from "../services/proyectos.service.js";
 import cloudinary from "../config/cloudinary.js";
 import proyectosService from "../services/proyectos.service.js";
 
@@ -30,12 +29,16 @@ export const UploadP = async (req, res) => {
 
 export const GetP = async (req, res) => {
   try {
+    console.log("🟦 [GetP] ID del usuario recibido:", req.idUsuario);
     const proyectos = await proyectosService.GetProyectos(req.idUsuario);
+    console.log("🟩 [GetP] Proyectos obtenidos:", proyectos.length);
     res.json(proyectos);
   } catch (error) {
+    console.error("❌ [GetP] Error:", error);
     res.status(500).json({ message: error.message });
   }
 };
+
 
 export const NameP = async (req, res) => {
   try {
