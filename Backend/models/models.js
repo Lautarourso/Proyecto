@@ -19,8 +19,8 @@ Proyectos.hasMany(Analisis, { foreignKey: "proyecto_id" });
 Proyectos.belongsTo(Usuarios, { foreignKey: "usuario_id", onDelete: "CASCADE" });
 Usuarios.hasMany(Proyectos, { foreignKey: "usuario_id" });
 
-Proyectos.hasOne(Videos, { foreignKey: "proyecto_id", onDelete: "CASCADE" });
-Videos.belongsTo(Proyectos, { foreignKey: "proyecto_id", onDelete: "CASCADE" });
+Proyectos.belongsTo(Videos, { foreignKey: "video_id", as: "video", onDelete: "CASCADE" });
+Videos.hasMany(Proyectos, { foreignKey: "video_id", as: "proyectos" });
 
 export { Usuarios, Videos, Analisis, Proyectos };
 
