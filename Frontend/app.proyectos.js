@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("authToken");
-  const container = document.getElementById("proyectosContainer"); // ID del contenedor
-  const info = document.getElementById("proyectosInfo");
+  const container = document.getElementById("videosContainer"); // Cambiado a ID
+  const info = document.getElementById("videosInfo");
 
   if (!token) {
     info.classList.replace("alert-info", "alert-danger");
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const response = await fetch("https://proyecto-zvzl.onrender.com/proyectos/getProyectos", {
+    const response = await fetch("https://proyecto-zvzl.onrender.com/vids/videos", {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` }
     });
@@ -20,44 +20,47 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const data = await response.json();
-    console.log("Datos recibidos de la API (proyectos):", data);
+    console.log("Datos recibidos de la API:", data);
 
-    // Asegura que sea un array
-    const proyectos = Array.isArray(data) ? data : data.proyectos || [];
+    // Manejar ambos casos: array directo o objeto con 'videos'
+    const videos = Array.isArray(data) ? data : data.videos || [];
 
-    if (proyectos.length === 0) {
+    if (videos.length === 0) {
       info.classList.replace("alert-info", "alert-warning");
-      info.textContent = "No tenés proyectos cargados.";
+      info.textContent = "No tenés videos disponibles.";
       return;
     }
 
     info.style.display = "none";
 
-    proyectos.forEach(proyecto => {
-      
+    videos.forEach(video => {
+      if (!video.url) {
+        console.warn("Video sin URL:", video);
+        return;
+      }
+
+      const fecha = new Date(video.fecha).toLocaleString('es-AR');
 
       const div = document.createElement("div");
-      div.className = "proyecto-card";
-
+      div.className = "video-card"; // Añade la clase para el estilo
       div.innerHTML = `
-        <div class="proyecto-info">
-          <h3 class="proyecto-title">${proyecto.name || "Proyecto sin nombre"}</h3>
-          <p class="proyecto-desc">${proyecto.descripcion || "Sin descripción"}</p>
-          <p class="proyecto-date">${fecha}</p>
-          ${
-            proyecto.video_id
-              ? `<p class="proyecto-video">🎬 Video asociado: ID ${proyecto.video_id}</p>`
-              : `<p class="proyecto-video sin-video">Sin video asociado</p>`
-          }
-        </div>
-      `;
+  <video class="video-player" controls preload="metadata" crossorigin="anonymous">
+    <source src="${video.url}" type="video/mp4">
+    Tu navegador no soporta video HTML5.
+  </video>
+  <div class="video-info">
+    <p class="video-title">${video.name}</p>
+    <p class="video-date">${fecha}</p>
+  </div>
+`;
 
+      console.log("Agregando al DOM:", video.url);
       container.appendChild(div);
     });
 
   } catch (err) {
-    console.error("Error cargando proyectos:", err);
+    console.error("Error cargando videos:", err);
     info.classList.replace("alert-info", "alert-danger");
-    info.textContent = "Error al cargar los proyectos: " + err.message;
+    info.textContent = "Error al cargar los videos: " + err.message;
   }
 });
