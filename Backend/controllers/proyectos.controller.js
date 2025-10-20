@@ -30,7 +30,7 @@ export const UploadP = async (req, res) => {
 export const GetP = async (req, res) => {
   try {
     console.log("🟦 [GetP] ID del usuario recibido:", req.idUsuario);
-    const proyectos = await proyectosService.GetProyectos(req.idUsuario);
+    const proyectos = await proyectosService.getProyectos(req.idUsuario);
     console.log("🟩 [GetP] Proyectos obtenidos:", proyectos.length);
     res.json(proyectos);
   } catch (error) {
