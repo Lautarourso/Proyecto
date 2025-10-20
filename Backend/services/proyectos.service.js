@@ -34,11 +34,13 @@ const createProyectos = async (Usuario_id, analisisData) => {
   }
 };
 
-const getProyectos = async (proyectos) => {
+const getProyectos = async (Usuario_id) => {
   return await Proyectos.findAll({
-    where: { id_usuario: id },
-    proyectos});
+    where: { usuario_id: Usuario_id },
+    attributes: ["id", "name", "video_id", "usuario_id", "createdAt", "updatedAt"],
+  });
 };
+
 
 const renameProyectos = async (parsedName, proyecto_id) =>{
 
