@@ -35,10 +35,16 @@ const createProyectos = async (Usuario_id, analisisData) => {
 };
 
 const getProyectos = async (Usuario_id) => {
-  return await Proyectos.findAll({
-    where: { usuario_id: Usuario_id },
-    attributes: ["id", "name", "video_id", "usuario_id", "createdAt", "updatedAt"],
+  try{
+    const proyectos = await Proyectos.findAll({
+      where: { usuario_id: Usuario_id },
+      attributes: ["id", "name", "video_id"],
   });
+    return proyectos;
+  } catch (error) {
+    console.error("❌ Error en getProyectos:", error);
+    throw error;
+  }
 };
 
 
