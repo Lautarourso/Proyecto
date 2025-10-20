@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="proyecto-info">
           <h3 class="proyecto-title">${proyecto.name || "Proyecto sin nombre"}</h3>
           <p class="proyecto-desc">${proyecto.descripcion || "Sin descripción"}</p>
-          <p class="proyecto-date">${fecha}</p>
           ${
             proyecto.video_id
               ? `<p class="proyecto-video">🎬 Video asociado: ID ${proyecto.video_id}</p>`
