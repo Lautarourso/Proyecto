@@ -42,10 +42,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       div.innerHTML = `
         <div class="proyecto-info">
           <h3 class="proyecto-title">${proyecto.name || "Proyecto sin nombre"}</h3>
-          <p class="proyecto-desc">${proyecto.descripcion || "Sin descripción"}</p>
           ${
             proyecto.video_id
-              ? `<p class="proyecto-video">🎬 Video asociado: ID ${proyecto.video_id}</p>`
+              ? `<p class="proyecto-video">🎬 Video asociado:</p>`
               : `<p class="proyecto-video sin-video">Sin video asociado</p>`
           }
         </div>
