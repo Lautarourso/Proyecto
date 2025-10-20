@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("authToken");
-  const container = document.getElementById("videosContainer"); // Cambiado a ID
-  const info = document.getElementById("videosInfo");
+  const container = document.getElementById("proyectosContainer"); // ID del contenedor
+  const info = document.getElementById("proyectosInfo");
 
   if (!token) {
     info.classList.replace("alert-info", "alert-danger");
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const response = await fetch("https://proyecto-zvzl.onrender.com/vids/videos", {
+    const response = await fetch("https://proyecto-zvzl.onrender.com/proyectos/getProyectos", {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` }
     });
@@ -20,47 +20,44 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const data = await response.json();
-    console.log("Datos recibidos de la API:", data);
+    console.log("Datos recibidos de la API (proyectos):", data);
 
-    // Manejar ambos casos: array directo o objeto con 'videos'
-    const videos = Array.isArray(data) ? data : data.videos || [];
+    // Asegura que sea un array
+    const proyectos = Array.isArray(data) ? data : data.proyectos || [];
 
-    if (videos.length === 0) {
+    if (proyectos.length === 0) {
       info.classList.replace("alert-info", "alert-warning");
-      info.textContent = "No tenés videos disponibles.";
+      info.textContent = "No tenés proyectos cargados.";
       return;
     }
 
     info.style.display = "none";
 
-    videos.forEach(video => {
-      if (!video.url) {
-        console.warn("Video sin URL:", video);
-        return;
-      }
-
-      const fecha = new Date(video.fecha).toLocaleString('es-AR');
+    proyectos.forEach(proyecto => {
+      
 
       const div = document.createElement("div");
-      div.className = "video-card"; // Añade la clase para el estilo
-      div.innerHTML = `
-  <video class="video-player" controls preload="metadata" crossorigin="anonymous">
-    <source src="${video.url}" type="video/mp4">
-    Tu navegador no soporta video HTML5.
-  </video>
-  <div class="video-info">
-    <p class="video-title">${video.name}</p>
-    <p class="video-date">${fecha}</p>
-  </div>
-`;
+      div.className = "proyecto-card";
 
-      console.log("Agregando al DOM:", video.url);
+      div.innerHTML = `
+        <div class="proyecto-info">
+          <h3 class="proyecto-title">${proyecto.name || "Proyecto sin nombre"}</h3>
+          <p class="proyecto-desc">${proyecto.descripcion || "Sin descripción"}</p>
+          <p class="proyecto-date">${fecha}</p>
+          ${
+            proyecto.video_id
+              ? `<p class="proyecto-video">🎬 Video asociado: ID ${proyecto.video_id}</p>`
+              : `<p class="proyecto-video sin-video">Sin video asociado</p>`
+          }
+        </div>
+      `;
+
       container.appendChild(div);
     });
 
   } catch (err) {
-    console.error("Error cargando videos:", err);
+    console.error("Error cargando proyectos:", err);
     info.classList.replace("alert-info", "alert-danger");
-    info.textContent = "Error al cargar los videos: " + err.message;
+    info.textContent = "Error al cargar los proyectos: " + err.message;
   }
 });
