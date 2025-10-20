@@ -47,7 +47,6 @@ const renameProyectos = async (parsedName, proyecto_id) =>{
     {where: { id: proyecto_id }});
 };
 
-import { Proyectos } from '../models/proyectos.model.js';
 
 const videoProyecto = async (proyecto_id, video_id) => {
   return await Proyectos.update(
