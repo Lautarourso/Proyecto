@@ -30,7 +30,7 @@ export const UploadP = async (req, res) => {
 
 export const GetP = async (req, res) => {
   try {
-    const proyectos = await Proyectos.GetProyectos(req.idUsuario);
+    const proyectos = await proyectosService.GetProyectos(req.idUsuario);
     res.json(proyectos);
   } catch (error) {
     res.status(500).json({ message: error.message });
