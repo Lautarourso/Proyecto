@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const response = await fetch("https://proyecto-zvzl.onrender.com/proyectos", {
+    const response = await fetch("https://proyecto-zvzl.onrender.com/proyectos/getProyectos", {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` }
     });

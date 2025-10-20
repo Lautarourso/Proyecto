@@ -125,10 +125,10 @@ async function handleLoginSubmit(e) {
     if (res.ok) {
       localStorage.setItem('authToken', data.token);
       localStorage.setItem('userEmail', email);
-      await showAlert('success', 'Sesión iniciada', 'Redirigiendo a videos...');
+      await showAlert('success', 'Sesión iniciada', 'Redirigiendo a tus Proyectos...');
       // Redirección después de 1.5 segundos para que se vea el mensaje
       setTimeout(() => {
-        window.location.href = "videos.html";
+        window.location.href = "proyectos.html";
       }, 1500);
     } else {
       await showAlert('error', 'Error', data.message || 'No se pudo iniciar sesión');
