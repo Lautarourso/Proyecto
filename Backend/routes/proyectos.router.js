@@ -8,5 +8,7 @@ const router = Router();
 
 router.post("/upProyectos", verifyToken, upload.single("Video"), Proyectos.UploadP);
 router.get("/getProyectos", verifyToken, Proyectos.GetP);
+router.get("/:id", Proyectos.getProyectoPorId);
+
 
 export default router;

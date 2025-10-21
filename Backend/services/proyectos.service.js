@@ -51,6 +51,19 @@ const getProyectos = async (Usuario_id) => {
   }
 };
 
+export const getProyectoPorId = async (req, res) => {
+  try {
+    const proyecto = await Proyectos.findByPk(req.params.id);
+
+    if (!proyecto) {
+      return res.status(404).json({ message: "Proyecto no encontrado" });
+    }
+
+    res.json(proyecto);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 
 const renameProyectos = async (parsedName, proyecto_id) =>{

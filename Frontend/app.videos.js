@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("authToken");
-  const container = document.getElementById("proyectosContainer"); // ID del contenedor
+  const container = document.getElementById("proyectosContainer");
   const info = document.getElementById("proyectosInfo");
 
   if (!token) {
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const data = await response.json();
     console.log("Datos recibidos de la API (proyectos):", data);
 
-    // Asegura que sea un array
+    // Asegurarse de que sea un array
     const proyectos = Array.isArray(data) ? data : data.proyectos || [];
 
     if (proyectos.length === 0) {
@@ -32,23 +32,30 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     info.style.display = "none";
+    container.innerHTML = ""; // limpiar contenido previo
 
     proyectos.forEach(proyecto => {
-      
-
       const div = document.createElement("div");
       div.className = "proyecto-card";
+      div.dataset.id = proyecto.id; // guardar el id del proyecto
 
       div.innerHTML = `
         <div class="proyecto-info">
           <h3 class="proyecto-title">${proyecto.name || "Proyecto sin nombre"}</h3>
           ${
             proyecto.video_id
-              ? `<p class="proyecto-video">🎬 Video asociado:</p>`
+              ? `<p class="proyecto-video">🎬 Video asociado</p>`
               : `<p class="proyecto-video sin-video">Sin video asociado</p>`
           }
+          <button class="ver-proyecto">Ver detalles</button>
         </div>
       `;
+
+      // Al hacer clic en el botón, redirige a proyectos.html?id=ID
+      const boton = div.querySelector(".ver-proyecto");
+      boton.addEventListener("click", () => {
+        window.location.href = `proyectos.html?id=${proyecto.id}`;
+      });
 
       container.appendChild(div);
     });
