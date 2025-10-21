@@ -27,11 +27,7 @@ async function startServer() {
   app.get("/", (req, res) => {
     res.sendFile("mainpage.html", { root: frontendPath });
   });
-
-  app.get("/*.html", (req, res) => {
-    const filePath = path.join(frontendPath, req.path);
-    res.sendFile(filePath);
-  });
+  
 
   app.use("/auth", AuthRouter);
   app.use("/vids", VideosRouter);
