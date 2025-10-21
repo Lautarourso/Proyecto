@@ -51,18 +51,8 @@ const getProyectos = async (Usuario_id) => {
   }
 };
 
-export const getProyectoPorId = async (req, res) => {
-  try {
-    const proyecto = await Proyectos.findByPk(req.params.id);
-
-    if (!proyecto) {
-      return res.status(404).json({ message: "Proyecto no encontrado" });
-    }
-
-    res.json(proyecto);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+const proyId = async (id) => {
+    return await Proyectos.findByPk(id);
 };
 
 
@@ -82,4 +72,4 @@ const videoProyecto = async (proyecto_id, video_id) => {
 };
 
 
-  export default {createProyectos, getProyectos, renameProyectos, videoProyecto};
+  export default {createProyectos, getProyectos, renameProyectos, videoProyecto, proyId};

@@ -27,6 +27,20 @@ export const UploadP = async (req, res) => {
   }
 };
 
+export const getProyectoPorId = async (req, res) => {
+  try {
+    const proyecto = await proyectosService.proyId(req.params.id);
+
+    if (!proyecto) {
+      return res.status(404).json({ message: "Proyecto no encontrado" });
+    }
+
+    res.json(proyecto);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const GetP = async (req, res) => {
   try {
     console.log("🟦 [GetP] ID del usuario recibido:", req.idUsuario);
@@ -61,4 +75,4 @@ export const NameP = async (req, res) => {
   }
 };
 
-export default { UploadP, GetP, NameP};
+export default { UploadP, GetP, NameP, getProyectoPorId};
