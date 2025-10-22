@@ -3,73 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CalibraX - Proyecto</title>
-
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <title>Proyecto - CalibraX</title>
+  <link href="css/styleproyecto.css" rel="stylesheet" />
 </head>
-<body class="bg-dark text-light">
+<body>
+  <header>
+    <h2 id="nombreProyecto">Cargando...</h2>
+    <p id="infoProyecto"></p>
+  </header>
 
-  <div class="container my-5">
-    <h1 id="tituloProyecto" class="mb-4">Cargando proyecto...</h1>
-    <div id="proyecto-detalle" class="p-3 bg-secondary rounded">
-      <!-- Contenido cargado dinámicamente -->
-    </div>
-    <div class="mt-4">
-      <button class="btn btn-outline-light" onclick="window.location.href='videos.html'">
-        <i class="bi bi-arrow-left"></i> Volver
-      </button>
-    </div>
-  </div>
+  <div id="videosContainer"></div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      // Obtener ID del proyecto desde localStorage
-      const id = localStorage.getItem("proyectoSeleccionadoId");
-
-      if (!id) {
-        document.getElementById("proyecto-detalle").textContent =
-          "No se indicó un proyecto.";
-        window.location.href = "videos.html";
-        return;
-      }
-
-      // Borrar el ID para no dejarlo guardado
-      localStorage.removeItem("proyectoSeleccionadoId");
-
-      try {
-        const res = await fetch(`https://proyecto-zvzl.onrender.com/proyectos/${id}`);
-        if (!res.ok) throw new Error("Error al obtener el proyecto.");
-
-        const proyecto = await res.json();
-        const contenedor = document.getElementById("proyecto-detalle");
-
-        document.getElementById("tituloProyecto").textContent =
-          proyecto.videoName || "Proyecto sin título";
-
-        contenedor.innerHTML = `
-          ${proyecto.videoUrl
-            ? `<video controls width="100%" src="${proyecto.videoUrl}" class="rounded"></video>`
-            : "<p>No hay video asociado.</p>"}
-          <h3 class="mt-4">Análisis:</h3>
-          ${
-            proyecto.analisisData?.length
-              ? `<ul>${proyecto.analisisData
-                  .map(
-                    a => `<li>Tiempo: ${a.tiempo}s — Duración: ${a.duracion}s</li>`
-                  )
-                  .join("")}</ul>`
-              : "<p>No hay análisis cargados.</p>"
-          }
-        `;
-      } catch (err) {
-        console.error(err);
-        document.getElementById("proyecto-detalle").textContent =
-          "Error al cargar el proyecto.";
-      }
-    });
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>

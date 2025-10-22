@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const id = localStorage.getItem("proyectoSeleccionadoId");
+  const token = localStorage.getItem("authToken");
 
 
   if (!id) {
@@ -9,7 +10,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   localStorage.removeItem("proyectoSeleccionadoId");
 
   try {
-    const res = await fetch(`https://proyecto-zvzl.onrender.com/proyectos/${id}`);
+    const res = await fetch(`https://proyecto-zvzl.onrender.com/proyectos/${id}`,{
+      headers: {Authorization: `Bearer ${token}` }
+    });
+    
     const proyecto = await res.json();
 
     const contenedor = document.getElementById("proyecto-detalle");
