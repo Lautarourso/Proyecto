@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const boton = div.querySelector(".ver-proyecto");
       boton.addEventListener("click", () => {
         localStorage.setItem("proyectoSeleccionadoId", proyecto.id);
-        window.location.href = "proyectos.html";
+        window.location.href = "proyecto.html";
       });
       
 
