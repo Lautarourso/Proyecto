@@ -54,8 +54,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       // Al hacer clic en el botón, redirige a proyectos.html?id=ID
       const boton = div.querySelector(".ver-proyecto");
       boton.addEventListener("click", () => {
-        window.location.href = `proyectos.html?id=${proyecto.id}`;
+        localStorage.setItem("proyectoSeleccionadoId", proyecto.id);
+        window.location.href = "proyectos.html";
       });
+      
 
       container.appendChild(div);
     });

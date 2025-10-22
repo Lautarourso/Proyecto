@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
+  const id = localStorage.getItem("proyectoSeleccionadoId");
+
 
   if (!id) {
     document.getElementById("proyecto-detalle").textContent = "No se indicó un proyecto.";
     return;
   }
+  localStorage.removeItem("proyectoSeleccionadoId");
 
   try {
     const res = await fetch(`https://proyecto-zvzl.onrender.com/proyectos/${id}`);

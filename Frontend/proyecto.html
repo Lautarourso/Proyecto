@@ -106,8 +106,8 @@
             document.getElementById('progressBar').style.opacity = '0';
             
             // Obtener ID del proyecto de la URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const proyectoId = urlParams.get('id');
+            const proyectoId = localStorage.getItem('proyectoSeleccionadoId');
+
             
             if (!proyectoId) {
                 window.location.href = "videos.html";
