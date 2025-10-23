@@ -3,8 +3,7 @@
   
 
    const getVideosById = async (id) => {
-  return await Videos.findByPk({id
-  });
+    return await Videos.findByPk(id);
 };
    
   const Createvideo = async (video, url, tipo_mime, user_id) => {

@@ -16,12 +16,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     const proyecto = await res.json();
 
+    let video = null
     if (proyecto.video_id) {
       const resVideo = await fetch(`https://proyecto-zvzl.onrender.com/vids/${proyecto.video_id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
+      video = await resVideo.json();
+
     }
-    const video = await resVideo.json();
 
 
     const resAnalisis = await fetch(`https://proyecto-zvzl.onrender.com/analisis/proyecto/${id}`, {
