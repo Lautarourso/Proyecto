@@ -16,19 +16,34 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     const proyecto = await res.json();
 
+    if (proyecto.video_id) {
+      const resVideo = await fetch(`https://proyecto-zvzl.onrender.com/vids/${proyecto.video_id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+    }
+    const video = await resVideo.json();
+
+
+    const resAnalisis = await fetch(`https://proyecto-zvzl.onrender.com/analisis/proyecto/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    const analisis = await resAnalisis.json();
+
+    
     const contenedor = document.getElementById("proyecto-detalle");
 
     contenedor.innerHTML = `
-      <h2>${proyecto.videoName || "Proyecto sin título"}</h2>
+      <h2>${proyecto.name || "Proyecto sin título"}</h2>
       ${
-        proyecto.videoUrl
-          ? `<video controls width="500" src="${proyecto.videoUrl}"></video>`
+        video.url
+          ? `<video controls width="500" src="${video.videoUrl}"></video>`
           : "<p>No hay video asociado.</p>"
       }
       <h3>Análisis:</h3>
       ${
-        proyecto.analisisData && proyecto.analisisData.length > 0
-          ? `<ul>${proyecto.analisisData.map(a => `
+        analisis.length > 0
+          ? `<ul>${analisis.map(a => `
               <li>Tiempo: ${a.tiempo}s — Duración: ${a.duracion}s</li>
             `).join("")}</ul>`
           : "<p>No hay análisis cargados.</p>"

@@ -48,8 +48,9 @@ const UploadV = async (req, res) => {
 
 const GetV = async (req, res) => {
   try {
-    const videos = await videosService.getVideosById(req.idUsuario);
-    console.log("Videos encontrados:", videos);
+    const { id } = req.params;
+    const videos = await videosService.getVideosById(id);
+    console.log("Video encontrado:", videos);
     res.json(videos);
   } catch (error) {
     console.error("Error al obtener videos:", error);
