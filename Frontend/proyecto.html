@@ -16,6 +16,28 @@
     <div id="videosContainer"></div>
   </div>
 
+  <hr>
+
+  <!-- 🔹 Formulario para ingresar datos del material del gasoducto -->
+  <section id="material-section">
+    <h3>Datos del material del gasoducto</h3>
+    <form id="materialForm">
+      <label>Material del gasoducto: <input type="text" id="material" required></label><br>
+      <label>Espesor (mm): <input type="number" id="espesor" step="0.01" required></label><br>
+      <label>Diámetro (mm): <input type="number" id="diametro" step="0.01" required></label><br>
+      <label>Antigüedad (años): <input type="number" id="antiguedad" required></label><br>
+      <label>TFME (Tensión de Fluencia Mínima Especificada, MPa): 
+        <input type="number" id="tfme" step="0.01" required>
+      </label><br>
+      <label>Latitud inicial: <input type="text" id="latitudInicial" required></label><br>
+      <label>Latitud final: <input type="text" id="latitudFinal" required></label><br>
+      <label>Longitud inicial: <input type="text" id="longitudInicial" required></label><br>
+      <label>Longitud final: <input type="text" id="longitudFinal" required></label><br>
+      <label>Presión habitual del gas (bar): <input type="number" id="presionHabitual" step="0.01" required></label><br>
+      <label>Presión máxima de operación (bar): <input type="number" id="presionMaxima" step="0.01" required></label><br>
+    </form>
+  </section>
+
   <script src="app.proyectos.js"></script>
 </body>
 </html>
