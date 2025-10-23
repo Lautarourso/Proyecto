@@ -58,8 +58,8 @@
     </div>
   </header>
 
-  <!-- Canvas para efecto Fluid Vision -->
-  <canvas id="fluidCanvas"></canvas>
+  <!-- Canvas para efecto Thermal Vision -->
+  <canvas id="thermalCanvas"></canvas>
   
   <!-- Contenido principal -->
   <div class="content-wrapper">
@@ -238,8 +238,8 @@
         once: true
       });
       
-      // Inicializar efecto Fluid Vision
-      initFluidVision();
+      // Inicializar efecto Thermal Vision
+      initThermalVision();
       
       document.body.classList.add("loaded");
       document.getElementById('progressBar').style.opacity = '0';
@@ -254,9 +254,9 @@
       progressBar.style.opacity = winScroll > 100 ? '1' : '0';
     });
 
-    // Efecto Fluid Vision - Diseño fluido y futurista en azules
-    function initFluidVision() {
-      const canvas = document.getElementById('fluidCanvas');
+    // Efecto Thermal Vision
+    function initThermalVision() {
+      const canvas = document.getElementById('thermalCanvas');
       const ctx = canvas.getContext('2d');
       
       // Configurar canvas para cubrir toda la pantalla
@@ -268,12 +268,11 @@
       resizeCanvas();
       window.addEventListener('resize', resizeCanvas);
       
-      // Configuración del efecto fluido
+      // Configuración del efecto
       const particles = [];
-      const particleCount = 80;
-      
-      // Paleta de azules fríos y neón
-      const bluePalette = [
+      const particleCount = 100;
+      const colors = [
+        '#000000', // Negro
         '#001122', // Azul muy oscuro
         '#002244', // Azul oscuro
         '#003366', // Azul medio
@@ -281,96 +280,58 @@
         '#0055AA', // Azul claro
         '#0066CC', // Azul más claro
         '#0077EE', // Azul brillante
-        '#0088FF', // Azul neón
-        '#00AAFF', // Celeste neón
-        '#00CCFF', // Celeste brillante
-        '#00EEFF'  // Celeste muy brillante
+        '#0088FF'  // Azul muy brillante
       ];
       
-      // Crear partículas fluidas
+      // Crear partículas
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 4 + 2,
-          speedX: (Math.random() - 0.5) * 0.8,
-          speedY: (Math.random() - 0.5) * 0.8,
-          color: bluePalette[Math.floor(Math.random() * bluePalette.length)],
-          opacity: Math.random() * 0.6 + 0.2,
-          waveOffset: Math.random() * Math.PI * 2
+          size: Math.random() * 3 + 1,
+          speedX: (Math.random() - 0.5) * 0.5,
+          speedY: (Math.random() - 0.5) * 0.5,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          opacity: Math.random() * 0.5 + 0.2
         });
       }
       
-      // Tiempo para animaciones
-      let time = 0;
-      
       // Función de animación
       function animate() {
-        time += 0.01;
-        
-        // Fondo con gradiente azul oscuro
-        const gradient = ctx.createRadialGradient(
-          canvas.width / 2, canvas.height / 2, 0,
-          canvas.width / 2, canvas.height / 2, Math.max(canvas.width, canvas.height) / 1.5
-        );
-        gradient.addColorStop(0, 'rgba(0, 17, 34, 0.8)');
-        gradient.addColorStop(1, 'rgba(0, 8, 16, 0.9)');
-        
-        ctx.fillStyle = gradient;
+        // Limpiar canvas con un fondo negro semitransparente
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Dibujar ondas fluidas de fondo
-        drawFluidWaves();
         
         // Dibujar y actualizar partículas
         particles.forEach(particle => {
-          // Movimiento fluido con ondas
-          particle.x += particle.speedX + Math.sin(time + particle.waveOffset) * 0.5;
-          particle.y += particle.speedY + Math.cos(time + particle.waveOffset) * 0.3;
+          // Actualizar posición
+          particle.x += particle.speedX;
+          particle.y += particle.speedY;
           
-          // Rebotar suavemente en los bordes
+          // Rebotar en los bordes
           if (particle.x <= 0 || particle.x >= canvas.width) particle.speedX *= -1;
           if (particle.y <= 0 || particle.y >= canvas.height) particle.speedY *= -1;
           
-          // Efecto de brillo intermitente
-          const pulse = Math.sin(time * 2 + particle.waveOffset) * 0.3 + 0.7;
-          
-          // Dibujar partícula con efecto de luz
+          // Dibujar partícula
           ctx.beginPath();
           ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-          
-          const gradient = ctx.createRadialGradient(
-            particle.x, particle.y, 0,
-            particle.x, particle.y, particle.size * 2
-          );
-          gradient.addColorStop(0, particle.color);
-          gradient.addColorStop(1, 'transparent');
-          
-          ctx.fillStyle = gradient;
-          ctx.globalAlpha = particle.opacity * pulse;
+          ctx.fillStyle = particle.color;
+          ctx.globalAlpha = particle.opacity;
           ctx.fill();
         });
         
-        // Conexiones entre partículas cercanas
-        ctx.globalAlpha = 0.15;
+        // Dibujar líneas entre partículas cercanas
+        ctx.globalAlpha = 0.2;
         for (let i = 0; i < particles.length; i++) {
           for (let j = i + 1; j < particles.length; j++) {
             const dx = particles[i].x - particles[j].x;
             const dy = particles[i].y - particles[j].y;
             const distance = Math.sqrt(dx * dx + dy * dy);
             
-            if (distance < 120) {
+            if (distance < 100) {
               ctx.beginPath();
-              // Gradiente para las conexiones
-              const gradient = ctx.createLinearGradient(
-                particles[i].x, particles[i].y,
-                particles[j].x, particles[j].y
-              );
-              gradient.addColorStop(0, particles[i].color);
-              gradient.addColorStop(1, particles[j].color);
-              
-              ctx.strokeStyle = gradient;
-              ctx.lineWidth = 0.8 * (1 - distance / 120);
+              ctx.strokeStyle = '#0088FF';
+              ctx.lineWidth = 0.5;
               ctx.moveTo(particles[i].x, particles[i].y);
               ctx.lineTo(particles[j].x, particles[j].y);
               ctx.stroke();
@@ -378,55 +339,42 @@
           }
         }
         
+        // Dibujar efecto de calor
+        drawHeatEffect();
+        
         requestAnimationFrame(animate);
       }
       
-      // Ondas fluidas de fondo
-      function drawFluidWaves() {
-        ctx.globalAlpha = 0.1;
-        
-        for (let i = 0; i < 4; i++) {
-          const waveTime = time * 0.5 + i * Math.PI / 2;
-          const amplitude = 50 + i * 20;
-          const frequency = 0.002 + i * 0.001;
-          
-          ctx.beginPath();
-          for (let x = 0; x < canvas.width; x += 10) {
-            const y = canvas.height / 2 + Math.sin(x * frequency + waveTime) * amplitude +
-                     Math.cos(x * frequency * 0.7 + waveTime) * amplitude * 0.5;
-            
-            if (x === 0) {
-              ctx.moveTo(x, y);
-            } else {
-              ctx.lineTo(x, y);
-            }
-          }
-          
-          // Gradiente para las ondas
-          const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
-          gradient.addColorStop(0, '#0088FF');
-          gradient.addColorStop(0.5, '#00AAFF');
-          gradient.addColorStop(1, '#0088FF');
-          
-          ctx.strokeStyle = gradient;
-          ctx.lineWidth = 3;
-          ctx.stroke();
-        }
-        
-        // Efectos de luz central
+      // Efecto de calor (ondas)
+      function drawHeatEffect() {
+        const time = Date.now() * 0.001;
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
         
-        const glowGradient = ctx.createRadialGradient(
+        // Crear gradiente radial para el efecto de calor
+        const gradient = ctx.createRadialGradient(
           centerX, centerY, 0,
-          centerX, centerY, 300
+          centerX, centerY, Math.min(canvas.width, canvas.height) * 0.8
         );
-        glowGradient.addColorStop(0, 'rgba(0, 136, 255, 0.2)');
-        glowGradient.addColorStop(1, 'transparent');
+        
+        gradient.addColorStop(0, 'rgba(0, 136, 255, 0.1)');
+        gradient.addColorStop(0.5, 'rgba(0, 85, 170, 0.05)');
+        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
         
         ctx.globalAlpha = 0.3;
-        ctx.fillStyle = glowGradient;
+        ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Ondas de calor
+        ctx.globalAlpha = 0.1;
+        for (let i = 0; i < 3; i++) {
+          const radius = 100 + Math.sin(time * 0.5 + i) * 50;
+          ctx.beginPath();
+          ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+          ctx.strokeStyle = '#00AAFF';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
       }
       
       animate();
