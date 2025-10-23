@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
 
-    const resAnalisis = await fetch(`https://proyecto-zvzl.onrender.com/analisis/proyecto/${id}`, {
+    const resAnalisis = await fetch(`https://proyecto-zvzl.onrender.com/analisis/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
 

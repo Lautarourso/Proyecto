@@ -5,6 +5,6 @@ import { verifyToken, verifyAdmin } from "../middlewares/auth.middleware.js";
 const router = Router();
 
 
-router.get("/gettiempo", verifyToken, Analisis.GetT);
+router.get("/:id", verifyToken, Analisis.GetT);
 
 export default router;
