@@ -39,14 +39,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       <h2>${proyecto.name || "Proyecto sin título"}</h2>
       ${
         video.url
-          ? `<video controls width="500" src="${video.videoUrl}"></video>`
+          ? `<video controls width="500" src="${video.url}"></video>`
           : "<p>No hay video asociado.</p>"
       }
       <h3>Análisis:</h3>
       ${
         analisis.length > 0
           ? `<ul>${analisis.map(a => `
-              <li>Tiempo: ${a.tiempo}s — Duración: ${a.duracion}s</li>
+              <li>Tiempo: ${a.tiempo}s — Distancia: ${a.distancia}s</li>
             `).join("")}</ul>`
           : "<p>No hay análisis cargados.</p>"
       }
