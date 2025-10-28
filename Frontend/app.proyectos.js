@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("proyecto-detalle").textContent = "No se indicó un proyecto.";
     return;
   }
-  localStorage.removeItem("proyectoSeleccionadoId");
 
   try {
     const res = await fetch(`https://proyecto-zvzl.onrender.com/proyectos/${id}`,{
@@ -58,6 +57,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  const id = localStorage.getItem("proyectoSeleccionadoId");
+
   const boton = document.getElementById("btnAccion");
   if (boton) {
     boton.addEventListener("click", async () => {
@@ -95,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const data = await res.json();
+        localStorage.removeItem("proyectoSeleccionadoId");
         console.log("✅ Respuesta del backend:", data);
 
         alert("Datos enviados correctamente a Numericos.py");
