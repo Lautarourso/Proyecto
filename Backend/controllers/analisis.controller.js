@@ -12,7 +12,7 @@ export const IA = async (req, res) => {
     const datos = req.body;
 
     // Ruta absoluta al script Python
-    const scriptPath = path.join(__dirname, "../../Proyecto/IA/Numericos.py");
+    const scriptPath = path.resolve(process.cwd(), "IA", "Numericos.py");
 
     // Ejecutamos el script, pasándole los datos como JSON
     execFile("python3", [scriptPath, JSON.stringify(datos)], (error, stdout, stderr) => {
