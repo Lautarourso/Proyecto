@@ -22,6 +22,7 @@
   <section id="material-section">
     <h3>Datos del material del gasoducto</h3>
     <form id="materialForm">
+      <label>Tipo de falla: <input type="text" id="falla" required></label>
       <label>Material del gasoducto: <input type="text" id="material" required></label><br>
       <label>Espesor (mm): <input type="number" id="espesor" step="0.01" required></label><br>
       <label>Diámetro (mm): <input type="number" id="diametro" step="0.01" required></label><br>
@@ -35,6 +36,7 @@
       <label>Longitud final: <input type="text" id="longitudFinal" required></label><br>
       <label>Presión habitual del gas (bar): <input type="number" id="presionHabitual" step="0.01" required></label><br>
       <label>Presión máxima de operación (bar): <input type="number" id="presionMaxima" step="0.01" required></label><br>
+      <button type="button" id="btnAccion">Ejecutar acción</button>
     </form>
   </section>
 

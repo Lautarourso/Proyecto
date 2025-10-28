@@ -56,3 +56,52 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("proyecto-detalle").textContent = "Error al cargar el proyecto.";
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const boton = document.getElementById("btnAccion");
+  if (boton) {
+    boton.addEventListener("click", async () => {
+      console.log("🔹 Botón presionado. Acción pendiente por definir...");
+      const formData = {
+        falla: document.getElementById("falla").value,
+        material: document.getElementById("material").value,
+        espesor: parseFloat(document.getElementById("espesor").value),
+        diametro: parseFloat(document.getElementById("diametro").value),
+        antiguedad: parseInt(document.getElementById("antiguedad").value),
+        tfme: parseFloat(document.getElementById("tfme").value),
+        latitudInicial: document.getElementById("latitudInicial").value,
+        latitudFinal: document.getElementById("latitudFinal").value,
+        longitudInicial: document.getElementById("longitudInicial").value,
+        longitudFinal: document.getElementById("longitudFinal").value,
+        presionHabitual: parseFloat(document.getElementById("presionHabitual").value),
+        presionMaxima: parseFloat(document.getElementById("presionMaxima").value),
+      };
+
+      // Crear objeto combinado
+      const payload = {
+        proyectoId: id,
+        datosMaterial: formData,
+        datosAnalisis: analisis,
+      };
+
+      try {
+        const res = await fetch("https://proyecto-zvzl.onrender.com/analisis/numericos", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+        console.log("✅ Respuesta del backend:", data);
+
+        alert("Datos enviados correctamente a Numericos.py");
+      } catch (error) {
+        console.error("❌ Error al enviar datos:", error);
+        alert("Error al enviar datos.");
+      }
+    });
+  }
+});

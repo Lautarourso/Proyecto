@@ -6,5 +6,6 @@ const router = Router();
 
 
 router.get("/:id", verifyToken, Analisis.GetT);
+router.post("/numericos", Analisis.IA)
 
 export default router;
