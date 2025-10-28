@@ -1,6 +1,10 @@
+let analisis = null; 
+let token = null; 
+let id = null;
+
 document.addEventListener("DOMContentLoaded", async () => {
-  const id = localStorage.getItem("proyectoSeleccionadoId");
-  const token = localStorage.getItem("authToken");
+  id = localStorage.getItem("proyectoSeleccionadoId");
+  token = localStorage.getItem("authToken");
 
 
   if (!id) {
@@ -29,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       headers: { Authorization: `Bearer ${token}` }
     });
 
-    const analisis = await resAnalisis.json();
+    analisis = await resAnalisis.json();
 
     
     const contenedor = document.getElementById("proyecto-detalle");
@@ -57,7 +61,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const id = localStorage.getItem("proyectoSeleccionadoId");
 
   const boton = document.getElementById("btnAccion");
   if (boton) {
