@@ -5,6 +5,7 @@ import AuthRouter from "./routes/auth.router.js";
 import AnalisisRouter from "./routes/analisis.router.js";
 import VideosRouter from "./routes/vids.router.js";
 import ProyectosRouter from "./routes/proyectos.router.js";
+import FormRouter from "./routes/form.router.js";
 import cors from "cors";
 import "dotenv/config";
 import { defModelos } from "./models/models.js";
@@ -33,6 +34,8 @@ async function startServer() {
   app.use("/vids", VideosRouter);
   app.use("/analisis", AnalisisRouter);
   app.use("/proyectos", ProyectosRouter);
+  app.use("/form", FormRouter);
+
 
   const PORT = process.env.PORT || 9000;
   app.listen(PORT, "0.0.0.0", () =>

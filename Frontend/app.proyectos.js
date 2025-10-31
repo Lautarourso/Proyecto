@@ -85,11 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const payload = {
         proyectoId: id,
         datosMaterial: formData,
-        datosAnalisis: analisis,
+        //datosAnalisis: analisis,
       };
 
       try {
-        const res = await fetch("https://proyecto-zvzl.onrender.com/analisis/numericos", {
+        const res = await fetch("https://proyecto-zvzl.onrender.com/form/numericos", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
