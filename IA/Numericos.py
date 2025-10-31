@@ -13,7 +13,9 @@ def main():
         print(json.dumps(data, indent=2, ensure_ascii=False))
 
         out_folder = "datos_crudos"
+        print(f"📍 La carpeta se intentará crear en: {os.path.abspath(out_folder)}")
         os.makedirs(out_folder, exist_ok=True)
+        
 
         ruta_salida = os.path.join(out_folder, "datos_recibidos.json")
         with open(ruta_salida, "w", encoding="utf-8") as f:
