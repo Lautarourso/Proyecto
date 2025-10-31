@@ -12,6 +12,18 @@ Form.init(
             primaryKey: true,
         },
 
+        proyecto_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false, // Un formulario siempre debe pertenecer a un proyecto
+            unique: true,     // 👈 CLAVE para la relación UNO A UNO:
+                              // Asegura que solo un 'form' pueda referenciar un 'proyecto_id'.
+            references: {
+                model: "proyectos", // Nombre de la tabla de destino (en PostgreSQL)
+                key: "id",          // Clave de destino en la tabla 'proyectos'
+            },
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE'
+        },
         // 📝 Campos de Texto (VARCHAR)
         falla: {
             type: DataTypes.STRING(100), // Mapea a VARCHAR(100)
