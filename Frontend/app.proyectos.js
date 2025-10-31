@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ${
         analisis.length > 0
           ? `<ul>${analisis.map(a => `
-              <li>Tiempo: ${a.tiempo}s — Distancia: ${a.distancia}s</li>
+              <p>Tiempo: ${a.tiempo}s — Distancia: ${a.distancia}s</p>
             `).join("")}</ul>`
           : "<p>No hay análisis cargados.</p>"
       }
