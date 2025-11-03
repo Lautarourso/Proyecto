@@ -11,14 +11,12 @@ const IA = async (req, res) => {
 
     if (usuario2)
         return res.status(400).json({ message: "Ya has subido los datos de este proyecto" });
-        alert("Ya has subido los datos de este proyecto");
 
     await formservice.Cañerias({
         proyecto_id: proyectoId,
         ...datosMaterial,
     });
     res.status(201).json({ message: "Formulario subido" });
-    alert("Formulario subido");
 } catch (error) {
     res.status(500).json({ message: error.message });
 }
