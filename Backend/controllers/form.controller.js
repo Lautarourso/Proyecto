@@ -1,6 +1,6 @@
 import formservice from "../services/form.service.js";
 
-export const IA = async (req, res) => {
+const IA = async (req, res) => {
     try {
       const datos = req.body;
   
@@ -21,4 +21,6 @@ export const IA = async (req, res) => {
       console.error("Error en el controlador:", error);
       res.status(500).json({ message: "Error en el servidor", error });
     }
-  };
+};
+
+export default { IA};

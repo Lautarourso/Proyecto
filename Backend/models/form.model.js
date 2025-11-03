@@ -87,12 +87,10 @@ Form.init(
         
     },
 
-    // ⚙️ Configuración del Modelo
-    {
-        sequelize,
-        modelName: "form",
-        tableName: "form", // 👈 Nombre literal de la tabla en PostgreSQL
-        timestamps: false, // 👈 Importante: si tu tabla SÓLO tiene 'created_at' y no 'updated_at',
-                          // usa 'timestamps: false' y deja que PostgreSQL maneje `created_at`.
-    }
-);
+        {
+            sequelize,
+            modelName: "form",
+            tableName: "form", // 👈 Nombre literal de la tabla en PostgreSQL
+            timestamps: false, // 👈 Importante: si tu tabla SÓLO tiene 'created_at' y no 'updated_at',
+        }
+    );
