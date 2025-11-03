@@ -6,4 +6,8 @@ const Cañerias = async (datos) => {
     return await Form.create(datos);
 };
 
-export default {Cañerias};
+const getFormbyIDP = async (proyectoId) => {
+    return await Form.findOne({ where: { proyectoId } });
+};
+
+export default {Cañerias, getFormbyIDP};
