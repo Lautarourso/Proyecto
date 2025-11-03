@@ -19,4 +19,4 @@ const GetT = async (req, res) => {
 };
 
 
-export default { GetT, IA};
+export default { GetT};
