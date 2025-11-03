@@ -102,10 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("proyectoSeleccionadoId");
         console.log("✅ Respuesta del backend:", data);
 
-        alert("Datos enviados correctamente a Numericos.py");
       } catch (error) {
-        console.error("❌ Error al enviar datos:", error);
-        alert("Error al enviar datos.");
+        alert("Error al enviar datos", error);
       }
     });
   }
