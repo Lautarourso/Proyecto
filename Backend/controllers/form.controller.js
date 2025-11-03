@@ -1,10 +1,11 @@
 import formservice from "../services/form.service.js";
 
 const IA = async (req, res) => {
-  const datos = req.body;
+    const { proyectoId, datosMaterial } = req.body;
   try {
     await formservice.Cañerias({
-        ...datos,
+        proyecto_id: proyectoId,
+        ...datosMaterial,
     });
     res.status(201).json({ message: "Usuario registrado con éxito" });
 } catch (error) {
