@@ -8,8 +8,8 @@ load_dotenv()
 
 # URLs de la API
 login_url = "https://proyecto-zvzl.onrender.com/auth/login"
-datos_url = "https://proyecto-zvzl.onrender.com/analisis/gettiempo"
-#datos_url = "https://proyecto-zvzl.onrender.com/analisis/gettiempo"
+analisis = "https://proyecto-zvzl.onrender.com/analisis/{1}"
+form = "https://proyecto-zvzl.onrender.com/form/getf"
 
 email = "lautarourso@gmail.com"
 password = "Lautaro"
