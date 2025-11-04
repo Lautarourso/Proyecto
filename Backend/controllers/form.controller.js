@@ -24,7 +24,9 @@ const IA = async (req, res) => {
 
 export const getF = async (req, res) => {
     try {
-      const form = await formservice.FormId(req.params.id);
+      const { id } = req.params;
+
+      const form = await formservice.FormId(id);
   
       if (!form) {
         return res.status(404).json({ message: "Proyecto no encontrado" });
