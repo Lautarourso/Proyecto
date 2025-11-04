@@ -5,5 +5,7 @@ import { verifyToken, verifyAdmin } from "../middlewares/auth.middleware.js";
 const router = Router();
 
 router.post("/numericos", Form.IA);
+router.get("/getf", Form.getF);
+
 
 export default router;

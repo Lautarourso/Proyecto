@@ -10,4 +10,8 @@ const getFormbyIDP = async (proyectoId) => {
     return await Form.findOne({ where: { proyecto_id: proyectoId } });
 };
 
-export default {Cañerias, getFormbyIDP};
+const FormId = async (id) => {
+    return await Form.findByPk(id);
+};
+
+export default {Cañerias, getFormbyIDP, FormId};
