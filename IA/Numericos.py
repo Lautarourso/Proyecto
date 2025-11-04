@@ -5,11 +5,10 @@ from dotenv import load_dotenv
 
 # Cargar credenciales del archivo .env
 load_dotenv()
-
+id = 1
 # URLs de la API
 login_url = "https://proyecto-zvzl.onrender.com/auth/login"
-analisis = "https://proyecto-zvzl.onrender.com/analisis/{1}"
-form = "https://proyecto-zvzl.onrender.com/form/getf"
+analisis = f"https://proyecto-zvzl.onrender.com/analisis/{id}"
 
 email = "lautarourso@gmail.com"
 password = "Lautaro"
@@ -37,7 +36,7 @@ headers = {
 }
 
 # Obtener datos numéricos
-response = requests.get(datos_url, headers=headers, verify=False)
+response = requests.get(analisis, headers=headers, verify=False)
 
 if response.status_code != 200:
     print("Error al obtener datos:", response.status_code, response.text)

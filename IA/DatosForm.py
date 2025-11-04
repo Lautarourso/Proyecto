@@ -8,7 +8,7 @@ load_dotenv()
 
 # URLs de la API
 login_url = "https://proyecto-zvzl.onrender.com/auth/login"
-form_url = "https://proyecto-zvzl.onrender.com/form/numericos"
+form_url = f"https://proyecto-zvzl.onrender.com/form/{1}"
 
 email = "lautarourso@gmail.com"
 password = "Lautaro"
