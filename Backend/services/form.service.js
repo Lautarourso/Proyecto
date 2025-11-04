@@ -11,7 +11,10 @@ const getFormbyIDP = async (proyectoId) => {
 };
 
 const FormId = async (id) => {
-    return await Form.findByPk(id);
+    return await Form.findAll({
+        where: { proyecto_id: id },
+        order: [["id", "ASC"]]
+      });
 };
 
 export default {Cañerias, getFormbyIDP, FormId};
