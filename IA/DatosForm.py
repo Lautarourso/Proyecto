@@ -5,10 +5,10 @@ from dotenv import load_dotenv
 
 # Cargar credenciales del archivo .env
 load_dotenv()
-
+id = 1
 # URLs de la API
 login_url = "https://proyecto-zvzl.onrender.com/auth/login"
-form_url = f"https://proyecto-zvzl.onrender.com/form/{1}"
+form_url = f"https://proyecto-zvzl.onrender.com/form/{id}"
 
 email = "lautarourso@gmail.com"
 password = "Lautaro"
