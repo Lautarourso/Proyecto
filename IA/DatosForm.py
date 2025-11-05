@@ -62,20 +62,20 @@ if response_analisis.status_code != 200:
 out_folder = "datos totales"
 os.makedirs(out_folder, exist_ok=True)
 
-ruta_salida = os.path.join(out_folder, f"datos_analisis{id}.json")
-with open(ruta_salida, "w", encoding="utf-8") as f:
+ruta_hardware = os.path.join(out_folder, f"datos_analisis{id}.json")
+with open(ruta_hardware, "w", encoding="utf-8") as f:
     import json
     json.dump(datos_analisis, f, ensure_ascii=False, indent=4)
 
-print(f"Datos guardados en: {ruta_salida}")
+print(f"Datos guardados en: {ruta_hardware}")
 
 
 os.makedirs(out_folder, exist_ok=True)
 
-ruta_salida = os.path.join(out_folder, f"datos_form{id}.json")
-with open(ruta_salida, "w", encoding="utf-8") as f:
+ruta_form = os.path.join(out_folder, f"datos_form{id}.json")
+with open(ruta_form, "w", encoding="utf-8") as f:
     import json
     json.dump(datos_form, f, ensure_ascii=False, indent=4)
 
-print(f"Datos guardados en: {ruta_salida}")
+print(f"Datos guardados en: {ruta_form}")
 

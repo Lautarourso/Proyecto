@@ -1,16 +1,14 @@
 import json
-from Numericos import ruta_salida
-from DatosForm import ruta_salida
+from DatosForm import ruta_form, ruta_hardware
 
 
 
 try:
     with open(ruta_hardware, "r", encoding="utf-8") as f:
-        # Asumo que el JSON de datos crudos es una lista de casos y tomamos el primero (ID 44)
         casos_hardware = json.load(f)
         datos_hardware = casos_hardware[0] if casos_hardware else {}
     
-    with open(ruta_cliente, "r", encoding="utf-8") as f:
+    with open(ruta_form, "r", encoding="utf-8") as f:
         # Asumo que el JSON de datos form (cliente) devuelve una lista de formularios y tomamos el primero
         casos_cliente = json.load(f)
         datos_cliente = casos_cliente[0] if casos_cliente else {}
@@ -40,7 +38,7 @@ def longitud_falla(tiempo_imp_ms_param, velocidad_imp_MS):
 tiempo_imp_ms = datos_hardware.get("tiempo") 
 duracion_ms = datos_hardware.get("distancia")
 
-tipo_falla = datos_cliente.get("falla", "Abolladura")
+tipo_falla = datos_cliente.get("falla")
 espesor_gasoducto = datos_cliente.get("espesor")
 diametro_gasoducto = datos_cliente.get("diametro")
 tmfe = datos_cliente.get("tfme", 0)
