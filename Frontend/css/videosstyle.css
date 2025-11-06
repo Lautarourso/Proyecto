@@ -218,3 +218,21 @@ body {
         text-align: center;
     }
 }
+
+html, body {
+    height: 100%; /* asegura que el body ocupe toda la altura de la pantalla */
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* ordena el contenido en columna */
+}
+
+.container {
+    flex: 1; /* empuja el footer hacia abajo automáticamente */
+}
+
+/* Footer fijo al final visualmente */
+.footer-custom {
+    margin-top: auto; /* se coloca al final de la página */
+}
