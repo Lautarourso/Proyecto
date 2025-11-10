@@ -6,6 +6,6 @@ const router = Router();
 
 router.post("/numericos", Form.IA);
 router.get("/:id", verifyToken, Form.getF);
-
+router.post("/python", Form.python); 
 
 export default router;

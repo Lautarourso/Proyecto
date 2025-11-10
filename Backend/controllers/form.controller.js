@@ -1,4 +1,6 @@
 import formservice from "../services/form.service.js";
+import { PythonShell } from "python-shell";
+
 
 const IA = async (req, res) => {
     const { proyectoId, datosMaterial } = req.body;
@@ -38,4 +40,16 @@ export const getF = async (req, res) => {
     }
   };
 
-export default { IA, getF};
+export const python = async (req, res) => {
+  const { id } = req.body;
+  console.log("ID recibido desde el front:", id);
+
+  PythonShell.run("../../IA/modulos.py", { args: [id] })
+    .then(results => {
+      res.json({ success: true, output: results });
+    })
+    .catch(err => {
+      res.status(500).json({ success: false, error: err.message });
+    });
+};
+export default { IA, getF, python};

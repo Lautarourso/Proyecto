@@ -88,6 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
         //datosAnalisis: analisis,
       };
 
+
+
       try {
         const res = await fetch("https://proyecto-zvzl.onrender.com/form/numericos", {
           method: "POST",
@@ -105,6 +107,12 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (error) {
         alert("Error al enviar datos", error);
       }
+
+      await fetch("https://proyecto-zvzl.onrender.com/form/python", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }) // 👈 LO ENVIÁS AL BACKEND
+      });
     });
   }
 });
