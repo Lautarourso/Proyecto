@@ -63,3 +63,4 @@ response = client.models.generate_content(
 
 print("Informe generado con éxito:")
 print(response.text)
+
