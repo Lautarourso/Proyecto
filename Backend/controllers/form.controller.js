@@ -40,16 +40,26 @@ export const getF = async (req, res) => {
     }
   };
 
+
 export const python = async (req, res) => {
   const { id, token } = req.body;
   console.log("ID recibido desde el front:", id);
 
+
+  try {
   PythonShell.run("../../IA/modulos.py", { args: [id, token] })
-    .then(results => {
-      res.json({ success: true, output: results });
-    })
-    .catch(err => {
-      res.status(500).json({ success: false, error: err.message });
-    });
+  const informeFinal = results[results.length - 1]; 
+        
+        // 4. Devolver la respuesta exitosa con el informe
+        return res.status(200).json({ 
+            status: "success", 
+            message: "Datos guardados e informe de IA generado.",
+            informe: informeFinal, // Enviamos el resultado de la IA al Front-End
+        });
+
+    } catch (err) {
+        // Error durante la ejecución del script Python (falla en el script, en la IA, etc.)
+        return res.status(500).json({ error_generacion: `Fallo al ejecutar el script Python: ${err.message}` });
+    }
 };
 export default { IA, getF, python};
