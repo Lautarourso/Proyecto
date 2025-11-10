@@ -41,10 +41,10 @@ export const getF = async (req, res) => {
   };
 
 export const python = async (req, res) => {
-  const { id } = req.body;
+  const { id, token } = req.body;
   console.log("ID recibido desde el front:", id);
 
-  PythonShell.run("../../IA/modulos.py", { args: [id] })
+  PythonShell.run("../../IA/modulos.py", { args: [id, token] })
     .then(results => {
       res.json({ success: true, output: results });
     })

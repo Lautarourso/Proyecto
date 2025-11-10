@@ -101,7 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const data = await res.json();
-        localStorage.removeItem("proyectoSeleccionadoId");
         console.log("✅ Respuesta del backend:", data);
 
       } catch (error) {
@@ -110,9 +109,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       await fetch("https://proyecto-zvzl.onrender.com/form/python", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id }) // 👈 LO ENVIÁS AL BACKEND
+        headers: { 
+          "Content-Type": "application/json" ,
+          Authorization: `Bearer ${token}` // también lo mandás en header por si lo querés usar
+        },
+        body: JSON.stringify({ id, token }) // 👈 LO ENVIÁS AL BACKEND
       });
+      localStorage.removeItem("proyectoSeleccionadoId");
     });
+            
+
   }
 });
