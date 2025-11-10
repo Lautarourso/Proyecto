@@ -98,4 +98,5 @@ def generar_informe_completo(id_falla: str, auth_token: str):
     # 4. DEVOLVER EL RESULTADO
     # ----------------------------------------------------------------------
     print("Informe generado con éxito.")
+    print(response.text)
     return response.text
