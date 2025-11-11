@@ -1,6 +1,7 @@
 import formservice from "../services/form.service.js";
 import { PythonShell } from "python-shell";
 import path from "path";
+import fs from "fs";
 
 
 const IA = async (req, res) => {
@@ -48,11 +49,10 @@ export const getF = async (req, res) => {
   
     const scriptPath = path.join(process.cwd(), "src", "IA", "modulo.py");
 
-    import fs from "fs";
     console.log("CWD:", process.cwd());
     console.log("Ruta del script Python:", scriptPath);
     console.log("¿Existe el archivo?", fs.existsSync(scriptPath));  
-    
+
     PythonShell.run(scriptPath, { args: [id, token] }, (err, results) => {
       if (err) {
         console.error("Error ejecutando Python:", err);
