@@ -18,8 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     
     const proyecto = await res.json();
-
-    let video = null
+    let video = {}; // inicializamos como objeto vacío
     if (proyecto.video_id) {
       const resVideo = await fetch(`https://proyecto-zvzl.onrender.com/vids/${proyecto.video_id}`, {
         headers: { Authorization: `Bearer ${token}` }

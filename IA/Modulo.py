@@ -5,6 +5,9 @@ from google import genai
 from Datos2 import longitud_falla
 from Analisis import construir_prompt_completo
 import sys
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 load_dotenv()
 
