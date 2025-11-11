@@ -46,9 +46,13 @@ export const getF = async (req, res) => {
     const { id, token } = req.body;
     console.log("ID recibido desde el front:", id);
   
-    const scriptPath = path.join(process.cwd(), "..","IA", "modulo.py");
+    const scriptPath = path.join(process.cwd(), "src", "IA", "modulo.py");
+
+    import fs from "fs";
+    console.log("CWD:", process.cwd());
     console.log("Ruta del script Python:", scriptPath);
-  
+    console.log("¿Existe el archivo?", fs.existsSync(scriptPath));  
+    
     PythonShell.run(scriptPath, { args: [id, token] }, (err, results) => {
       if (err) {
         console.error("Error ejecutando Python:", err);
