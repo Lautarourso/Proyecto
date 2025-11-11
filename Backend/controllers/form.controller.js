@@ -46,7 +46,7 @@ export const getF = async (req, res) => {
     const { id, token } = req.body;
     console.log("ID recibido desde el front:", id);
   
-    const scriptPath = path.join(process.cwd(), "IA", "modulo.py");
+    const scriptPath = path.join(process.cwd(), "..","IA", "modulo.py");
     console.log("Ruta del script Python:", scriptPath);
   
     PythonShell.run(scriptPath, { args: [id, token] }, (err, results) => {
