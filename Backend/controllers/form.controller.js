@@ -1,5 +1,6 @@
 import formservice from "../services/form.service.js";
 import { PythonShell } from "python-shell";
+import path from "path";
 
 
 const IA = async (req, res) => {
@@ -45,9 +46,10 @@ export const python = async (req, res) => {
   const { id, token } = req.body;
   console.log("ID recibido desde el front:", id);
 
-
+  const scriptPath = path.join(process.cwd(), "IA", "modulo.py");
+  console.log("Ruta del script Python:", scriptPath);
   try {
-  PythonShell.run("../../IA/modulos.py", { args: [id, token] })
+  PythonShell.run(scriptPath, { args: [id, token] })
   const informeFinal = results[results.length - 1]; 
         
         // 4. Devolver la respuesta exitosa con el informe
