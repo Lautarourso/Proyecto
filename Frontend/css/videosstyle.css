@@ -1,238 +1,189 @@
 :root {
-    --azul: #003366;
-    --azul-oscuro: #002244;
-    --gris-claro: #F0F0F0;
-    --naranja: #E24B16;
-    --naranja-oscuro: #C53D0F;
-    --blanco: #FFFFFF;
-    --negro: #000000;
+  --azul-profundo: #020b1a;
+  --azul-brillante: #00aaff;
+  --azul-medio: #02224f;
+  --naranja: #E24B16;
+  --naranja-oscuro: #C53D0F;
+  --gris-claro: #F0F0F0;
+  --blanco: #FFFFFF;
 }
 
-/* === Fondo en video === */
-#bgVideo {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -10; /* más bajo que todo */
-    opacity: 0.45;
-    filter: saturate(140%) contrast(120%) blur(1px);
-    animation: slowMove 30s ease-in-out infinite alternate;
+/* === Fondo tipo líquido === */
+.liquid-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 20%, rgba(0, 170, 255, 0.2), transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(0, 150, 255, 0.15), transparent 50%),
+              radial-gradient(circle at 50% 50%, rgba(0, 120, 255, 0.1), transparent 70%),
+              linear-gradient(135deg, var(--azul-profundo), var(--azul-medio));
+  background-blend-mode: screen;
+  filter: contrast(130%) brightness(110%) saturate(140%);
+  z-index: -10;
+  background-attachment: fixed;
 }
 
-/* Capa oscura encima del video */
+/* Capa oscura superior para contraste */
 body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.85) 100%);
-    z-index: -1;
-    pointer-events: none;
-}
-
-/* Movimiento lento del video (simula desplazamiento líquido) */
-@keyframes slowMove {
-    0% { transform: scale(1) translate(0, 0); }
-    50% { transform: scale(1.05) translate(-1%, -1%); }
-    100% { transform: scale(1) translate(1%, 1%); }
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.85) 100%);
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* === Estructura base === */
 body {
-    font-family: 'Hanson', sans-serif;
-    color: var(--gris-claro);
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    position: relative;
-    min-height: 100vh;
-    background: transparent !important;
+  font-family: 'Hanson', sans-serif;
+  color: var(--gris-claro);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+  background: transparent !important;
 }
 
 /* === Header === */
 .header-custom {
-    background-color: rgba(0, 0, 0, 0.8) !important;
-    border-bottom: 2px solid var(--naranja);
-    backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  border-bottom: 2px solid var(--naranja);
+  backdrop-filter: blur(5px);
 }
 
 .nav-link-custom {
-    color: var(--gris-claro) !important;
-    font-family: 'Basement Grotesque', sans-serif;
-    font-weight: 700;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: color 0.3s;
+  color: var(--gris-claro) !important;
+  font-family: 'Basement Grotesque', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s;
 }
-
 .nav-link-custom:hover {
-    color: var(--naranja) !important;
+  color: var(--naranja) !important;
 }
 
 /* === Botones === */
 .btn-orange-custom {
-    background-color: var(--naranja);
-    color: var(--blanco);
-    font-family: 'Basement Grotesque', sans-serif;
-    font-weight: 700;
-    border: none;
-    padding: 10px 25px;
-    text-transform: uppercase;
-    transition: all 0.3s;
+  background-color: var(--naranja);
+  color: var(--blanco);
+  font-family: 'Basement Grotesque', sans-serif;
+  font-weight: 700;
+  border: none;
+  padding: 10px 25px;
+  text-transform: uppercase;
+  transition: all 0.3s;
 }
-
 .btn-orange-custom:hover {
-    background-color: var(--naranja-oscuro);
-    transform: translateY(-2px);
+  background-color: var(--naranja-oscuro);
+  transform: translateY(-2px);
 }
-
 .btn-outline-orange {
-    border-color: var(--naranja);
-    color: var(--naranja);
-    background-color: transparent;
+  border-color: var(--naranja);
+  color: var(--naranja);
+  background-color: transparent;
 }
-
 .btn-outline-orange:hover {
-    background-color: var(--naranja);
-    color: var(--blanco);
+  background-color: var(--naranja);
+  color: var(--blanco);
 }
 
 /* === Grid de proyectos === */
 .proyectos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 25px;
-    margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
 }
-
 .proyecto-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
 }
-
 .proyecto-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    border-color: var(--naranja);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  border-color: var(--naranja);
 }
-
 .proyecto-header {
-    background: rgba(0, 51, 102, 0.3);
-    padding: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 51, 102, 0.3);
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .proyecto-title {
-    font-family: 'Hanson', sans-serif;
-    color: var(--gris-claro);
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-    font-weight: 700;
+  color: var(--gris-claro);
+  font-size: 1.2rem;
+  font-weight: 700;
 }
-
 .proyecto-body {
-    padding: 15px;
-    color: var(--gris-claro);
+  padding: 15px;
+  color: var(--gris-claro);
 }
-
 .proyecto-info {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    opacity: 0.8;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  opacity: 0.8;
 }
 
 /* === Footer === */
 .footer-custom {
-    background-color: rgba(0, 0, 0, 0.8);
-    border-top: 2px solid var(--naranja);
-    backdrop-filter: blur(5px);
-    margin-top: 50px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-top: 2px solid var(--naranja);
+  backdrop-filter: blur(5px);
+  margin-top: auto;
 }
 
 /* === Barra de progreso === */
 .progress-bar-custom {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: linear-gradient(to right, var(--naranja), #0088FF);
-    width: 0%;
-    z-index: 9999;
-    transition: width 0.1s ease-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(to right, var(--naranja), #0088FF);
+  width: 0%;
+  z-index: 9999;
+  transition: width 0.1s ease-out;
 }
 
 /* === Modal === */
 .modal-header-custom {
-    background-color: var(--azul);
-    color: var(--gris-claro);
+  background-color: var(--azul-medio);
+  color: var(--gris-claro);
 }
-
 .modal-content {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-}
-
-#crearProyectoModal .form-label {
-    color: #000000 !important;
-    font-weight: 600;
-    font-family: 'Basement Grotesque', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-}
-
-#crearProyectoModal .form-control {
-    background-color: rgba(255, 255, 255, 0.95);
-    border: 1px solid #ccc;
-    color: #000000;
-    padding: 10px 12px;
-}
-
-#crearProyectoModal .form-control:focus {
-    background-color: #ffffff;
-    border-color: var(--naranja);
-    box-shadow: 0 0 0 0.2rem rgba(226, 75, 22, 0.25);
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
 }
 
 /* === Responsive === */
 @media (max-width: 768px) {
-    .proyectos-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .header-custom .container {
-        flex-direction: column;
-        text-align: center;
-    }
+  .proyectos-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .header-custom .container {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
 html, body {
-    height: 100%; /* asegura que el body ocupe toda la altura de la pantalla */
+  height: 100%;
 }
-
 body {
-    display: flex;
-    flex-direction: column; /* ordena el contenido en columna */
+  display: flex;
+  flex-direction: column;
 }
-
 .container {
-    flex: 1; /* empuja el footer hacia abajo automáticamente */
-}
-
-/* Footer fijo al final visualmente */
-.footer-custom {
-    margin-top: auto; /* se coloca al final de la página */
+  flex: 1;
 }
