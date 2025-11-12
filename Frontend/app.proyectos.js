@@ -11,6 +11,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("proyecto-detalle").textContent = "No se indicó un proyecto.";
     return;
   }
+  const resVerificacion = await fetch(`https://proyecto-zvzl.onrender.com/form/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const check = await resVerificacion.json();
+
+    if (check) {
+      contenedor.innerHTML = `
+        <h2>Este proyecto ya tiene datos subidos.</h2>
+        <p>No es necesario volver a completar el formulario.</p>
+        <button id="volver">Volver al inicio</button>
+      `;
+
+      document.getElementById("volver").addEventListener("click", () => {
+        localStorage.removeItem("proyectoSeleccionadoId");
+        window.location.href = "/mainpage.html";
+      });
+      return; // 🚫 No cargar el resto si ya existe
+  }
 
   try {
     const res = await fetch(`https://proyecto-zvzl.onrender.com/proyectos/${id}`,{

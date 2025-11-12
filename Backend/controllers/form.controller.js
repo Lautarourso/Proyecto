@@ -11,11 +11,9 @@ const IA = async (req, res) => {
 
   try {
 
-    const usuario2 = await formservice.getFormbyIDP(proyectoId);
+    
 
-    if (usuario2)
-        return res.status(400).json({ message: "Ya has subido los datos de este proyecto" });
-
+    
     await formservice.Cañerias({
         proyecto_id: proyectoId,
         ...datosMaterial,
@@ -30,13 +28,9 @@ export const getF = async (req, res) => {
     try {
       const { id } = req.params;
 
-      const form = await formservice.FormId(id);
+      const existente = await formservice.getFormbyIDP(id);
   
-      if (!form) {
-        return res.status(404).json({ message: "Proyecto no encontrado" });
-      }
-  
-      res.json(form);
+      res.json({ exists: !!existente });
     } catch (error) {
       res.status(500).json({ message: error.message });
     }

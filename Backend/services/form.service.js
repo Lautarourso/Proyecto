@@ -6,8 +6,8 @@ const Cañerias = async (datos) => {
     return await Form.create(datos);
 };
 
-const getFormbyIDP = async (proyectoId) => {
-    return await Form.findOne({ where: { proyecto_id: proyectoId } });
+const getFormbyIDP = async (id) => {
+    return await Form.findOne({ where: { proyecto_id: id } });
 };
 
 const FormId = async (id) => {
