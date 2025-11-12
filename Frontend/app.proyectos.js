@@ -2,34 +2,47 @@ let analisis = null;
 let token = null; 
 let id = null;
 
-document.addEventListener("DOMContentLoaded", async () => {
-  id = localStorage.getItem("proyectoSeleccionadoId");
-  token = localStorage.getItem("authToken");
+id = localStorage.getItem("proyectoSeleccionadoId");
+token = localStorage.getItem("authToken");
 
-
-  if (!id) {
-    document.getElementById("proyecto-detalle").textContent = "No se indicó un proyecto.";
-    return;
-  }
-  const resVerificacion = await fetch(`https://proyecto-zvzl.onrender.com/form/${id}`, {
+async function checkFormExists() {
+  try {
+    const res = await fetch(`https://proyecto-zvzl.onrender.com/form/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
-    const check = await resVerificacion.json();
 
-    if (check) {
-      contenedor.innerHTML = `
-        <h2>Este proyecto ya tiene datos subidos.</h2>
-        <p>No es necesario volver a completar el formulario.</p>
-        <button id="volver">Volver al inicio</button>
-      `;
+    const data = await res.json();
+    return data.exists; // true si ya existe
+  } catch (error) {
+    console.error("Error verificando formulario:", error);
+    return false;
+  }
+}
 
-      document.getElementById("volver").addEventListener("click", () => {
-        localStorage.removeItem("proyectoSeleccionadoId");
-        window.location.href = "/mainpage.html";
-      });
-      return; // 🚫 No cargar el resto si ya existe
+document.addEventListener("DOMContentLoaded", async () => {
+
+   const contenedor = document.getElementById("proyecto-detalle");
+
+  if (!id) {
+    contenedor.textContent = "No se indicó un proyecto.";
+    return;
   }
 
+  // 🟢 Verificar si ya hay formulario subido
+  const yaExiste = await checkFormExists(id, token);
+  if (yaExiste) {
+    contenedor.innerHTML = `
+      <h2>Este proyecto ya tiene datos subidos.</h2>
+      <p>No es necesario volver a completar el formulario.</p>
+      <button id="volver">Volver al inicio</button>
+    `;
+
+    document.getElementById("volver").addEventListener("click", () => {
+      localStorage.removeItem("proyectoSeleccionadoId");
+      window.location.href = "/mainpage.html";
+    });
+    return; // 👈 Importante: detenemos aquí
+  }
   try {
     const res = await fetch(`https://proyecto-zvzl.onrender.com/proyectos/${id}`,{
       headers: {Authorization: `Bearer ${token}` }
