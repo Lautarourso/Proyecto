@@ -31,17 +31,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   // 🟢 Verificar si ya hay formulario subido
   const yaExiste = await checkFormExists(id, token);
   if (yaExiste) {
-    contenedor.innerHTML = `
-      <h2>Este proyecto ya tiene datos subidos.</h2>
-      <p>No es necesario volver a completar el formulario.</p>
-      <button id="volver">Volver al inicio</button>
-    `;
-
-    document.getElementById("volver").addEventListener("click", () => {
-      localStorage.removeItem("proyectoSeleccionadoId");
-      window.location.href = "/mainpage.html";
-    });
-    return; // 👈 Importante: detenemos aquí
+    alert("Este proyecto ya tiene datos subidos. Serás redirigido a la página de videos.");
+    localStorage.removeItem("proyectoSeleccionadoId");
+    window.location.href = "videos.html";
+    return; // 👈 Detenemos aquí
   }
   try {
     const res = await fetch(`https://proyecto-zvzl.onrender.com/proyectos/${id}`,{
