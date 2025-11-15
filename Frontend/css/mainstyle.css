@@ -250,12 +250,12 @@ body {
   border-right: .15em solid var(--naranja);
   white-space: nowrap;
   width: 0ch;
-  animation: typing 2.5s steps(29, end) forwards, blink .75s step-end infinite;
+  animation: typing 2.5s steps(30, end) forwards, blink .75s step-end infinite;
 }
 
 @keyframes typing {
   from { width: 0ch; }
-  to { width: 29ch; }
+  to { width: 30ch; }
 }
 
 @keyframes blink {
