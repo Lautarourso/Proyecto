@@ -247,10 +247,9 @@ body {
 .typewriter {
   display: inline-block;
   overflow: hidden;
-  border-right: .15em solid var(--naranja);
   white-space: nowrap;
   width: 0ch;
-  animation: typing 2.5s steps(30, end) forwards, blink .75s step-end infinite;
+  animation: typing 2.5s steps(29, end) forwards;
 }
 
 @keyframes typing {
@@ -258,9 +257,7 @@ body {
   to { width: 29.2ch; }
 }
 
-@keyframes blink {
-  50% { border-color: transparent; }
-}
+
 
 /* Botones hover */
 .btn-orange-custom, .btn-outline-light, .btn-light {
