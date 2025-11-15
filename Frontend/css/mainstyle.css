@@ -255,7 +255,7 @@ body {
 
 @keyframes typing {
   from { width: 0ch; }
-  to { width: 30ch; }
+  to { width: 28.9ch; }
 }
 
 @keyframes blink {
