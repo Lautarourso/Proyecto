@@ -249,13 +249,14 @@ body {
   overflow: hidden;
   border-right: .15em solid var(--naranja);
   white-space: nowrap;
+  width: 0ch;
   animation: typing 3.5s steps(40, end), blink .75s step-end infinite;
-  vertical-align: bottom;
+  
 }
 
 @keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+   from { width: 0ch; }
+  to { width: 31ch; }
 }
 
 @keyframes blink {
