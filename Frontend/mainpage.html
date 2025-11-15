@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   
   <!-- AOS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos@2.3.4/aos.css"/>
   
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -29,6 +29,9 @@
 </head>
 
 <body>
+  <!-- Fondo líquido azul (REEMPLAZA TODO EL FONDO ANTERIOR) -->
+  <div class="liquid-bg"></div>
+  
   <!-- Barra de progreso -->
   <div id="progressBar" class="progress-bar-custom"></div>
   
@@ -58,9 +61,6 @@
     </div>
   </header>
 
-  <!-- Canvas para efecto Thermal Vision -->
-  <canvas id="thermalCanvas"></canvas>
-  
   <!-- Contenido principal -->
   <div class="content-wrapper">
     <!-- HERO -->
@@ -238,9 +238,6 @@
         once: true
       });
       
-      // Inicializar efecto Thermal Vision
-      initThermalVision();
-      
       document.body.classList.add("loaded");
       document.getElementById('progressBar').style.opacity = '0';
     });
@@ -253,132 +250,6 @@
       progressBar.style.width = scrolled + '%';
       progressBar.style.opacity = winScroll > 100 ? '1' : '0';
     });
-
-    // Efecto Thermal Vision
-    function initThermalVision() {
-      const canvas = document.getElementById('thermalCanvas');
-      const ctx = canvas.getContext('2d');
-      
-      // Configurar canvas para cubrir toda la pantalla
-      function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-      
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-      
-      // Configuración del efecto
-      const particles = [];
-      const particleCount = 100;
-      const colors = [
-        '#000000', // Negro
-        '#001122', // Azul muy oscuro
-        '#002244', // Azul oscuro
-        '#003366', // Azul medio
-        '#004488', // Azul
-        '#0055AA', // Azul claro
-        '#0066CC', // Azul más claro
-        '#0077EE', // Azul brillante
-        '#0088FF'  // Azul muy brillante
-      ];
-      
-      // Crear partículas
-      for (let i = 0; i < particleCount; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: Math.random() * 3 + 1,
-          speedX: (Math.random() - 0.5) * 0.5,
-          speedY: (Math.random() - 0.5) * 0.5,
-          color: colors[Math.floor(Math.random() * colors.length)],
-          opacity: Math.random() * 0.5 + 0.2
-        });
-      }
-      
-      // Función de animación
-      function animate() {
-        // Limpiar canvas con un fondo negro semitransparente
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Dibujar y actualizar partículas
-        particles.forEach(particle => {
-          // Actualizar posición
-          particle.x += particle.speedX;
-          particle.y += particle.speedY;
-          
-          // Rebotar en los bordes
-          if (particle.x <= 0 || particle.x >= canvas.width) particle.speedX *= -1;
-          if (particle.y <= 0 || particle.y >= canvas.height) particle.speedY *= -1;
-          
-          // Dibujar partícula
-          ctx.beginPath();
-          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-          ctx.fillStyle = particle.color;
-          ctx.globalAlpha = particle.opacity;
-          ctx.fill();
-        });
-        
-        // Dibujar líneas entre partículas cercanas
-        ctx.globalAlpha = 0.2;
-        for (let i = 0; i < particles.length; i++) {
-          for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            
-            if (distance < 100) {
-              ctx.beginPath();
-              ctx.strokeStyle = '#0088FF';
-              ctx.lineWidth = 0.5;
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.stroke();
-            }
-          }
-        }
-        
-        // Dibujar efecto de calor
-        drawHeatEffect();
-        
-        requestAnimationFrame(animate);
-      }
-      
-      // Efecto de calor (ondas)
-      function drawHeatEffect() {
-        const time = Date.now() * 0.001;
-        const centerX = canvas.width / 2;
-        const centerY = canvas.height / 2;
-        
-        // Crear gradiente radial para el efecto de calor
-        const gradient = ctx.createRadialGradient(
-          centerX, centerY, 0,
-          centerX, centerY, Math.min(canvas.width, canvas.height) * 0.8
-        );
-        
-        gradient.addColorStop(0, 'rgba(0, 136, 255, 0.1)');
-        gradient.addColorStop(0.5, 'rgba(0, 85, 170, 0.05)');
-        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-        
-        ctx.globalAlpha = 0.3;
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Ondas de calor
-        ctx.globalAlpha = 0.1;
-        for (let i = 0; i < 3; i++) {
-          const radius = 100 + Math.sin(time * 0.5 + i) * 50;
-          ctx.beginPath();
-          ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-          ctx.strokeStyle = '#00AAFF';
-          ctx.lineWidth = 2;
-          ctx.stroke();
-        }
-      }
-      
-      animate();
-    }
   </script>
 </body>
 </html>
