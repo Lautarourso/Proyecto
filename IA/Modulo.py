@@ -88,7 +88,7 @@ def generar_informe_completo(id_falla: str, auth_token: str):
         
     client = genai.Client(api_key=api_key)
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-2.5-pro",
         contents=prompt_texto
     )
     
