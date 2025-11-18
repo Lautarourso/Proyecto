@@ -6,8 +6,6 @@ from Datos2 import longitud_falla
 from Analisis import construir_prompt_completo
 import sys
 import urllib3
-import time
-from google.generativeai.errors import APIError
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -89,34 +87,13 @@ def generar_informe_completo(id_falla: str, auth_token: str):
         raise Exception("La variable de entorno GEMINI_API_KEY no está configurada.")
         
     client = genai.Client(api_key=api_key)
-    MAX_RETRIES = 3
-    DELAY_SECONDS = 5
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt_texto
+    )
     
-    for attempt in range(MAX_RETRIES):
-        try:
-            print(f"Generando informe con Gemini (Intento {attempt + 1}/{MAX_RETRIES})...")
-            response = client.models.generate_content(
-                model="gemini-2.5-flash",
-                contents=prompt_texto
-            )
-            # Si tiene éxito, devolver el texto y salir de la función
-            return response.text 
-            
-        except APIError as e:
-            # Captura errores de la API como 503 (Unavailable) y 429 (Rate Limit)
-            error_message = str(e)
-            
-            # Verificar si el error es transitorio (503 o 429) y no el último intento
-            if ("503" in error_message or "429" in error_message) and (attempt < MAX_RETRIES - 1):
-                print(f"Error de API: {e}. Reintentando en {DELAY_SECONDS} segundos...")
-                time.sleep(DELAY_SECONDS)
-            else:
-                # Si es el último intento o un error no transitorio, lanzarlo.
-                raise Exception(f"Fallo crítico y no recuperable de la API de Gemini: {e}")
-                
-    # Este punto no debería ser alcanzado si el error se maneja correctamente, 
-    # pero es un seguro en caso de que el bucle termine sin retorno.
-    raise Exception(f"Fallo al generar el informe después de {MAX_RETRIES} intentos.")
+    # Devolver el texto del informe para que el Back-End lo envíe al Front-End
+    return response.text
 
 
 # --- 2. BLOQUE DE EJECUCIÓN (Para testing o uso de línea de comandos) ---
