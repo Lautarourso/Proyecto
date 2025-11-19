@@ -86,11 +86,10 @@ def generar_informe_completo(id_falla: str, auth_token: str):
     if not api_key:
         raise Exception("La variable de entorno GEMINI_API_KEY no está configurada.")
         
-    client = genai.Client(api_key=api_key)
-    response = client.models.generate_content(
-        model="gemini-2.5-pro",
-        contents=prompt_texto
-    )
+    genai.configure(api_key=api_key)
+
+    response = genai.GenerativeModel("gemini-2.5-pro").generate_content(prompt_texto)
+
     
     # Devolver el texto del informe para que el Back-End lo envíe al Front-End
     resultado = response.text
