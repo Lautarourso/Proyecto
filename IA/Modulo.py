@@ -93,7 +93,10 @@ def generar_informe_completo(id_falla: str, auth_token: str):
     )
     
     # Devolver el texto del informe para que el Back-End lo envíe al Front-End
-    return response.text
+    resultado = response.text
+    print(resultado)   # 👈 PythonShell necesita esto
+    return resultado
+
 
 
 # --- 2. BLOQUE DE EJECUCIÓN (Para testing o uso de línea de comandos) ---

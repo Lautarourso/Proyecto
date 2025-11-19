@@ -53,7 +53,9 @@ export const getF = async (req, res) => {
         return res.status(500).json({ error_generacion: err.message });
       }
   
-      const informeFinal = results[results.length - 1];
+      const informeFinal = results?.length ? results[results.length - 1] : null;
+      console.log("📌 Resultados del script:", results);
+
   
       return res.status(200).json({
         status: "success",

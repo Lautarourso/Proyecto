@@ -138,6 +138,9 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         body: JSON.stringify({ id, token }) // 👈 LO ENVIÁS AL BACKEND
       });
+      const dataPython = await resPython.json();
+      console.log("📄 Informe recibido:", dataPython);
+      
       localStorage.removeItem("proyectoSeleccionadoId");
     });
             
