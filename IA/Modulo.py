@@ -1,7 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
-import google.generativeai as genai
+from google import generativeai as genai
 from Datos2 import longitud_falla
 from Analisis import construir_prompt_completo
 import sys
