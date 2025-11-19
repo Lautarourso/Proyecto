@@ -81,7 +81,7 @@ def generar_informe_completo(id_falla: str, auth_token: str):
         presion_max_op, latitud_in, latitud_fin, longitud_in, longitud_fin
     )
 
-    # 4. LLAMADA A GEMINI 2.0 PRO (SDK CORRECTO)
+    # 4. LLAMADA A GEMINI 1.5 PRO (SDK CORRECTO)
     # ----------------------------------------------------------------------
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
@@ -90,7 +90,7 @@ def generar_informe_completo(id_falla: str, auth_token: str):
     client = genai.Client(api_key=api_key)
 
     response = client.models.generate_content(
-        model="gemini-2.0-pro",
+        model="gemini-1.5-pro",
         contents=prompt_texto
     )
 
