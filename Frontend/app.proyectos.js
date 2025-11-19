@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Error al enviar datos", error);
       }
 
-      await fetch("https://proyecto-zvzl.onrender.com/form/python", {
+      const resPython = await fetch("https://proyecto-zvzl.onrender.com/form/python", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json" ,
