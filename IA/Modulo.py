@@ -90,8 +90,7 @@ def generar_informe_completo(id_falla: str, auth_token: str):
     genai.configure(api_key=api_key)
 
     # Modelo perfectamente compatible
-    model = genai.GenerativeModel("gemini-1.5-flash")
-
+    model = genai.GenerativeModel("gemini-2.0-flash-lite-preview")
 
     response = model.generate_content(prompt_texto)
 
