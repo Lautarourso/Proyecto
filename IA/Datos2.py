@@ -9,3 +9,4 @@ def longitud_falla(tiempo_imp_ms_param, velocidad_imp_MS):
     
     # paso a milímetros
     return longitud_m * 1000
+

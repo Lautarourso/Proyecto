@@ -50,7 +50,7 @@ def generar_informe_completo(id_falla: str, auth_token: str):
     # 2. EXTRACCIÓN Y PREPARACIÓN DE VARIABLES
     # ----------------------------------------------------------------------
     tiempo_imp_ms = datos_hardware.get("tiempo", 0)
-    duracion_ms = datos_hardware.get("distancia", 0)
+    ubicacion = datos_hardware.get("distancia", 0)
 
     tipo_falla = datos_cliente.get("falla", "N/A")
     espesor_gasoducto = datos_cliente.get("espesor", 0.0)
@@ -66,7 +66,7 @@ def generar_informe_completo(id_falla: str, auth_token: str):
     presion_max_op = datos_cliente.get("presionMaxima", 0.0)
 
     # Variables fijas
-    ubicacion = 20.3
+    duracion_ms = 500.5
     profundidad_max = 1.5
     velocidad_imp_MS = 4
 
