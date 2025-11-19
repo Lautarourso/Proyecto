@@ -1,7 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
-from google import genai
+import google.generativeai as genai
 from Datos2 import longitud_falla
 from Analisis import construir_prompt_completo
 import sys
@@ -87,12 +87,13 @@ def generar_informe_completo(id_falla: str, auth_token: str):
     if not api_key:
         raise Exception("La variable de entorno GEMINI_API_KEY no está configurada.")
 
-    client = genai.Client(api_key=api_key)
+    genai.configure(api_key=api_key)
 
-    response = client.models.generate_content(
-        model="gemini-1.5-pro",
-        contents=prompt_texto
-    )
+    # Modelo perfectamente compatible
+    model = genai.GenerativeModel("gemini-1.5-flash")
+
+
+    response = model.generate_content(prompt_texto)
 
     resultado = response.text
 
