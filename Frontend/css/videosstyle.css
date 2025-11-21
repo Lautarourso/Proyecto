@@ -121,7 +121,30 @@ body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
+  padding: 18px 20px;
 }
+.proyecto-card h3,
+.proyecto-card h4,
+.proyecto-card p {
+  margin-bottom: 10px;
+}
+.proyecto-card .btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--gris-claro);
+  border: 1px solid var(--naranja);
+  border-radius: 6px;
+  padding: 6px 18px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.proyecto-card .btn:hover {
+  background: var(--naranja);
+  color: var(--blanco);
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(226, 75, 22, 0.5);
+}
+
 .proyecto-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
