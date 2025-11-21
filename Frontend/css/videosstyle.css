@@ -213,3 +213,13 @@ body {
   z-index: -2; /* Debajo de todo */
   pointer-events: none; /* No bloquea clics */
 }
+
+.ver-proyecto {
+  margin-top: 10px;
+  font-family: 'Hanson', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.ver-proyecto:hover {
+  cursor: pointer;
+}

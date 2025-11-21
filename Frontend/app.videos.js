@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               ? `<p class="proyecto-video">🎬 Video asociado</p>`
               : `<p class="proyecto-video sin-video">Sin video asociado</p>`
           }
-          <button class="ver-proyecto">Ver detalles</button>
+          <button class="btn ver-proyecto">Ver detalles</button>
         </div>
       `;
 
