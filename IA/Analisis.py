@@ -1,6 +1,5 @@
 def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, tiempo_impacto, espesor_gasoducto, presion_gas, material_gasoducto, diametro_gasoducto, tmfe, antiguedad_gasoducto, presion_max_op, latitud_in, latitud_fin, longitud_in, longitud_fin):
     
-    # Define la variable `prompt` aquí, antes de usarla.
     prompt = f"""
 
 
@@ -91,6 +90,25 @@ def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, 
     2) el espesor de pared nominal requerido por la presión de diseño de la
     cañería.
 
+    
+    Potencial de fuga o ruptura del gasoducto a partir de las abolladuras:
+
+    ASME B31.8
+
+    Si la falla requiere ser eliminada por profundidad: Falla tipo 1, potencial fuga de gas. 
+    Gravedad Final: ALTA (en Área Tipo H/T, o en caso de ser muy profunda) o MODERADA (en Área Tipo R/S).
+
+
+    Sí la falla requiere eliminación por geometría (ABOLLADURA AGUDA, FALLA DE SOLDADURA): Falla tipo 2, potencial ruptura del gasoducto. 
+    Gravedad Final: ALTA. 
+    Acción Prioritaria: Eliminación y reemplazo inmediato del tramo de caño afectado (Sección 309.d).
+    Mitigación Inmediata: Si el reemplazo no es inmediato, APAGADO DE LÍNEA o reducción severa de la presión hasta el mínimo requerido.
+
+
+
+
+
+
 
     Riesgo social:
     
@@ -109,11 +127,11 @@ def construir_prompt_completo(tipo_falla, ubicacion, longitud, profundidad_max, 
     ---------------
     Instrucciones específicas para tu análisis, pero no las incluyas en el informe final escrito:
 
-    1.  **Clasificación:** Determina si la abolladura es simple, aguda o con concentrador, basándote en la descripción de la NAG-10. Para determinar si es Aguda, la IA debe utilizar la Profundidad y la Longitud estimada de la abolladura para inferir el Radio de Curvatura Mínimo. Si este es igual o menor a cinco veces el espesor del caño (R≤5×Espesor), clasifícala como Aguda, lo que lleva la Gravedad a Alta (Sección 309.b.2). Justifica tu elección.
+    1.  **Clasificación:** Determina si la abolladura es simple, aguda o con concentrador, basándote en la descripción de la NAG-10. Para determinar si es Aguda, la IA debe utilizar la Profundidad y la Longitud estimada de la abolladura para inferir el Radio de Curvatura Mínimo. Si este es igual o menor a cinco veces el espesor del caño (R≤5×Espesor), clasifícala como Aguda, lo que lleva la Gravedad a Alta (Sección 309.b.2, ASME B31.8). Dependiendo de la clasificación, determinar si es una falla **tipo 1** o **tipo 2**. Justifica tu elección.
     2.  **Cálculos:** Calcula la relación de profundidad (profundidad_max / diametro_gasoducto) y la tensión circunferencial (hoop stress = (presion_max_op/10 x diametro_gasoducto) / 2 x espesor_gasoducto) del gasoducto. Luego, compara la tensión de operación con el 40% de la TFME para determinar qué reglas de la NAG-10 debes aplicar.
-    3.  **Evaluación de la gravedad:** Basándote en los cálculos, la clasificación y la aproximación a la población, utilizando las coordenadas de inicio del tramo y las coordenadas del final del tramo, usa los criterios de la NAG-10 e IGEM/TD/1  SECCIÓN 6.7.1, combinado con tus conocimientos de ingenieria para determinar la gravedad. Si la abolladura cae en una categoría que requiere ser eliminada, la gravedad es **alta**. Si puede ser reparada o monitoreada, es **moderada** o **baja**.
+    3.  **Evaluación de la gravedad:** Basándote en los cálculos, la clasificación y la aproximación a la población, utilizando las coordenadas de inicio del tramo y las coordenadas del final del tramo, usa los criterios de la NAG-10, ASME B31.8 e IGEM/TD/1  SECCIÓN 6.7.1, combinado con tus conocimientos de ingenieria para determinar la gravedad. Si la abolladura cae en una categoría que requiere ser eliminada, la gravedad es **alta**. Si puede ser reparada o monitoreada, es **moderada** o **baja**.
     4.  **Recomendación:** La recomendación debe ser específica y técnica, basada en la NAG-10, en la IGEM/TD/1 y tus conocimientos de ingenieria. Por ejemplo, si es de gravedad alta, la recomendación es la **eliminación del tramo afectado**.
-    5.  **Regla de Prioridad de Gravedad (Conservadora): La clasificación de Gravedad de la falla debe ser el resultado más alto entre el análisis de la Profundidad/Geometría (criterios NAG-10) y el análisis de la Ubicación/Consecuencia (criterios Tipo R, S, H, T). Por ejemplo, si una abolladura es técnicamente Baja (por su profundidad) pero está en un Área Tipo T (Consecuencia Alta), la Gravedad Final debe ser clasificada como **Alta**.
+    5.  **Regla de Prioridad de Gravedad (Conservadora): La clasificación de Gravedad de la falla debe ser el resultado más alto entre el análisis de la Profundidad/Geometría (criterios NAG-10, ASME B31.8) y el análisis de la Ubicación/Consecuencia (criterios Tipo R, S, H, T). Por ejemplo, si una abolladura es técnicamente Baja (por su profundidad) pero está en un Área Tipo T (Consecuencia Alta), la Gravedad Final debe ser clasificada como **Alta**.
     Tener en cuenta, EN PRIMERA INSTANCIA, el riesgo social. En caso de que el riesgo social sea mas bajo, priorizar las caracteristicas técnicas de la falla.
     6.  **Priorizar la Seguridad: Si un dato (ej. abolladura en soldadura) resulta en gravedad **alta**, no importa si otro dato (ej. baja presión) sugiere gravedad **baja**. La IA debe elegir siempre la conclusión más conservadora.
     7.  **Justificar la Combinación de Riesgos: La recomendación debe reflejar cómo se combinan los factores. Por ejemplo: "La abolladura es superficial (0.5% del diámetro), pero el gasoducto es antiguo (35 años) y opera con ciclos de presión. Por lo tanto, se recomienda el **monitoreo de la situación para mitigar el riesgo de fatiga**, aplicando el principio ALARP."
