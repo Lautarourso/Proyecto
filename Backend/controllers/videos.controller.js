@@ -7,44 +7,52 @@ const UploadV = async (req, res) => {
       return res.status(400).json({ message: "No se envió ningún archivo." });
     }
 
-    const { proyecto_id } = req.body; // <-- importantísimo
+    const { proyecto_id } = req.body;
 
-    // Subir a Cloudinary
-    const uploadResult = await cloudinary.uploader.upload_stream(
-      { resource_type: "video", folder: "tus_videos" },
-      async (error, result) => {
-        if (error) {
-          console.error(error);
-          return res.status(500).json({ message: "Error subiendo a Cloudinary" });
-        }
-        const video = req.body
-        // Guarda solo la URL en la DB
-        await videosService.createVideo({
-          ...video,
-          url: result.secure_url,
-          tipo_mime: result.resource_type,
-          user_id: req.idUsuario
-        });
-
-        res.status(201).json({ message: "Video subido con éxito", url: result.secure_url });
-      }
-    );
-
-    // Pipe para enviarle los datos
-    uploadResult.end(req.file.buffer);
-
-      if (proyecto_id) {
-        await proyectosService.asociarVideoAProyecto(
-          proyecto_id,
-          videoCreado.id
+    // Convertimos upload_stream a una Promesa
+    const subirVideoCloudinary = () => {
+      return new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          { resource_type: "video", folder: "tus_videos" },
+          (error, result) => {
+            if (error) return reject(error);
+            resolve(result);
+          }
         );
-      }
+
+        stream.end(req.file.buffer);
+      });
+    };
+
+    // Esperamos a que Cloudinary termine la subida
+    const cloudResult = await subirVideoCloudinary();
+
+    // Creamos el video en la DB
+    const videoCreado = await videosService.createVideo({
+      url: cloudResult.secure_url,
+      tipo_mime: cloudResult.resource_type,
+      user_id: req.idUsuario,
+      proyecto_id: proyecto_id || null
+    });
+
+    // Si viene un proyecto, lo asociamos
+    if (proyecto_id) {
+      await proyectosService.asociarVideoAProyecto(
+        proyecto_id,
+        videoCreado.id
+      );
+    }
+
+    res.status(201).json({
+      message: "Video subido y asociado con éxito",
+      url: cloudResult.secure_url
+    });
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error interno del servidor." });
   }
 };
-
 
 const GetV = async (req, res) => {
   try {

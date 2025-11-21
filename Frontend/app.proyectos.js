@@ -21,7 +21,7 @@ async function checkFormExists() {
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-   const contenedor = document.getElementById("proyecto-detalle");
+  const contenedor = document.getElementById("proyecto-detalle");
 
   if (!id) {
     contenedor.textContent = "No se indicó un proyecto.";
@@ -34,23 +34,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     alert("Este proyecto ya tiene datos subidos. Serás redirigido a la página de videos.");
     localStorage.removeItem("proyectoSeleccionadoId");
     window.location.href = "videos.html";
-    return; // 👈 Detenemos aquí
+    return;
   }
+
   try {
     const res = await fetch(`https://proyecto-zvzl.onrender.com/proyectos/${id}`,{
-      headers: {Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` }
     });
     
     const proyecto = await res.json();
-    let video = {}; // inicializamos como objeto vacío
+    let video = {}; 
+
     if (proyecto.video_id) {
       const resVideo = await fetch(`https://proyecto-zvzl.onrender.com/vids/${proyecto.video_id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       video = await resVideo.json();
-
     }
-
 
     const resAnalisis = await fetch(`https://proyecto-zvzl.onrender.com/analisis/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
@@ -58,15 +58,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     analisis = await resAnalisis.json();
 
-    
-    const contenedor = document.getElementById("proyecto-detalle");
-
     contenedor.innerHTML = `
       <h2>${proyecto.name || "Proyecto sin título"}</h2>
       ${
         video.url
           ? `<video controls width="500" src="${video.url}"></video>`
-          : "<p>No hay video asociado.</p>"
+          : `
+              <p>No hay video asociado.</p>
+              <button id="btnSubirVideo" style="margin-top:10px;">Subir video</button>
+              <input type="file" id="inputVideo" accept="video/*" style="display:none;">
+            `
       }
       <h3>Análisis:</h3>
       ${
@@ -77,18 +78,69 @@ document.addEventListener("DOMContentLoaded", async () => {
           : "<p>No hay análisis cargados.</p>"
       }
     `;
+
+    // 🟢 LÓGICA PARA SUBIR VIDEO (solo si no existe)
+    if (!video.url) {
+      const btn = document.getElementById("btnSubirVideo");
+      const input = document.getElementById("inputVideo");
+
+      btn.addEventListener("click", () => {
+        input.click(); // abrir explorador
+      });
+
+      input.addEventListener("change", async () => {
+        const file = input.files[0];
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append("video", file);
+        formData.append("proyectoId", id);
+
+        try {
+          const res = await fetch("https://proyecto-zvzl.onrender.com/vids/upload", {
+            method: "POST",
+            headers: { Authorization: `Bearer ${token}` },
+            body: formData
+          });
+
+          const data = await res.json();
+          console.log("Video subido:", data);
+
+          // Actualizar contenido sin recargar
+          contenedor.innerHTML = `
+            <h2>${proyecto.name}</h2>
+            <video controls width="500" src="${data.url}"></video>
+            <h3>Análisis:</h3>
+            ${
+              analisis.length > 0
+                ? `<ul>${analisis
+                    .map(a => `<p>Tiempo: ${a.tiempo}s — Distancia: ${a.distancia}s</p>`)
+                    .join("")}</ul>`
+                : "<p>No hay análisis cargados.</p>"
+            }
+          `;
+        } catch (err) {
+          console.error("Error subiendo video:", err);
+          alert("Error al subir el video.");
+        }
+      });
+    }
+
   } catch (err) {
     console.error(err);
     document.getElementById("proyecto-detalle").textContent = "Error al cargar el proyecto.";
   }
 });
 
+
+// 🟡 SEGUNDO DOMContentLoaded — Lo dejo igual que tenías
 document.addEventListener("DOMContentLoaded", () => {
 
   const boton = document.getElementById("btnAccion");
   if (boton) {
     boton.addEventListener("click", async () => {
       console.log("🔹 Botón presionado. Acción pendiente por definir...");
+
       const formData = {
         falla: document.getElementById("falla").value,
         material: document.getElementById("material").value,
@@ -104,14 +156,10 @@ document.addEventListener("DOMContentLoaded", () => {
         presionMaxima: parseFloat(document.getElementById("presionMaxima").value),
       };
 
-      // Crear objeto combinado
       const payload = {
         proyectoId: id,
         datosMaterial: formData,
-        //datosAnalisis: analisis,
       };
-
-
 
       try {
         const res = await fetch("https://proyecto-zvzl.onrender.com/form/numericos", {
@@ -133,17 +181,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const resPython = await fetch("https://proyecto-zvzl.onrender.com/form/python", {
         method: "POST",
         headers: { 
-          "Content-Type": "application/json" ,
-          Authorization: `Bearer ${token}` // también lo mandás en header por si lo querés usar
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({ id, token }) // 👈 LO ENVIÁS AL BACKEND
+        body: JSON.stringify({ id, token })
       });
+
       const dataPython = await resPython.json();
       console.log("📄 Informe recibido:", dataPython);
       
       localStorage.removeItem("proyectoSeleccionadoId");
     });
-            
-
   }
 });
