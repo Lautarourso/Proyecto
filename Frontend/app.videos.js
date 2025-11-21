@@ -1,76 +1,83 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const token = localStorage.getItem("authToken");
-  const container = document.getElementById("proyectosContainer");
-  const info = document.getElementById("proyectosInfo");
+    const token = localStorage.getItem("authToken");
+    const container = document.getElementById("proyectosContainer");
+    const info = document.getElementById("proyectosInfo");
 
-  if (!token) {
-    info.classList.replace("alert-info", "alert-danger");
-    info.textContent = "No estás autenticado. Iniciá sesión primero.";
-    return;
-  }
+    // =========================================================
+    // 1. LÓGICA DE CARGA DE PROYECTOS EXISTENTES
+    // =========================================================
 
-  try {
-    const response = await fetch("https://proyecto-zvzl.onrender.com/proyectos/getProyectos", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` }
-    });
-
-    if (!response.ok) {
-      throw new Error(`Error de servidor: ${response.status}`);
+    if (!token) {
+        info.classList.replace("alert-info", "alert-danger");
+        info.textContent = "No estás autenticado. Iniciá sesión primero.";
+        return;
     }
 
-    const data = await response.json();
-    console.log("Datos recibidos de la API (proyectos):", data);
+    try {
+        const response = await fetch("https://proyecto-zvzl.onrender.com/proyectos/getProyectos", {
+            method: "GET",
+            headers: { Authorization: `Bearer ${token}` }
+        });
 
-    // Asegurarse de que sea un array
-    const proyectos = Array.isArray(data) ? data : data.proyectos || [];
+        if (!response.ok) {
+            throw new Error(`Error de servidor: ${response.status}`);
+        }
 
-    if (proyectos.length === 0) {
-      info.classList.replace("alert-info", "alert-warning");
-      info.textContent = "No tenés proyectos cargados.";
-      return;
+        const data = await response.json();
+        console.log("Datos recibidos de la API (proyectos):", data);
+
+        const proyectos = Array.isArray(data) ? data : data.proyectos || [];
+
+        if (proyectos.length === 0) {
+            info.classList.replace("alert-info", "alert-warning");
+            info.textContent = "No tenés proyectos cargados. ¡Creá uno nuevo!";
+            // Esto asegura que si no hay proyectos, el mensaje queda visible
+            info.style.display = "block";
+            
+            // Si no hay proyectos, podemos salir del try, pero la lógica de creación debe seguir
+        } else {
+            info.style.display = "none";
+            container.innerHTML = ""; 
+
+            proyectos.forEach(proyecto => {
+                const div = document.createElement("div");
+                div.className = "proyecto-card";
+                div.dataset.id = proyecto.id;
+
+                div.innerHTML = `
+                    <div class="proyecto-info">
+                        <h3 class="proyecto-title">${proyecto.name || "Proyecto sin nombre"}</h3>
+                        ${
+                            proyecto.video_id
+                                ? `<p class="proyecto-video">🎬 Video asociado</p>`
+                                : `<p class="proyecto-video sin-video">Sin video asociado</p>`
+                        }
+                        <button class="btn ver-proyecto">Ver detalles</button>
+                    </div>
+                `;
+
+                const boton = div.querySelector(".ver-proyecto");
+                boton.addEventListener("click", () => {
+                    localStorage.setItem("proyectoSeleccionadoId", proyecto.id);
+                    window.location.href = "proyecto.html";
+                });
+                
+                container.appendChild(div);
+            });
+        }
+
+
+    } catch (err) {
+        console.error("Error cargando proyectos:", err);
+        info.classList.replace("alert-info", "alert-danger");
+        info.textContent = "Error al cargar los proyectos: " + err.message;
+        info.style.display = "block";
     }
 
-    info.style.display = "none";
-    container.innerHTML = ""; // limpiar contenido previo
+    // =========================================================
+    // 2. LÓGICA DE CREAR PROYECTO (Unificada)
+    // =========================================================
 
-    proyectos.forEach(proyecto => {
-      const div = document.createElement("div");
-      div.className = "proyecto-card";
-      div.dataset.id = proyecto.id; // guardar el id del proyecto
-
-      div.innerHTML = `
-        <div class="proyecto-info">
-          <h3 class="proyecto-title">${proyecto.name || "Proyecto sin nombre"}</h3>
-          ${
-            proyecto.video_id
-              ? `<p class="proyecto-video">🎬 Video asociado</p>`
-              : `<p class="proyecto-video sin-video">Sin video asociado</p>`
-          }
-          <button class="btn ver-proyecto">Ver detalles</button>
-        </div>
-      `;
-
-      // Al hacer clic en el botón, redirige a proyectos.html?id=ID
-      const boton = div.querySelector(".ver-proyecto");
-      boton.addEventListener("click", () => {
-        localStorage.setItem("proyectoSeleccionadoId", proyecto.id);
-        window.location.href = "proyecto.html";
-      });
-      
-
-      container.appendChild(div);
-    });
-
-  } catch (err) {
-    console.error("Error cargando proyectos:", err);
-    info.classList.replace("alert-info", "alert-danger");
-    info.textContent = "Error al cargar los proyectos: " + err.message;
-  }
-});
-// --- LÓGICA DE CREAR PROYECTO ---
-
-document.addEventListener("DOMContentLoaded", () => {
     // Referencias a elementos del modal
     const form = document.getElementById("crearProyectoForm");
     const nombreInput = document.getElementById("nombreProyecto");
@@ -80,7 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const noVideoCheck = document.getElementById("noVideoCheck");
     const videoFile = document.getElementById("videoFile");
     const videoUrl = document.getElementById("videoUrl");
-    const token = localStorage.getItem("authToken");
 
     // Lógica para alternar entre subida de archivo y URL
     videoSourceSelect.addEventListener('change', () => {
@@ -94,6 +100,17 @@ document.addEventListener("DOMContentLoaded", () => {
         // Limpia los campos al cambiar de opción
         videoFile.value = '';
         videoUrl.value = '';
+
+        // Actualizar el atributo 'required' al cambiar la fuente
+        if (!noVideoCheck.checked) {
+            if (videoSourceSelect.value === 'file') {
+                videoFile.setAttribute('required', 'required');
+                videoUrl.removeAttribute('required');
+            } else {
+                videoFile.removeAttribute('required');
+                videoUrl.setAttribute('required', 'required');
+            }
+        }
     });
 
     // Lógica para deshabilitar opciones de video si se marca 'No asignar'
@@ -101,18 +118,24 @@ document.addEventListener("DOMContentLoaded", () => {
         const videoOpciones = document.getElementById('videoOpciones');
         const isChecked = noVideoCheck.checked;
         videoOpciones.style.display = isChecked ? 'none' : 'block';
+
         if (isChecked) {
-            // Limpiar y deshabilitar para asegurar
+            // Limpiar y quitar required
             videoFile.value = '';
             videoUrl.value = '';
-            videoFile.required = false;
-            videoUrl.required = false;
+            videoFile.removeAttribute('required'); 
+            videoUrl.removeAttribute('required');
         } else {
-            // Restaurar la opción por defecto (archivo)
-            videoFile.required = videoSourceSelect.value === 'file';
-            videoUrl.required = videoSourceSelect.value === 'url';
+            // Restaurar required basado en la opción seleccionada
+            videoSourceSelect.dispatchEvent(new Event('change'));
         }
     });
+    
+    // Ejecutar cambio inicial para establecer required
+    videoSourceSelect.dispatchEvent(new Event('change'));
+    // Deshabilitar la opción por defecto de no video, si no está marcada
+    noVideoCheck.dispatchEvent(new Event('change'));
+
 
     // Submit del formulario
     form.addEventListener("submit", async (e) => {
@@ -123,9 +146,15 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const nombre = nombreInput.value;
+        const nombre = nombreInput.value.trim();
         const noVideo = noVideoCheck.checked;
-        let videoData = null; // null si no se asigna video o si es por URL
+        let tieneVideoAsignado = false;
+        
+        // Validación básica
+        if (nombre === "") {
+            Swal.fire('Atención', 'El nombre del proyecto no puede estar vacío.', 'warning');
+            return;
+        }
 
         try {
             // 1. Crear el proyecto (sin video inicialmente)
@@ -138,17 +167,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify({ name: nombre })
             });
 
-            if (!proyectoRes.ok) throw new Error("Error al crear proyecto.");
+            if (!proyectoRes.ok) {
+                const errorData = await proyectoRes.json();
+                throw new Error(`Error al crear proyecto: ${errorData.message || 'Error desconocido'}`);
+            }
+            
             const nuevoProyecto = await proyectoRes.json();
             const proyectoId = nuevoProyecto.id;
 
             // 2. Manejar la asignación del video
-            let tieneVideoAsignado = false;
-
             if (!noVideo) {
                 const source = videoSourceSelect.value;
+
                 if (source === 'file' && videoFile.files.length > 0) {
                     // Opción: Subir Archivo
+                    
+                    Swal.fire({
+                        title: 'Subiendo Video...',
+                        text: 'Por favor, espera mientras se procesa el archivo. Esto puede tardar.',
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
                     const formData = new FormData();
                     formData.append("video", videoFile.files[0]);
                     formData.append("proyectoId", proyectoId);
@@ -159,8 +201,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         body: formData
                     });
 
-                    if (!uploadRes.ok) throw new Error("Error al subir el archivo de video.");
-                    videoData = await uploadRes.json();
+                    if (!uploadRes.ok) {
+                        const errorData = await uploadRes.json();
+                        throw new Error(`Error al subir el archivo de video: ${errorData.message || 'Error desconocido'}`);
+                    }
                     tieneVideoAsignado = true;
 
                 } else if (source === 'url' && videoUrl.value.trim() !== '') {
@@ -174,40 +218,48 @@ document.addEventListener("DOMContentLoaded", () => {
                         },
                         body: JSON.stringify({ proyectoId, url })
                     });
-                    if (!urlRes.ok) throw new Error("Error al asignar la URL de video.");
-                    videoData = await urlRes.json();
+                    
+                    if (!urlRes.ok) {
+                        const errorData = await urlRes.json();
+                        throw new Error(`Error al asignar la URL de video: ${errorData.message || 'Error desconocido'}`);
+                    }
                     tieneVideoAsignado = true;
                 }
+                
+                // Si el usuario eligió una fuente (file/url) pero el campo está vacío
+                if (!tieneVideoAsignado) {
+                    throw new Error("Debes seleccionar un archivo o ingresar una URL válida para el video.");
+                }
             }
+            
+            // Ocultar modal y SweetAlerts anteriores
+            const modalElement = document.getElementById('crearProyectoModal');
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            if (modal) modal.hide();
+            Swal.close(); 
 
             // 3. Mostrar confirmación y redirigir/recargar
             Swal.fire({
                 title: '¡Éxito!',
-                text: `Proyecto "${nombre}" creado correctamente. ${tieneVideoAsignado ? 'Video asignado.' : 'Sin video asignado.'}`,
+                text: `Proyecto "${nombre}" creado correctamente. ${tieneVideoAsignado ? 'Video asignado y en proceso de análisis. Serás redirigido.' : 'Sin video asignado. Podrás cargarlo más tarde.'}`,
                 icon: 'success',
                 confirmButtonText: 'Continuar'
             }).then(() => {
-                const modalElement = document.getElementById('crearProyectoModal');
-                const modal = bootstrap.Modal.getInstance(modalElement);
-                modal.hide();
-
-                // Si tiene video asignado, te pide el análisis (redirigiendo a proyecto.html)
+                // Si tiene video asignado, redirigir a proyecto.html
                 if (tieneVideoAsignado) {
                     localStorage.setItem("proyectoSeleccionadoId", proyectoId);
                     window.location.href = "proyecto.html";
                 } else {
-                    // Si no tiene video, recarga la página de videos
+                    // Si no tiene video, recargar la página de videos para mostrar el nuevo proyecto en la lista
                     window.location.reload();
                 }
             });
 
         } catch (error) {
             console.error("Error en la creación del proyecto:", error);
+            // Asegurarse de cerrar cualquier SweetAlert de carga o éxito
+            Swal.close(); 
             Swal.fire('Error', error.message || 'Ocurrió un error al crear el proyecto.', 'error');
         }
     });
-
-    // Asegurarse de que el campo de video correcto esté marcado como requerido inicialmente
-    document.getElementById("videoSourceSelect").dispatchEvent(new Event('change'));
-    
 });
