@@ -4,6 +4,7 @@ let id = null;
 
 id = localStorage.getItem("proyectoSeleccionadoId");
 token = localStorage.getItem("authToken");
+let contenedor = document.getElementById("proyecto-detalle");
 
 async function checkFormExists() {
   try {
@@ -21,7 +22,6 @@ async function checkFormExists() {
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-  const contenedor = document.getElementById("proyecto-detalle");
 
   if (!id) {
     contenedor.textContent = "No se indicó un proyecto.";
