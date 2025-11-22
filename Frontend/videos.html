@@ -48,13 +48,7 @@
   <!-- CONTENIDO PRINCIPAL -->
   <div class="container my-5">
     <div class="row">
-      <div class="col-12 d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-light mb-0">Mis Proyectos</h2>
-        <button class="btn btn-orange-custom" onclick="mostrarCrearProyecto()">
-          <i class="bi bi-plus-circle me-2"></i>Crear Proyecto
-        </button>
-      </div>
-
+      
       <div id="proyectosInfo" class="alert alert-info">
         Cargando proyectos...
       </div>
@@ -65,47 +59,7 @@
     </div>
   </div>
 
-  <!-- MODAL CREAR PROYECTO -->
-  <div id="crearProyectoModal" class="modal fade" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header modal-header-custom">
-        <h5 class="modal-title">CREAR NUEVO PROYECTO</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <form id="crearProyectoForm" enctype="multipart/form-data"> <div class="mb-3">
-            <label class="form-label">NOMBRE DEL PROYECTO</label>
-            <input type="text" class="form-control" id="nombreProyecto" name="nombre" required>
-          </div>
-
-          <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="noVideoCheck">
-            <label class="form-check-label" for="noVideoCheck">No asignar video ahora</label>
-          </div>
-
-          <div id="videoOpciones" class="mb-3">
-            <label class="form-label">OPCIÓN DE VIDEO</label>
-            <select class="form-select mb-3" id="videoSourceSelect">
-              <option value="file">Subir Archivo desde PC</option>
-              <option value="url">Ingresar URL</option>
-            </select>
-
-            <div id="fileUploadGroup">
-              <input type="file" class="form-control" id="videoFile" name="video" accept="video/*">
-            </div>
-
-            <div id="urlInputGroup" style="display: none;">
-              <input type="text" class="form-control" id="videoUrl" placeholder="https://ejemplo.com/mi_video.mp4">
-            </div>
-          </div>
-
-          <button type="submit" class="btn-orange-custom w-100">Crear Proyecto</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+  
 
   <!-- Footer -->
   <footer class="footer-custom py-4">
@@ -124,10 +78,7 @@
       window.location.href = "mainpage.html";
     }
 
-    function mostrarCrearProyecto() {
-      const modal = new bootstrap.Modal(document.getElementById('crearProyectoModal'));
-      modal.show();
-    }
+
 
     window.addEventListener('scroll', function () {
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
