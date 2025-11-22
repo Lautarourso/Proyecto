@@ -223,3 +223,36 @@ body {
 .ver-proyecto:hover {
   cursor: pointer;
 }
+
+/* Estilos para el botón de Borrar Proyecto */
+.proyecto-card.position-relative {
+    /* Asegura que el botón delete se posicione relativo a la tarjeta */
+    position: relative !important; 
+}
+
+.btn-delete-project {
+    position: absolute;
+    top: 10px; /* Separación de arriba */
+    right: 10px; /* Separación de la derecha */
+    background: none;
+    border: none;
+    color: var(--naranja); /* Color rojo/naranja */
+    font-size: 1.3rem;
+    padding: 5px;
+    cursor: pointer;
+    transition: color 0.2s, transform 0.2s;
+    z-index: 10; /* Asegura que esté por encima del contenido de la tarjeta */
+    line-height: 1; /* Evita espacio extra */
+}
+
+.btn-delete-project:hover {
+    color: var(--naranja-oscuro); /* Más oscuro al pasar el mouse */
+    transform: scale(1.1);
+}
+
+/* Hacemos que la tarjeta no cambie de tamaño al pasar el mouse sobre el botón de eliminar */
+.proyecto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    border-color: var(--naranja);
+}

@@ -1,8 +1,65 @@
+// =========================================================
+// FUNCIÓN PARA ELIMINAR PROYECTO (Frontend y API)
+// =========================================================
+async function deleteProject(proyectoId, token, proyectoName) {
+    // 1. Preguntar al usuario antes de borrar usando SweetAlert2
+    const result = await Swal.fire({
+        title: `¿Estás seguro de borrar "${proyectoName}"?`,
+        text: "¡Esta acción no se puede deshacer! Se eliminarán todos los datos asociados al proyecto.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#E24B16', // Color naranja de tu tema
+        cancelButtonColor: '#0088FF', 
+        confirmButtonText: 'Sí, ¡Borrar!',
+        cancelButtonText: 'Cancelar'
+    });
+
+    if (result.isConfirmed) {
+        // Si el usuario confirma, procedemos con la llamada a la API
+        try {
+            // Llama a la API de tu backend para eliminar el proyecto
+            const response = await fetch(`https://proyecto-zvzl.onrender.com/proyectos/delete/${proyectoId}`, {
+                method: "DELETE",
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            if (!response.ok) {
+                // Si el backend devuelve un error, intentamos leer el mensaje de error
+                const errorData = await response.json().catch(() => ({ message: 'Error desconocido del servidor.' }));
+                throw new Error(`Error ${response.status}: ${errorData.message || 'Error al conectar con la API.'}`);
+            }
+
+            // Muestra confirmación de éxito
+            Swal.fire(
+                '¡Eliminado!',
+                `El proyecto "${proyectoName}" ha sido eliminado.`,
+                'success'
+            ).then(() => {
+                // 2. Recargar la lista de proyectos para reflejar el cambio
+                window.location.reload();
+            });
+
+        } catch (err) {
+            console.error("Error borrando proyecto:", err);
+            // Muestra el error al usuario
+            Swal.fire(
+                'Error',
+                err.message || 'Ocurrió un error al intentar eliminar el proyecto.',
+                'error'
+            );
+        }
+    }
+}
+
+
 document.addEventListener("DOMContentLoaded", async () => {
     const token = localStorage.getItem("authToken");
     const container = document.getElementById("proyectosContainer");
     const info = document.getElementById("proyectosInfo");
 
+    // Hacemos que deleteProject sea accesible globalmente para el onclick del botón
+    window.deleteProject = deleteProject; 
+    
     // =========================================================
     // 1. LÓGICA DE CARGA DE PROYECTOS EXISTENTES
     // =========================================================
@@ -30,7 +87,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         if (proyectos.length === 0) {
             info.classList.replace("alert-info", "alert-warning");
-            // Se actualiza el mensaje ya que la opción de crear fue eliminada
             info.textContent = "No tenés proyectos cargados."; 
             info.style.display = "block";
             
@@ -40,10 +96,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             proyectos.forEach(proyecto => {
                 const div = document.createElement("div");
-                div.className = "proyecto-card";
+                // CLASE position-relative NECESARIA para posicionar el botón de borrado
+                div.className = "proyecto-card position-relative"; 
                 div.dataset.id = proyecto.id;
+                
+                // Escapa comillas simples en el nombre del proyecto para el onclick
+                const projectNameSafe = proyecto.name ? proyecto.name.replace(/'/g, "\\'") : 'Proyecto sin nombre';
+
 
                 div.innerHTML = `
+                    <button 
+                        class="btn-delete-project" 
+                        title="Eliminar Proyecto"
+                        onclick="deleteProject('${proyecto.id}', '${token}', '${projectNameSafe}')">
+                        <i class="bi bi-trash-fill"></i>
+                    </button>
                     <div class="proyecto-info">
                         <h3 class="proyecto-title">${proyecto.name || "Proyecto sin nombre"}</h3>
                         ${
