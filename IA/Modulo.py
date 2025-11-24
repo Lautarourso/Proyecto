@@ -98,6 +98,8 @@ def generar_informe_completo(id_falla: str, auth_token: str):
         response = model.generate_content(prompt_texto)
         resultado = response.text
 
+        print(resultado)
+        return resultado
  
 
     except Exception as e:
@@ -107,8 +109,7 @@ def generar_informe_completo(id_falla: str, auth_token: str):
         raise Exception(f"Error inesperado durante la llamada a Gemini: {e}")
 
     # PythonShell necesita imprimir el resultado final en stdout
-    print(resultado)
-    return resultado
+
 
 
 # ----------------------------------------------------------------------
