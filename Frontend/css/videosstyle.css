@@ -106,6 +106,10 @@ body {
   color: var(--blanco);
 }
 
+button, .btn {
+  font-family: 'Mango Grotesque', sans-serif !important;
+}
+
 /* === Grid === */
 .proyectos-grid {
   display: grid;
