@@ -54,7 +54,7 @@ body::before {
 
 /* === Estructura base === */
 body {
-  font-family: 'Mango Grotesque', sans-serif;
+  font-family: 'Hanson', sans-serif;
   color: var(--gris-claro);
   margin: 0;
   padding: 0;
@@ -124,13 +124,6 @@ body {
   padding: 18px 20px;
 }
 .proyecto-card h3,
-.proyecto-card h4 {
-    font-family: 'Basement Grotesque', sans-serif;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-}
-
-.proyecto-card h3,
 .proyecto-card h4,
 .proyecto-card p {
   margin-bottom: 10px;
@@ -141,7 +134,6 @@ body {
   border: 1px solid var(--naranja);
   border-radius: 6px;
   padding: 6px 18px;
-  font-family: 'Mango Grotesque', sans-serif;
   font-weight: 600;
   transition: all 0.25s ease;
 }
@@ -224,7 +216,7 @@ body {
 
 .ver-proyecto {
   margin-top: 10px;
-  font-family: 'Basement Grotesque', sans-serif;
+  font-family: 'Hanson', sans-serif;
   letter-spacing: 0.5px;
 }
 
