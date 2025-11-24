@@ -38,9 +38,16 @@ async function startServer() {
 
 
   const PORT = process.env.PORT || 9000;
-  app.listen(PORT, "0.0.0.0", () =>
+  const server = app.listen(PORT, "0.0.0.0", () =>
     console.log(`Server is running on port ${PORT}, Ya puedes empezar`)
   );
+
+  server.timeout = 60000; // 60 segundos (60,000 milisegundos)
+  
+  // Opcional: Aumentar el keepAliveTimeout
+  server.keepAliveTimeout = 65000; // 65 segundos
+
+
 }
 
 startServer().catch((err) => {
