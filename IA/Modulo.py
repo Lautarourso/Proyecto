@@ -87,24 +87,18 @@ def generar_informe_completo(id_falla: str, auth_token: str):
     if not api_key:
         raise Exception("La variable de entorno GEMINI_API_KEY no está configurada.")
 
-    try:
-        genai.configure(api_key=api_key, client_options={'api_timeout': 45})
+   
+    genai.configure(api_key=api_key)
 
     # Modelo perfectamente compatible
    
-        model = genai.GenerativeModel("gemini-2.0-flash-lite-preview")
+    model = genai.GenerativeModel("gemini-2.0-flash-lite-preview")
         
-        # Ejecución de la llamada
-        response = model.generate_content(prompt_texto)
-        resultado = response.text
+    # Ejecución de la llamada
+    response = model.generate_content(prompt_texto)
+    resultado = response.text
 
  
-
-    except Exception as e:
-        # Captura errores generales, incluyendo el timeout si ocurre
-        if 'timeout' in str(e).lower():
-            raise Exception("La llamada a Gemini excedió el tiempo límite (45s). El prompt es demasiado largo o el servidor está saturado.")
-        raise Exception(f"Error inesperado durante la llamada a Gemini: {e}")
 
     # PythonShell necesita imprimir el resultado final en stdout
     print(resultado)
