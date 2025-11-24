@@ -72,7 +72,7 @@ body {
 
 .nav-link-custom {
   color: var(--gris-claro) !important;
-  font-family: 'Basement Grotesque', sans-serif;
+  font-family: 'Mango Grotesque', sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -85,7 +85,7 @@ body {
 .btn-orange-custom {
   background-color: var(--naranja);
   color: var(--blanco);
-  font-family: 'Basement Grotesque', sans-serif;
+  font-family: 'Mango Grotesque', sans-serif;
   font-weight: 700;
   border: none;
   padding: 10px 25px;
