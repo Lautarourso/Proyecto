@@ -38,7 +38,7 @@ const UploadV = async (req, res) => {
 
     // Si viene un proyecto, lo asociamos
     if (proyecto_id) {
-      await proyectosService.asociarVideoAProyecto(
+      await proyectosService.videoProyecto(
         proyecto_id,
         videoCreado.id
       );
