@@ -77,9 +77,9 @@ export const NameP = async (req, res) => {
 
 export const deleteP = async (req,res) => {
   try{
-    const {id} = req.body;
+    const {id} = req.params;
     const nu = await proyectosService.borrar(id);
-    if (nu = null){
+    if (nu == null){
       console.log("proyecto kirkificado)");
     } 
   }
