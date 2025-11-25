@@ -88,7 +88,7 @@ def generar_informe_completo(id_falla: str, auth_token: str):
         raise Exception("La variable de entorno GEMINI_API_KEY no está configurada.")
 
     try:
-        genai.configure(api_key=api_key, client_options={'api_timeout': 45})
+        genai.configure(api_key=api_key, client_options={'api_timeout': 300})
 
     # Modelo perfectamente compatible
    
