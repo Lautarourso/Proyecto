@@ -55,9 +55,10 @@ const proyId = async (id) => {
     return await Proyectos.findByPk(id);
 };
 
-const borrar = async (id) =>{
-  return await Proyectos.delete(id);
+const borrar = async (id) => {
+  return await Proyectos.destroy({ where: { id } });
 };
+
 
 
 const renameProyectos = async (parsedName, proyecto_id) =>{
