@@ -92,7 +92,7 @@ def generar_informe_completo(id_falla: str, auth_token: str):
 
     # Modelo perfectamente compatible
    
-        model = genai.GenerativeModel("gemini-2.0-flash-lite-preview")
+        model = genai.GenerativeModel("gemini-1.5-flash")
         
         # Ejecución de la llamada
         response = model.generate_content(prompt_texto)
@@ -105,7 +105,7 @@ def generar_informe_completo(id_falla: str, auth_token: str):
     except Exception as e:
         # Captura errores generales, incluyendo el timeout si ocurre
         if 'timeout' in str(e).lower():
-            raise Exception("La llamada a Gemini excedió el tiempo límite (45s). El prompt es demasiado largo o el servidor está saturado.")
+            raise Exception("La llamada a Gemini excedió el tiempo límite (300s). El prompt es demasiado largo o el servidor está saturado.")
         raise Exception(f"Error inesperado durante la llamada a Gemini: {e}")
 
     # PythonShell necesita imprimir el resultado final en stdout
