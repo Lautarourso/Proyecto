@@ -30,7 +30,7 @@ export const getF = async (req, res) => {
 
       const existente = await formservice.getFormbyIDP(id);
   
-      res.json({ exists: !!existente });
+      res.json([existente ]);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
