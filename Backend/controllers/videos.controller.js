@@ -1,5 +1,6 @@
 import videosService from "../services/videos.service.js";
 import cloudinary from "../config/cloudinary.js";
+import proyectosService from "../services/proyectos.service.js";
 
 const UploadV = async (req, res) => {
   try {
