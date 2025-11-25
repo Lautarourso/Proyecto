@@ -88,7 +88,7 @@ def generar_informe_completo(id_falla: str, auth_token: str):
         raise Exception("La variable de entorno GEMINI_API_KEY no está configurada.")
 
     try:
-        genai.configure(api_key=api_key, client_options={'api_timeout': 300})
+        genai.configure(api_key=api_key, transport='rest')
 
     # Modelo perfectamente compatible
    
@@ -103,11 +103,17 @@ def generar_informe_completo(id_falla: str, auth_token: str):
  
 
     except Exception as e:
-        # Captura errores generales, incluyendo el timeout si ocurre
-        if 'timeout' in str(e).lower():
-            raise Exception("La llamada a Gemini excedió el tiempo límite (300s). El prompt es demasiado largo o el servidor está saturado.")
-        raise Exception(f"Error inesperado durante la llamada a Gemini: {e}")
-
+        # CAMBIO 2: Imprimimos el error REAL para saber qué pasa exactamente
+        # (A veces el error no es timeout, sino 'Quota exceeded' o 'Bad Request')
+        error_real = str(e)
+        print(f"--- DETALLE DEL ERROR: {error_real} ---")
+        
+        if '429' in error_real:
+            raise Exception("Error 429: Cuota excedida (Resource Exhausted).")
+        elif 'timeout' in error_real.lower():
+            raise Exception("La llamada excedió el tiempo límite.")
+        else:
+            raise Exception(f"Error en Gemini: {error_real}")
     # PythonShell necesita imprimir el resultado final en stdout
 
 
