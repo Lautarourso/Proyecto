@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const formData = new FormData();
         formData.append("video", file);
-        formData.append("proyectoId", id);
+        formData.append("proyecto_id", id);
 
         try {
           const res = await fetch("https://proyecto-zvzl.onrender.com/vids/upload", {
