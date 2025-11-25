@@ -11,6 +11,9 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 load_dotenv()
 
+# Configurar salida para que no se guarde en buffer (CRÍTICO PARA NODE.JS)
+sys.stdout.reconfigure(encoding='utf-8')
+
 # ----------------------------------------------------------------------
 # FUNCIÓN PRINCIPAL
 # ----------------------------------------------------------------------
@@ -90,6 +93,13 @@ def generar_informe_completo(id_falla: str, auth_token: str):
     try:
         genai.configure(api_key=api_key, transport='rest')
 
+        # CONFIGURACIÓN DE SEGURIDAD (Para que no bloquee respuestas)
+        safety_settings = [
+            {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
+            {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
+            {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
+            {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
+        ]
     # Modelo perfectamente compatible
    
         model = genai.GenerativeModel("gemini-2.0-flash-lite-preview")
@@ -98,10 +108,26 @@ def generar_informe_completo(id_falla: str, auth_token: str):
         response = model.generate_content(prompt_texto)
         resultado = response.text
 
-        print(resultado)
-        return resultado
+        if response.parts:
+            resultado = response.text
+            # EL PRINT MÁGICO CON FLUSH=TRUE
+            print(resultado, flush=True)
+            return resultado
+        else:
+            # Si Gemini bloqueó la respuesta o falló silenciosamente
+            print("ERROR: La IA devolvió una respuesta vacía (posible filtro de seguridad o error interno).", flush=True)
+            if response.prompt_feedback:
+                print(f"Feedback: {response.prompt_feedback}", flush=True)
+            return "Error: Respuesta vacía."
  
 
+    except Exception as s:
+        error_real = str(s)
+        # Imprimimos con flush para asegurar que Node lo lea
+        print(f"--- DETALLE DEL ERROR: {error_real} ---", flush=True)
+        sys.stdout.flush() 
+        raise s
+    
     except Exception as e:
         # CAMBIO 2: Imprimimos el error REAL para saber qué pasa exactamente
         # (A veces el error no es timeout, sino 'Quota exceeded' o 'Bad Request')
