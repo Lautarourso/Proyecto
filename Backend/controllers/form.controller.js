@@ -2,7 +2,16 @@ import formservice from "../services/form.service.js";
 import { PythonShell } from "python-shell";
 import path from "path";
 import fs from "fs";
+import nodemailer from 'nodemailer'; // <--- IMPORTANTE
 
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail', // O el servicio que uses
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
 
 const IA = async (req, res) => {
     const { proyectoId, datosMaterial } = req.body;
@@ -38,7 +47,7 @@ export const getF = async (req, res) => {
 
 
   export const python = async (req, res) => {
-    const { id, token } = req.body;
+    const { id, token, emailUsuario } = req.body;
     
     // Log inicial para confirmar que la petición entró
     console.log("🚀 CONTROLADOR PYTHON INICIADO. ID:", id);
@@ -84,7 +93,7 @@ export const getF = async (req, res) => {
         });
 
         // EVENTO 3: Cuando Python termina
-        pyshell.end(function (err, code, signal) {
+        pyshell.end(async function (err, code, signal) {
             if (err) {
                 console.error("❌ Python terminó con error:", err);
                 return res.status(500).json({ 
@@ -96,11 +105,42 @@ export const getF = async (req, res) => {
 
             console.log("✅ Python terminó correctamente. Código:", code);
 
-            // El informe suele ser el último mensaje largo, o unimos todo
-            // Aquí asumimos que el último mensaje es el informe final
-            const informeFinal = mensajesPython.length > 0 
-                ? mensajesPython[mensajesPython.length - 1] 
-                : "No se recibió texto de Python";
+            const informeFinal = mensajesPython.join("\n");
+
+      // -----------------------------------------------------------------
+      // 3. ENVÍO DE CORREO ELECTRÓNICO
+      // -----------------------------------------------------------------
+      try {
+        if (emailUsuario) {
+          console.log(`📧 Enviando informe a: ${emailUsuario}...`);
+          
+          await transporter.sendMail({
+            from: `"Sistema de Gasoductos" <${process.env.EMAIL_USER}>`,
+            to: emailUsuario,
+            subject: `Informe de Análisis Completado - Proyecto #${id}`,
+            html: `
+              <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto;">
+                <h2 style="color: #2c3e50;">Informe de Análisis con IA</h2>
+                <p>Estimado usuario,</p>
+                <p>El análisis para el proyecto <strong>#${id}</strong> ha finalizado exitosamente.</p>
+                <hr style="border: 1px solid #eee;">
+                <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; white-space: pre-wrap;">
+                  <strong>Resumen del Análisis:</strong><br><br>
+                  ${informeFinal}
+                </div>
+                <hr style="border: 1px solid #eee;">
+                <p style="font-size: 12px; color: #777;">Este es un mensaje automático generado por el sistema.</p>
+              </div>
+            `
+          });
+          console.log("✉️ ¡Correo enviado con éxito!");
+        } else {
+          console.warn("⚠️ No se envió correo: No se recibió 'emailUsuario' desde el frontend.");
+        }
+      } catch (emailError) {
+        console.error("❌ Error enviando correo:", emailError);
+        // No bloqueamos la respuesta, solo logueamos el error
+      }
 
             return res.status(200).json({
                 status: "success",
@@ -108,7 +148,9 @@ export const getF = async (req, res) => {
                 informe: informeFinal, // Enviamos lo capturado
                 debug_logs: mensajesPython // Útil para ver en el frontend qué pasó
             });
-        });
+        }
+      
+      );
 
     } catch (error) {
         console.error("❌ Error al iniciar PythonShell:", error);

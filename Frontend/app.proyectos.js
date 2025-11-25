@@ -178,13 +178,14 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Error al enviar datos", error);
       }
 
+      const mail = "lautarourso@gmail.com";
       const resPython = await fetch("https://proyecto-zvzl.onrender.com/form/python", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({ id, token })
+        body: JSON.stringify({ id, token, emailUsuario: mail })
       });
 
       const dataPython = await resPython.json();

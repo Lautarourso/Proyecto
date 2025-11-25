@@ -21,6 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",
     "mysql2": "^3.14.3",
+    "nodemailer": "^7.0.10",
     "pg": "^8.13.1",
     "pg-hstore": "^2.3.4",
     "python-shell": "^5.0.0",
