@@ -6,12 +6,12 @@
     return await Videos.findByPk(id);
 };
    
-  const Createvideo = async (data) => {
+  const createvideo = async (data) => {
   return await Videos.create(data);
 };
 
 
     export default {
         getVideosById,
-        Createvideo
+        createvideo
     };

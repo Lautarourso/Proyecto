@@ -28,7 +28,7 @@ const UploadV = async (req, res) => {
     const cloudResult = await subirVideoCloudinary();
 
     // Creamos el video en la DB
-    const videoCreado = await videosService.createVideo({
+    const videoCreado = await videosService.createvideo({
       url: cloudResult.secure_url,
       tipo_mime: cloudResult.resource_type,
       user_id: req.idUsuario,
