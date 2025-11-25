@@ -47,8 +47,11 @@ def generar_informe_completo(id_falla: str, auth_token: str):
     datos_analisis = response_analisis.json()
     datos_form = response_form.json()
 
-    datos_hardware = datos_analisis[0] if isinstance(datos_analisis, list) and datos_analisis else {}
-    datos_cliente = datos_form[0] if isinstance(datos_form, list) and datos_form else {}
+    datos_hardware = datos_analisis[0] if isinstance(datos_analisis, list) else datos_analisis
+    datos_cliente = datos_form[0] if isinstance(datos_form, list) else datos_form
+
+    # DEBUG: Para ver exactamente qué claves llegaron (IMPORTANTE)
+    print(f"KEYS RECIBIDAS: {list(datos_cliente.keys())}", flush=True)
 
     # 2. EXTRACCIÓN Y PREPARACIÓN DE VARIABLES
     # ----------------------------------------------------------------------
