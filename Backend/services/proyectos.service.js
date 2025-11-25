@@ -55,6 +55,10 @@ const proyId = async (id) => {
     return await Proyectos.findByPk(id);
 };
 
+const borrar = async (id) =>{
+  return await Proyectos.delete(id);
+};
+
 
 const renameProyectos = async (parsedName, proyecto_id) =>{
 
@@ -72,4 +76,4 @@ const videoProyecto = async (proyecto_id, video_id) => {
 };
 
 
-  export default {createProyectos, getProyectos, renameProyectos, videoProyecto, proyId};
+  export default {createProyectos, getProyectos, renameProyectos, videoProyecto, proyId, borrar};

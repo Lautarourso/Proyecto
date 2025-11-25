@@ -9,6 +9,7 @@ const router = Router();
 router.post("/upProyectos", verifyToken, upload.single("Video"), Proyectos.UploadP);
 router.get("/getProyectos", verifyToken, Proyectos.GetP);
 router.get("/:id", verifyToken, Proyectos.getProyectoPorId);
+router.delete("/delete/:id", verifyToken, Proyectos.deleteP);
 
 
 export default router;

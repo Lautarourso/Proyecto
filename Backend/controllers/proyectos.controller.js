@@ -75,4 +75,17 @@ export const NameP = async (req, res) => {
   }
 };
 
-export default { UploadP, GetP, NameP, getProyectoPorId};
+export const deleteP = async (req,res) => {
+  try{
+    const {id} = req.body;
+    const nu = await proyectosService.borrar(id);
+    if (nu = null){
+      console.log("proyecto kirkificado)");
+    } 
+  }
+  catch (error){
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export default { UploadP, GetP, NameP, getProyectoPorId, deleteP};
