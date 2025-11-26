@@ -8,7 +8,7 @@ let contenedor = document.getElementById("proyecto-detalle");
 
 async function checkFormExists() {
   try {
-    const res = await fetch(`https://proyecto-zvzl.onrender.com/form/${id}`, {
+    const res = await fetch(`https://proyecto-zvzl.onrender.com/form/dup/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
 

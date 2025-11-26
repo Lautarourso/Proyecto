@@ -30,6 +30,16 @@ export const getF = async (req, res) => {
   }
 };
 
+export const getdup = async (req, res) =>{
+  try {
+    const {id} = req.params;
+    const dupl = await formservice.getFormbyIDP(id);
+    res.json({ exists: !!dupl });
+  } catch (error){
+    res.status(500).json({message: error.message});
+  }
+}
+
 export const python = async (req, res) => {
   const { id, token, emailUsuario } = req.body;
   
@@ -129,4 +139,4 @@ export const python = async (req, res) => {
   }
 };
 
-export default { IA, getF, python };
+export default { IA, getF, python, getdup };
