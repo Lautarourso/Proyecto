@@ -2,23 +2,9 @@ import formservice from "../services/form.service.js";
 import { PythonShell } from "python-shell";
 import path from "path";
 import fs from "fs";
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
-// 1. CONFIGURACIÓN ROBUSTA DE GMAIL
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,               // Puerto seguro SSL
-  secure: false,            // SSL activado
-  requireTLS: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-  family: 4,
-  connectionTimeout: 30000, // 20 segundos de paciencia
-  greetingTimeout: 15000,
-  socketTimeout: 30000
-});
+const resend = new Resend(process.env.RESEND_KEY);
 
 export const IA = async (req, res) => {
   const { proyectoId, datosMaterial } = req.body;
@@ -101,8 +87,11 @@ export const python = async (req, res) => {
         if (emailUsuario) {
           console.log(`📧 Enviando informe a: ${emailUsuario}...`);
           
-          await transporter.sendMail({
-            from: `"Sistema de Gasoductos" <${process.env.EMAIL_USER}>`,
+          const data = await resend.emails.send({
+            // IMPORTANTE: Si no tienes dominio propio verificado en Resend,
+            // DEBES usar 'onboarding@resend.dev' como remitente.
+            // Si usas tu gmail aquí, fallará.
+            from: 'onboarding@resend.dev', 
             to: emailUsuario,
             subject: `Informe de Análisis Completado - Proyecto #${id}`,
             html: `
