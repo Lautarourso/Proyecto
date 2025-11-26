@@ -6,6 +6,16 @@ id = localStorage.getItem("proyectoSeleccionadoId");
 token = localStorage.getItem("authToken");
 let contenedor = document.getElementById("proyecto-detalle");
 
+function showAlert(icon, title, text) {
+  return Swal.fire({
+    icon: icon,
+    title: title,
+    text: text,
+    showConfirmButton: false, // Ocultamos botón para que sea automático
+    timer: 2000 // Dura 2 segundos
+  });
+}
+
 async function checkFormExists() {
   try {
     const res = await fetch(`https://proyecto-zvzl.onrender.com/form/dup/${id}`, {
@@ -141,6 +151,9 @@ document.addEventListener("DOMContentLoaded", () => {
     boton.addEventListener("click", async () => {
       console.log("🔹 Botón presionado. Acción pendiente por definir...");
 
+      boton.disabled = true;
+      boton.innerText = "Procesando..."; // Cambiamos el texto
+
       const formData = {
         falla: document.getElementById("falla").value,
         material: document.getElementById("material").value,
@@ -174,24 +187,33 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = await res.json();
         console.log("✅ Respuesta del backend:", data);
 
+        const mail = "lautarourso@gmail.com";
+        const resPython = await fetch("https://proyecto-zvzl.onrender.com/form/python", {
+          method: "POST",
+          headers: { 
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ id, token, emailUsuario: mail })
+        });
+  
+        const dataPython = await resPython.json();
+        console.log("📄 Informe recibido:", dataPython);
+        
+        localStorage.removeItem("proyectoSeleccionadoId");
+  
+        await showAlert('success', 'Formulario enviado', 'Volviendo a la página de proyectos...');
+  
+          // Redirección después de que la alerta se muestre
+          setTimeout(() => {
+            window.location.href = "videos.html";
+          }, 1500);
+
       } catch (error) {
         alert("Error al enviar datos", error);
       }
 
-      const mail = "lautarourso@gmail.com";
-      const resPython = await fetch("https://proyecto-zvzl.onrender.com/form/python", {
-        method: "POST",
-        headers: { 
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ id, token, emailUsuario: mail })
-      });
-
-      const dataPython = await resPython.json();
-      console.log("📄 Informe recibido:", dataPython);
       
-      localStorage.removeItem("proyectoSeleccionadoId");
     });
   }
 });

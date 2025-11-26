@@ -6,7 +6,8 @@ function showAlert(icon, title, text) {
     icon,
     title,
     text,
-    confirmButtonColor: '#E24B16'
+    showConfirmButton: false,
+    timer:2000
   });
 }
 
