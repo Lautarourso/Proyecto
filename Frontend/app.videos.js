@@ -1,6 +1,16 @@
 // =========================================================
 // FUNCIÓN PARA ELIMINAR PROYECTO (Frontend y API)
 // =========================================================
+function showAlert(icon, title, text) {
+    return Swal.fire({
+      icon: icon,
+      title: title,
+      text: text,
+      showConfirmButton: false, // Ocultamos botón para que sea automático
+      timer: 2000 // Dura 2 segundos
+    });
+  }
+
 async function deleteProject(proyectoId, token, proyectoName) {
     // 1. Preguntar al usuario antes de borrar usando SweetAlert2
     const result = await Swal.fire({
@@ -30,14 +40,12 @@ async function deleteProject(proyectoId, token, proyectoName) {
             }
 
             // Muestra confirmación de éxito
-            Swal.fire(
-                '¡Eliminado!',
-                `El proyecto "${proyectoName}" ha sido eliminado.`,
-                'success'
-            ).then(() => {
-                // 2. Recargar la lista de proyectos para reflejar el cambio
-                window.location.reload();
-            });
+            if (response.ok){
+                await showAlert('success', '¡Eliminado!', "El proyecto ha sido eliminado");
+                setTimeout(() => {
+                    window.location.href = "videos.html";
+                }, 1500);
+            }
 
         } catch (err) {
             console.error("Error borrando proyecto:", err);
