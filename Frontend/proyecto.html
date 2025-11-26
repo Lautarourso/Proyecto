@@ -13,19 +13,24 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
   
+  <link href="css/mainstyle.css" rel="stylesheet" /> <!-- Usamos mainstyle para los fondos -->
   <link href="css/styleproyecto.css" rel="stylesheet" />
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
-<body class="bg-light">
+<body class="bg-light position-relative">
+
+  <!-- Decoration BG (Añadido) -->
+  <div class="decoration-bg">
+    <div class="blur-shape shape-1" style="top: -20%; left: 30%;"></div>
+    <div class="blur-shape shape-2" style="bottom: -10%; right: -10%;"></div>
+  </div>
 
   <!-- HEADER -->
   <header class="header-custom sticky-top bg-white border-bottom border-light shadow-sm">
     <div class="container d-flex justify-content-between align-items-center py-3">
       <a href="videos.html" class="d-flex align-items-center text-decoration-none">
-         <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded me-2" style="width:32px; height:32px;">
-            <span class="fw-bold">C</span>
-        </div>
-        <span class="fw-bold fs-5 text-dark">Calibra<span class="text-orange">X</span></span>
+         <!-- Logo (Reemplazado) -->
+         <img src="img/LOGOPROYECTO1.png" alt="Logo CalibraX" class="logo-img me-2" style="height: 40px;">
       </a>
       <nav class="d-flex align-items-center">
         <a href="videos.html" class="btn btn-sm btn-link text-secondary text-decoration-none me-2">
@@ -39,7 +44,7 @@
   </header>
 
   <!-- CONTENIDO -->
-  <main class="container my-5 pb-5">
+  <main class="container my-5 pb-5 position-relative z-1">
     
     <!-- Encabezado del Proyecto -->
     <div class="bg-white p-4 rounded-4 shadow-sm mb-4 text-center">
@@ -135,7 +140,7 @@
     </section>
   </main>
 
-  <footer class="footer-custom py-4 bg-white border-top border-light">
+  <footer class="footer-custom py-4 bg-white border-top border-light position-relative z-1">
     <div class="container text-center">
       <p class="small mb-0 text-secondary">© 2025 CalibraX. Tecnología de Inspección.</p>
     </div>

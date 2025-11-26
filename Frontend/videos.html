@@ -15,20 +15,25 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
   
   <!-- Estilo personalizado -->
+  <link href="css/mainstyle.css" rel="stylesheet" /> <!-- Usamos mainstyle para los fondos -->
   <link href="css/videosstyle.css" rel="stylesheet" />
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 
-<body class="bg-light">
+<body class="bg-light position-relative">
+
+  <!-- Decoration BG (Añadido) -->
+  <div class="decoration-bg">
+    <div class="blur-shape shape-1"></div>
+    <div class="blur-shape shape-2" style="bottom: 10%; right: 20%;"></div>
+  </div>
 
   <!-- HEADER -->
   <header class="header-custom sticky-top bg-white border-bottom border-light shadow-sm">
     <div class="container d-flex justify-content-between align-items-center py-3">
       <a href="mainpage.html" class="d-flex align-items-center text-decoration-none">
-        <div class="logo-box me-2 d-flex align-items-center justify-content-center bg-primary text-white rounded" style="width:32px; height:32px;">
-            <span class="fw-bold">C</span>
-        </div>
-        <span class="fw-bold fs-5 text-dark">Calibra<span class="text-orange">X</span></span>
+        <!-- Logo (Reemplazado) -->
+        <img src="img/LOGOPROYECTO1.png" alt="Logo CalibraX" class="logo-img me-2" style="height: 40px;">
       </a>
       <nav class="d-flex align-items-center">
         <span class="d-none d-md-block text-secondary me-3 small">Bienvenido</span>
@@ -40,15 +45,13 @@
   </header>
 
   <!-- CONTENIDO PRINCIPAL -->
-  <div class="container my-5" style="min-height: 70vh;">
+  <div class="container my-5 position-relative z-1" style="min-height: 70vh;">
     
     <div class="d-flex justify-content-between align-items-center mb-4">
       <div>
         <h2 class="fw-bold text-dark mb-1">Mis Proyectos</h2>
         <p class="text-secondary small">Gestiona tus inspecciones y reportes.</p>
       </div>
-      <!-- Botón opcional para añadir proyecto si la lógica lo permitiera en el futuro -->
-      <!-- <button class="btn btn-primary-custom btn-sm"><i class="bi bi-plus-lg"></i> Nuevo</button> -->
     </div>
 
     <div class="row">
@@ -65,7 +68,7 @@
   </div>
 
   <!-- Footer -->
-  <footer class="footer-custom py-4 bg-white border-top border-light mt-auto">
+  <footer class="footer-custom py-4 bg-white border-top border-light mt-auto position-relative z-1">
     <div class="container text-center">
       <p class="small mb-0 text-secondary">© 2025 CalibraX. Plataforma de Clientes.</p>
     </div>

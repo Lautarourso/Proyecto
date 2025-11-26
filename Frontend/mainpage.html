@@ -1,48 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CalibraX | Inicio</title>
- 
-  <!-- Fuentes: Inter (Igual que la Landing Page) -->
+
+  <!-- Fuentes: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
- 
+
   <!-- Bootstrap CSS + Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
- 
+
   <!-- Animate.css & AOS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos@2.3.4/aos.css"/>
- 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos@2.3.4/aos.css" />
+
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
- 
+
   <!-- Estilos personalizados -->
   <link href="css/mainstyle.css" rel="stylesheet" />
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 
-<body class="bg-light">
+<body class="bg-light position-relative">
 
-  <!-- HEADER (Blanco con sombra suave) -->
+  <!-- Decoration BG (Añadido) -->
+  <div class="decoration-bg">
+    <div class="blur-shape shape-1"></div>
+    <div class="blur-shape shape-2"></div>
+  </div>
+
+  <!-- HEADER -->
   <header class="header-custom sticky-top bg-white border-bottom border-light shadow-sm">
     <div class="container d-flex justify-content-between align-items-center py-3">
-      <!-- Logo -->
+      <!-- Logo (Reemplazado) -->
       <a href="#" class="d-flex align-items-center text-decoration-none logo-container">
-        <!-- Reemplaza src con tu logo, ajusté el estilo para que se vea bien en fondo blanco -->
-        <div class="logo-box me-2"><span class="fw-bold text-white">C</span></div>
-        <span class="fw-bold fs-4 text-dark tracking-tight">Calibra<span class="text-orange">X</span></span>
+        <img src="img/LOGOPROYECTO1.png" alt="Logo CalibraX" class="logo-img me-2">
       </a>
-     
-      <button class="navbar-toggler d-md-none border-0 text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+
+      <button class="navbar-toggler d-md-none border-0 text-dark" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse">
         <i class="bi bi-list fs-2"></i>
       </button>
-     
+
       <nav class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
         <div class="d-flex flex-column flex-md-row align-items-center gap-3">
           <a href="#" class="nav-link-custom text-secondary">Servicios</a>
@@ -59,13 +65,14 @@
 
   <!-- Contenido principal -->
   <div class="content-wrapper">
-    
-    <!-- HERO SECTION (Estilo Minimalista) -->
-    <section class="hero-section py-5 bg-white">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section py-5">
       <div class="container py-lg-5">
         <div class="row align-items-center">
           <div class="col-lg-6 text-center text-lg-start mb-5 mb-lg-0">
-            <div class="badge bg-blue-soft text-primary mb-3 px-3 py-2 rounded-pill fw-bold animate__animated animate__fadeInDown">
+            <div
+              class="badge bg-blue-soft text-primary mb-3 px-3 py-2 rounded-pill fw-bold animate__animated animate__fadeInDown">
               🚀 Tecnología de Vanguardia
             </div>
             <h1 class="display-4 fw-bolder text-dark mb-4 animate__animated animate__fadeInLeft">
@@ -74,7 +81,8 @@
             <p class="lead text-secondary mb-4 animate__animated animate__fadeInUp">
               Inspección inteligente de gasoductos con tecnología de precisión y diagnósticos potenciados por IA.
             </p>
-            <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start animate__animated animate__fadeInUp animate__delay-1s">
+            <div
+              class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start animate__animated animate__fadeInUp animate__delay-1s">
               <button class="btn btn-primary-custom btn-lg px-5" onclick="mostrarLogin()">
                 <i class="bi bi-box-arrow-in-right me-2"></i>Acceder al Sistema
               </button>
@@ -83,34 +91,39 @@
               </button>
             </div>
           </div>
-          
-          <!-- Carousel / Visual (Estilizado como tarjeta) -->
+
+          <!-- Carousel / Visual -->
           <div class="col-lg-6 animate__animated animate__fadeInRight">
             <div class="hero-card-container position-relative">
-              <div id="mainCarousel" class="carousel slide carousel-fade shadow-2xl rounded-4 overflow-hidden" data-bs-ride="carousel">
+              <div id="mainCarousel" class="carousel slide carousel-fade shadow-2xl rounded-4 overflow-hidden"
+                data-bs-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img src="img/fakeaf2.jpeg" class="d-block w-100 object-fit-cover" style="height: 400px;" alt="Sistema">
+                    <img src="img/fakeaf2.jpeg" class="d-block w-100 object-fit-cover" style="height: 400px;"
+                      alt="Sistema">
                     <div class="carousel-caption d-none d-md-block bg-dark-glass rounded-3 mb-3">
                       <p class="mb-0 fw-bold">Monitoreo en Tiempo Real</p>
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="img/fakeaf3.jpeg" class="d-block w-100 object-fit-cover" style="height: 400px;" alt="Tecnología">
-                     <div class="carousel-caption d-none d-md-block bg-dark-glass rounded-3 mb-3">
+                    <img src="img/fakeaf3.jpeg" class="d-block w-100 object-fit-cover" style="height: 400px;"
+                      alt="Tecnología">
+                    <div class="carousel-caption d-none d-md-block bg-dark-glass rounded-3 mb-3">
                       <p class="mb-0 fw-bold">Sensores de Precisión</p>
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img src="img/fakeaf4.png" class="d-block w-100 object-fit-cover" style="height: 400px;" alt="Equipo">
-                     <div class="carousel-caption d-none d-md-block bg-dark-glass rounded-3 mb-3">
+                    <img src="img/fakeaf4.png" class="d-block w-100 object-fit-cover" style="height: 400px;"
+                      alt="Equipo">
+                    <div class="carousel-caption d-none d-md-block bg-dark-glass rounded-3 mb-3">
                       <p class="mb-0 fw-bold">Equipo CalibraX</p>
                     </div>
                   </div>
                 </div>
               </div>
               <!-- Elemento decorativo flotante -->
-              <div class="floating-badge bg-white shadow p-3 rounded-3 position-absolute top-0 end-0 translate-middle-y me-n3 mt-4 d-none d-lg-block">
+              <div
+                class="floating-badge bg-white shadow p-3 rounded-3 position-absolute top-0 end-0 translate-middle-y me-n3 mt-4 d-none d-lg-block">
                 <div class="d-flex align-items-center gap-3">
                   <div class="icon-circle bg-orange-soft text-orange">
                     <i class="bi bi-cpu-fill"></i>
@@ -127,8 +140,8 @@
       </div>
     </section>
 
-    <!-- INFO SECTION (Gris claro) -->
-    <section class="info-section py-5 bg-slate-50">
+    <!-- INFO SECTION -->
+    <section class="info-section py-5 bg-slate-50-transparent">
       <div class="container py-4">
         <div class="row align-items-center">
           <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
@@ -138,7 +151,7 @@
             </p>
           </div>
         </div>
-        
+
         <div class="row g-4">
           <!-- Card 1 -->
           <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
@@ -174,18 +187,22 @@
       </div>
     </section>
 
-    <!-- CONTACTO -->
-    <section class="contact-section text-center py-5 bg-white" data-aos="zoom-in">
+    <!-- CONTACTO (Modificado con logo) -->
+    <section class="contact-section text-center py-5" data-aos="zoom-in">
       <div class="container py-5">
         <div class="cta-box bg-primary-dark text-white rounded-5 p-5 position-relative overflow-hidden">
           <div class="position-relative z-1">
-             <h2 class="fw-bold mb-4">¿Dudas sobre el servicio?</h2>
-             <button class="btn btn-orange-custom btn-lg px-5 shadow-lg" onclick="mostrarOpcionesContacto()">
+            <h2 class="fw-bold mb-4">¿Dudas sobre el servicio?</h2>
+            <!-- Botón llama al nuevo modal -->
+            <button class="btn btn-orange-custom btn-lg px-5 shadow-lg" onclick="mostrarContacto()">
               <i class="bi bi-envelope-fill me-2"></i>Contáctanos
             </button>
           </div>
-          <!-- Decoración de fondo abstracta -->
-          <div class="circle-deco bg-white opacity-10 position-absolute" style="width:300px; height:300px; border-radius:50%; top:-100px; right:-50px;"></div>
+          <!-- Decoración de fondo con el LOGO -->
+          <div class="circle-deco bg-white position-absolute d-flex align-items-center justify-content-center"
+            style="width:300px; height:300px; border-radius:50%; top:-100px; right:-50px; opacity: 0.15;">
+            <img src="img/LOGOPROYECTO1.png" alt="CalibraX" style="width: 60%; opacity: 0.8;">
+          </div>
         </div>
       </div>
     </section>
@@ -194,7 +211,8 @@
     <footer class="footer-custom py-4 bg-white border-top border-light">
       <div class="container d-flex justify-content-between align-items-center flex-column flex-md-row">
         <div class="d-flex align-items-center gap-2 mb-3 mb-md-0">
-          <div class="logo-box-sm bg-primary text-white rounded d-flex align-items-center justify-content-center" style="width:24px; height:24px; font-weight:bold;">C</div>
+          <!-- Logo pequeño en footer -->
+          <img src="img/LOGOPROYECTO1.png" alt="Logo CalibraX" style="height: 30px;">
           <span class="text-dark fw-bold">CalibraX</span>
         </div>
         <p class="mb-2 mb-md-0 text-secondary small">© 2025 CalibraX - Todos los derechos reservados</p>
@@ -206,7 +224,42 @@
     </footer>
   </div>
 
-  <!-- MODALES (Rediseñados Clean) -->
+  <!-- MODAL DE CONTACTO (NUEVO) -->
+  <div id="contactoModal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-bold text-orange">Contáctanos</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form id="contactoForm" onsubmit="enviarContacto(event)">
+            <div class="row g-2">
+              <div class="col-6 mb-2">
+                <label class="form-label text-secondary small fw-bold">NOMBRE</label>
+                <input type="text" class="form-control bg-light border-0" id="contactoNombre" required>
+              </div>
+              <div class="col-6 mb-2">
+                <label class="form-label text-secondary small fw-bold">APELLIDO</label>
+                <input type="text" class="form-control bg-light border-0" id="contactoApellido" required>
+              </div>
+            </div>
+            <div class="mb-2">
+              <label class="form-label text-secondary small fw-bold">MAIL</label>
+              <input type="email" class="form-control bg-light border-0" id="contactoEmail" required>
+            </div>
+            <div class="mb-4">
+              <label class="form-label text-secondary small fw-bold">MOTIVO</label>
+              <textarea class="form-control bg-light border-0" id="contactoMotivo" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-orange-custom w-100 py-2 fw-bold">Enviar Mensaje</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALES EXISTENTES (Login y Registro) -->
   <div id="loginModal" class="modal fade" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content border-0 shadow-lg rounded-4">
@@ -273,16 +326,41 @@
     </div>
   </div>
 
-  <!-- Scripts (Mismos que tenías, + AOS) -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <!-- Tu script lógico -->
   <script src="app.main.js"></script>
- 
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       AOS.init({ duration: 800, once: true });
     });
+
+    // Funciones para el nuevo modal de contacto
+    function mostrarContacto() {
+        const modal = new bootstrap.Modal(document.getElementById('contactoModal'));
+        modal.show();
+    }
+
+    function enviarContacto(event) {
+        event.preventDefault();
+        const nombre = document.getElementById('contactoNombre').value;
+        const apellido = document.getElementById('contactoApellido').value;
+        const email = document.getElementById('contactoEmail').value;
+        const motivo = document.getElementById('contactoMotivo').value;
+
+        const subject = `Contacto Web de ${nombre} ${apellido}`;
+        const body = `Nombre: ${nombre} ${apellido}%0D%0AEmail: ${email}%0D%0A%0D%0AMotivo:%0D%0A${motivo}`;
+        
+        // Abre el cliente de correo
+        window.location.href = `mailto:proyecto.calibrax@gmail.com?subject=${subject}&body=${body}`;
+
+        // Cierra el modal y limpia el formulario
+        const modalEl = document.getElementById('contactoModal');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        modal.hide();
+        event.target.reset();
+    }
   </script>
 </body>
 </html>
