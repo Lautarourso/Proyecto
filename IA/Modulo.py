@@ -51,7 +51,7 @@ def generar_informe_completo(id_falla: str, auth_token: str):
     datos_cliente = datos_form[0] if isinstance(datos_form, list) else datos_form
 
     # DEBUG: Para ver exactamente qué claves llegaron (IMPORTANTE)
-    print(f"KEYS RECIBIDAS: {list(datos_cliente.keys())}", flush=True)
+    #print(f"KEYS RECIBIDAS: {list(datos_cliente.keys())}", flush=True)
 
     # 2. EXTRACCIÓN Y PREPARACIÓN DE VARIABLES
     # ----------------------------------------------------------------------
@@ -108,7 +108,7 @@ def generar_informe_completo(id_falla: str, auth_token: str):
         if response.parts:
             resultado = response.text
             # EL PRINT MÁGICO CON FLUSH=TRUE
-            print(resultado, flush=True)
+            #print(resultado, flush=True)
             return resultado
         else:
             # Si Gemini bloqueó la respuesta o falló silenciosamente
@@ -153,7 +153,7 @@ if __name__ == "__main__":
     id_falla = sys.argv[1]
     auth_token = sys.argv[2]
 
-    print(f"\n--- Iniciando análisis para ID: {id_falla} ---\n")
+    #print(f"\n--- Iniciando análisis para ID: {id_falla} ---\n")
 
     try:
         informe = generar_informe_completo(id_falla, auth_token)
