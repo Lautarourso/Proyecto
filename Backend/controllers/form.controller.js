@@ -7,16 +7,17 @@ import nodemailer from 'nodemailer';
 // 1. CONFIGURACIÓN ROBUSTA DE GMAIL
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port: 465,               // Puerto seguro SSL
-  secure: true,            // SSL activado
+  port: 587,               // Puerto seguro SSL
+  secure: false,            // SSL activado
+  requireTLS: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
   family: 4,
-  connectionTimeout: 40000, // 20 segundos de paciencia
-  greetingTimeout: 10000,
-  socketTimeout: 20000
+  connectionTimeout: 30000, // 20 segundos de paciencia
+  greetingTimeout: 15000,
+  socketTimeout: 30000
 });
 
 export const IA = async (req, res) => {
