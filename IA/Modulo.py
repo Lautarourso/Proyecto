@@ -96,13 +96,7 @@ def generar_informe_completo(id_falla: str, auth_token: str):
     try:
         genai.configure(api_key=api_key, transport='rest')
 
-        # CONFIGURACIÓN DE SEGURIDAD (Para que no bloquee respuestas)
-        safety_settings = [
-            {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
-            {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
-            {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
-            {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
-        ]
+        
     # Modelo perfectamente compatible
    
         model = genai.GenerativeModel("gemini-2.0-flash-lite-preview")
