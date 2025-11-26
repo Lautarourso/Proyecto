@@ -3,125 +3,141 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CalibraX - Proyecto</title>
-  
+  <title>CalibraX | Detalles de Proyecto</title>
+ 
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Mango+Grotesque:wght@700&family=Basement+Grotesque:wght@700&family=Hanson:wght@400;700&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+ 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  
   <link href="css/styleproyecto.css" rel="stylesheet" />
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
-<body>
-  <div class="liquid-bg"></div>
-  <!-- Barra de progreso -->
-  <div id="progressBar" class="progress-bar-custom"></div>
+<body class="bg-light">
 
   <!-- HEADER -->
-  <header class="header-custom sticky-top">
+  <header class="header-custom sticky-top bg-white border-bottom border-light shadow-sm">
     <div class="container d-flex justify-content-between align-items-center py-3">
       <a href="videos.html" class="d-flex align-items-center text-decoration-none">
-        <img src="img/LOGOPROYECTO1.png" alt="Logo CalibraX" height="50" class="me-2">
-        
+         <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded me-2" style="width:32px; height:32px;">
+            <span class="fw-bold">C</span>
+        </div>
+        <span class="fw-bold fs-5 text-dark">Calibra<span class="text-orange">X</span></span>
       </a>
       <nav class="d-flex align-items-center">
-        <button class="btn btn-sm btn-outline-orange ms-3" onclick="logout()">
-          <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+        <a href="videos.html" class="btn btn-sm btn-link text-secondary text-decoration-none me-2">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+        <button class="btn btn-sm btn-outline-danger rounded-pill" onclick="logout()">
+          <i class="bi bi-box-arrow-right"></i> Salir
         </button>
       </nav>
     </div>
   </header>
 
   <!-- CONTENIDO -->
-  <main class="container my-5">
-    <div class="row">
-      <div class="col-12 mb-4 text-center">
-        <h2 class="text-light" id="nombreProyecto">Proyecto:</h2>
-        <p class="text-muted" id="infoProyecto"></p>
-      </div>
-
-      <div id="proyecto-detalle" class="text-center mb-5">
-        <div id="videosContainer"></div>
-      </div>
-
-      <hr class="text-light">
-
-      <!-- FORMULARIO DE MATERIALES -->
-      <section id="material-section" class="mt-5">
-        <h3 class="text-light mb-3">Datos del material del gasoducto</h3>
-        <form id="materialForm" class="text-light">
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label">Tipo de falla:</label>
-              <input type="text" id="falla" class="form-control" required>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Material del gasoducto:</label>
-              <input type="text" id="material" class="form-control" required>
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">Espesor (mm):</label>
-              <input type="number" id="espesor" step="0.01" class="form-control" required>
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">Diámetro (mm):</label>
-              <input type="number" id="diametro" step="0.01" class="form-control" required>
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">Antigüedad (años):</label>
-              <input type="number" id="antiguedad" class="form-control" required>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">TFME (MPa):</label>
-              <input type="number" id="tfme" step="0.01" class="form-control" required>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Presión habitual (bar):</label>
-              <input type="number" id="presionHabitual" step="0.01" class="form-control" required>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Presión máxima (bar):</label>
-              <input type="number" id="presionMaxima" step="0.01" class="form-control" required>
-            </div>
-               
-            <!-- ESPACIO PARA SEPARAR -->
-            <div class="col-12 mb-4"></div>
-            
-            <div class="col-md-6">
-              <label class="form-label">Latitud inicial:</label>
-              <input type="text" id="latitudInicial" class="form-control" required>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Latitud final:</label>
-              <input type="text" id="latitudFinal" class="form-control" required>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Longitud inicial:</label>
-              <input type="text" id="longitudInicial" class="form-control" required>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Longitud final:</label>
-              <input type="text" id="longitudFinal" class="form-control" required>
-            </div>
-          </div>
-          <div class="text-center mt-4">
-            <button type="button" id="btnAccion" class="btn btn-orange-custom">
-              <i class="bi bi-gear-wide-connected me-2"></i>Cargar datos
-            </button>
-          </div>
-        </form>
-      </section>
+  <main class="container my-5 pb-5">
+    
+    <!-- Encabezado del Proyecto -->
+    <div class="bg-white p-4 rounded-4 shadow-sm mb-4 text-center">
+      <h2 class="fw-bold text-dark mb-2" id="nombreProyecto">Cargando Proyecto...</h2>
+      <p class="text-secondary mb-0" id="infoProyecto">Detalles e inspección visual</p>
     </div>
+
+    <!-- Contenedor de Video y Análisis (Se llena via JS) -->
+    <div id="proyecto-detalle" class="bg-white p-4 rounded-4 shadow-sm mb-4">
+        <!-- JS inyectará el video aquí -->
+        <div class="text-center py-5 text-secondary">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p class="mt-2">Cargando datos...</p>
+        </div>
+    </div>
+
+    <!-- FORMULARIO DE MATERIALES -->
+    <section id="material-section" class="bg-white p-4 p-lg-5 rounded-4 shadow-sm border border-light">
+      <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+          <div class="bg-blue-soft text-primary rounded p-2 me-3">
+              <i class="bi bi-clipboard-data fs-4"></i>
+          </div>
+          <div>
+              <h3 class="fw-bold text-dark mb-0">Datos Técnicos del Gasoducto</h3>
+              <small class="text-secondary">Complete la información para procesar con IA</small>
+          </div>
+      </div>
+
+      <form id="materialForm">
+        <div class="row g-4">
+          <!-- Columna 1 -->
+          <div class="col-md-6">
+            <label class="form-label fw-bold text-secondary small">TIPO DE FALLA</label>
+            <input type="text" id="falla" class="form-control" placeholder="Ej: Abolladura con grieta" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-bold text-secondary small">MATERIAL</label>
+            <input type="text" id="material" class="form-control" placeholder="Ej: Acero API 5L" required>
+          </div>
+          
+          <div class="col-md-4">
+            <label class="form-label fw-bold text-secondary small">ESPESOR (mm)</label>
+            <input type="number" id="espesor" step="0.01" class="form-control" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label fw-bold text-secondary small">DIÁMETRO (mm)</label>
+            <input type="number" id="diametro" step="0.01" class="form-control" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label fw-bold text-secondary small">ANTIGÜEDAD (años)</label>
+            <input type="number" id="antiguedad" class="form-control" required>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold text-secondary small">TFME (MPa)</label>
+            <input type="number" id="tfme" step="0.01" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-bold text-secondary small">PRESIÓN HABITUAL (bar)</label>
+            <input type="number" id="presionHabitual" step="0.01" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-bold text-secondary small">PRESIÓN MÁXIMA (bar)</label>
+            <input type="number" id="presionMaxima" step="0.01" class="form-control" required>
+          </div>
+          
+          <div class="col-12"><hr class="text-muted opacity-25"></div>
+           
+          <div class="col-md-3">
+            <label class="form-label fw-bold text-secondary small">LAT. INICIAL</label>
+            <input type="text" id="latitudInicial" class="form-control" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label fw-bold text-secondary small">LAT. FINAL</label>
+            <input type="text" id="latitudFinal" class="form-control" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label fw-bold text-secondary small">LONG. INICIAL</label>
+            <input type="text" id="longitudInicial" class="form-control" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label fw-bold text-secondary small">LONG. FINAL</label>
+            <input type="text" id="longitudFinal" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="text-center mt-5">
+          <button type="button" id="btnAccion" class="btn btn-primary-custom btn-lg px-5 shadow">
+            <i class="bi bi-cpu me-2"></i> Procesar con IA
+          </button>
+        </div>
+      </form>
+    </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="footer-custom py-4 mt-5">
+  <footer class="footer-custom py-4 bg-white border-top border-light">
     <div class="container text-center">
-      <p class="small mb-0">© 2025 CalibraX. Todos los derechos reservados.</p>
+      <p class="small mb-0 text-secondary">© 2025 CalibraX. Tecnología de Inspección.</p>
     </div>
   </footer>
 
@@ -132,18 +148,7 @@
       localStorage.removeItem('authToken');
       window.location.href = "mainpage.html";
     }
-
-    // Barra de progreso scroll
-    window.addEventListener('scroll', function () {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      const progressBar = document.getElementById('progressBar');
-      progressBar.style.width = scrolled + '%';
-      progressBar.style.opacity = winScroll > 100 ? '1' : '0';
-    });
   </script>
-
   <script src="app.proyectos.js"></script>
 </body>
 </html>

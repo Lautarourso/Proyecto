@@ -1,262 +1,104 @@
 :root {
-  --azul-profundo: #010812;
-  --azul-medio: #021a36;
-  --azul-brillante: #00aaff;
-  --naranja: #E24B16;
-  --naranja-oscuro: #C53D0F;
-  --gris-claro: #F0F0F0;
-  --blanco: #FFFFFF;
+  --brand-blue: #0044CC;
+  --brand-orange: #FF6B00;
+  --text-main: #1e293b;
+  --text-secondary: #64748b;
+  --bg-light: #F8FAFC;
+  --white: #FFFFFF;
 }
 
-/* === Fondo con efecto líquido tipo olas === */
-.liquid-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: -10;
-  background: radial-gradient(circle at 30% 20%, rgba(0, 150, 255, 0.25), transparent 60%),
-              radial-gradient(circle at 70% 80%, rgba(0, 100, 255, 0.15), transparent 60%),
-              linear-gradient(135deg, var(--azul-profundo), var(--azul-medio));
-  background-blend-mode: screen;
-  filter: brightness(110%) contrast(120%) saturate(130%);
-  animation: waveMove 15s ease-in-out infinite alternate;
-  background-size: 200% 200%;
-}
-
-/* Movimiento fluido tipo ola */
-@keyframes waveMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 60%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Capa superior más oscura para contraste */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.85) 100%);
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* === Estructura base === */
 body {
-  font-family: 'Hanson', sans-serif;
-  color: var(--gris-claro);
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  min-height: 100vh;
-  background: transparent !important;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-light);
 }
 
-/* Resto igual */
-.header-custom {
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  border-bottom: 2px solid var(--naranja);
-  backdrop-filter: blur(5px);
-}
+.text-orange { color: var(--brand-orange); }
 
-.nav-link-custom {
-  color: var(--gris-claro) !important;
-  font-family: 'Mango Grotesque', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: color 0.3s;
-}
-.nav-link-custom:hover {
-  color: var(--naranja) !important;
-}
+/* === HEADER === */
+.logo-box { background-color: var(--brand-blue); }
 
-.btn-orange-custom {
-  background-color: var(--naranja);
-  color: var(--blanco);
-  font-family: 'Mango Grotesque', sans-serif;
-  font-weight: 700;
-  border: none;
-  padding: 10px 25px;
-  text-transform: uppercase;
-  transition: all 0.3s;
-}
-.btn-orange-custom:hover {
-  background-color: var(--naranja-oscuro);
-  transform: translateY(-2px);
-}
-.btn-outline-orange {
-  border-color: var(--naranja);
-  color: var(--naranja);
-  background-color: transparent;
-}
-.btn-outline-orange:hover {
-  background-color: var(--naranja);
-  color: var(--blanco);
-}
-
-button, .btn {
-  font-family: 'Mango Grotesque', sans-serif !important;
-}
-
-/* === Grid === */
+/* === GRID & CARDS === */
 .proyectos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 25px;
-  margin-top: 20px;
+  gap: 24px;
 }
+
 .proyecto-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
+  background: var(--white);
+  border: 1px solid #e2e8f0; /* Borde sutil */
+  border-radius: 16px;
   overflow: hidden;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  cursor: pointer;
-  padding: 18px 20px;
-}
-.proyecto-card h3,
-.proyecto-card h4,
-.proyecto-card p {
-  margin-bottom: 10px;
-}
-.proyecto-card .btn {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--gris-claro);
-  border: 1px solid var(--naranja);
-  border-radius: 6px;
-  padding: 6px 18px;
-  font-weight: 600;
-  transition: all 0.25s ease;
-}
-
-.proyecto-card .btn:hover {
-  background: var(--naranja);
-  color: var(--blanco);
-  transform: translateY(-2px);
-  box-shadow: 0 0 12px rgba(226, 75, 22, 0.5);
-}
-
-.proyecto-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  border-color: var(--naranja);
-}
-
-/* Footer */
-.footer-custom {
-  background-color: rgba(0, 0, 0, 0.8);
-  border-top: 2px solid var(--naranja);
-  backdrop-filter: blur(5px);
-  margin-top: auto;
-}
-
-/* Barra progreso */
-.progress-bar-custom {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 4px;
-  background: linear-gradient(to right, var(--naranja), #0088FF);
-  width: 0%;
-  z-index: 9999;
-  transition: width 0.1s ease-out;
-}
-
-/* Modal */
-.modal-header-custom {
-  background-color: var(--azul-medio);
-  color: var(--gris-claro);
-}
-.modal-content {
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .proyectos-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-  .header-custom .container {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-html, body {
-  height: 100%;
-}
-body {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  padding: 24px;
+  position: relative;
   display: flex;
   flex-direction: column;
 }
-.container {
-  flex: 1;
+
+.proyecto-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+  border-color: #cbd5e1;
 }
 
-#particles-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2; /* Debajo de todo */
-  pointer-events: none; /* No bloquea clics */
+.proyecto-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
 }
 
+.proyecto-video {
+  font-size: 0.875rem;
+  color: #10b981; /* Verde Success */
+  font-weight: 600;
+  background-color: #ecfdf5;
+  padding: 4px 10px;
+  border-radius: 20px;
+  width: fit-content;
+  margin-bottom: 1.5rem;
+}
+
+.proyecto-video.sin-video {
+  color: #f59e0b; /* Amber Warning */
+  background-color: #fffbeb;
+}
+
+/* === BOTONES DENTRO DE CARD === */
 .ver-proyecto {
-  margin-top: 10px;
-  font-family: 'Hanson', sans-serif;
-  letter-spacing: 0.5px;
+  margin-top: auto; /* Empuja el botón al fondo */
+  background-color: transparent;
+  color: var(--brand-blue);
+  border: 1px solid var(--brand-blue);
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s;
 }
 
 .ver-proyecto:hover {
-  cursor: pointer;
-}
-
-/* Estilos para el botón de Borrar Proyecto */
-.proyecto-card.position-relative {
-    /* Asegura que el botón delete se posicione relativo a la tarjeta */
-    position: relative !important; 
+  background-color: var(--brand-blue);
+  color: white;
 }
 
 .btn-delete-project {
-    position: absolute;
-    top: 10px; /* Separación de arriba */
-    right: 10px; /* Separación de la derecha */
-    background: none;
-    border: none;
-    color: var(--naranja); /* Color rojo/naranja */
-    font-size: 1.3rem;
-    padding: 5px;
-    cursor: pointer;
-    transition: color 0.2s, transform 0.2s;
-    z-index: 10; /* Asegura que esté por encima del contenido de la tarjeta */
-    line-height: 1; /* Evita espacio extra */
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #fee2e2; /* Rojo muy claro */
+  border: none;
+  color: #ef4444; /* Rojo */
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
 }
 
 .btn-delete-project:hover {
-    color: var(--naranja-oscuro); /* Más oscuro al pasar el mouse */
-    transform: scale(1.1);
-}
-
-/* Hacemos que la tarjeta no cambie de tamaño al pasar el mouse sobre el botón de eliminar */
-.proyecto-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    border-color: var(--naranja);
+  background: #ef4444;
+  color: white;
 }

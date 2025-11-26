@@ -1,378 +1,142 @@
 :root {
-  --azul: #003366;
-  --azul-oscuro: #002244;
-  --gris-claro: #F0F0F0;
-  --naranja: #E24B16;
-  --naranja-oscuro: #C53D0F;
-  --blanco: #FFFFFF;
-  --negro: #000000;
-  --azul-profundo: #010812;
-  --azul-medio: #021a36;
-  --azul-brillante: #00aaff;
+  /* Paleta CalibraX Modern */
+  --brand-blue: #0044CC;
+  --brand-dark-blue: #002a80;
+  --brand-orange: #FF6B00;
+  --brand-orange-dark: #cc5600;
+  
+  --text-main: #1e293b; /* Slate 800 */
+  --text-secondary: #64748b; /* Slate 500 */
+  --bg-light: #F8FAFC; /* Slate 50 */
+  --white: #FFFFFF;
 }
 
-/* === Fondo con efecto líquido tipo olas === */
-.liquid-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: -10;
-  background: radial-gradient(circle at 30% 20%, rgba(0, 150, 255, 0.25), transparent 60%),
-              radial-gradient(circle at 70% 80%, rgba(0, 100, 255, 0.15), transparent 60%),
-              linear-gradient(135deg, var(--azul-profundo), var(--azul-medio));
-  background-blend-mode: screen;
-  filter: brightness(110%) contrast(120%) saturate(130%);
-  animation: waveMove 15s ease-in-out infinite alternate;
-  background-size: 200% 200%;
-}
-
-/* Movimiento fluido tipo ola */
-@keyframes waveMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 60%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Capa superior más oscura para contraste */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.85) 100%);
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* ESTILOS GENERALES */
+/* === GENERAL === */
 body {
-  font-family: 'Hanson', sans-serif;
-  color: var(--gris-claro);
-  margin: 0;
-  padding: 0;
-  position: relative;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-light);
   overflow-x: hidden;
-  background: transparent !important;
-  min-height: 100vh;
 }
 
-/* Contenedor del contenido */
-.content-wrapper {
-  position: relative;
-  z-index: 1;
-}
-
-/* HEADER - FONDO ELIMINADO */
-.header-custom {
-  background-color: transparent !important;
-  border-bottom: 2px solid var(--naranja);
-  backdrop-filter: blur(5px);
-}
-
-.nav-link-custom {
-  color: var(--gris-claro) !important;
-  font-family: 'Mango Grotesque', sans-serif;
+/* === COMPONENTES DE TEXTO === */
+h1, h2, h3, h4, h5 {
   font-weight: 700;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: color 0.3s;
+  letter-spacing: -0.02em;
 }
 
-.nav-link-custom:hover {
-  color: var(--naranja) !important;
+.text-orange { color: var(--brand-orange) !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+
+.text-gradient {
+  background: linear-gradient(90deg, var(--brand-blue) 0%, var(--brand-dark-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* HERO SECTION */
-.hero-section {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-
-.hero-section > .container {
-  position: relative;
-  z-index: 1;
-}
-
-.racing-text {
-  font-family: 'Hanson', sans-serif;
-  font-size: 1.5rem;
-  letter-spacing: 1px;
-}
-
-/* INFO SECTION - FONDO AZUL ELIMINADO */
-.info-section {
-  background-color: transparent !important;
-  backdrop-filter: blur(5px);
-  border-top: 1px solid rgba(0, 136, 255, 0.3);
-  border-bottom: 1px solid rgba(0, 136, 255, 0.3);
-}
-
-.title-custom, h1, .display-3 {
-  font-family: 'Basement Grotesque', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--gris-claro);
-}
-
-.roboto-text {
-  font-family: 'Hanson', sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--gris-claro);
-}
-
-/* BOTÓN NARANJA */
-.btn-orange-custom {
-  background-color: var(--naranja);
-  color: var(--blanco);
-  font-family: 'Basement Grotesque', sans-serif;
-  font-weight: 700;
-  border: none;
-  padding: 10px 25px;
-  text-transform: uppercase;
-  transition: all 0.3s;
-}
-
-.btn-orange-custom:hover {
-  background-color: var(--naranja-oscuro);
-  color: var(--blanco);
-  transform: translateY(-2px);
-}
-
-.btn-outline-orange {
-  border-color: var(--naranja);
-  color: var(--naranja);
-  background-color: transparent;
-}
-
-.btn-outline-orange:hover {
-  background-color: var(--naranja);
-  color: var(--blanco);
-}
-
-.text-orange {
-  color: var(--naranja) !important;
-}
-
-/* CONTACTO */
-.contact-section {
-  background-color: transparent;
-  backdrop-filter: blur(5px);
-  border-top: 1px solid rgba(0, 136, 255, 0.3);
-}
-
-.contact-title {
-  font-family: 'Basement Grotesque', sans-serif;
-  color: var(--gris-claro);
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-/* FOOTER */
-.footer-custom {
-  background-color: transparent;
-  border-top: 2px solid var(--naranja);
-  backdrop-filter: blur(5px);
-}
-
-.footer-text, .footer-link {
-  font-family: 'Hanson', sans-serif;
-  color: var(--gris-claro);
-  font-weight: 700;
-}
-
-.footer-link {
-  text-decoration: none !important;
-  color: var(--gris-claro) !important;
-}
-
-.footer-link:hover {
-  color: var(--naranja) !important;
-}
-
-/* MODALES */
-.modal-header-custom {
-  background-color: var(--azul);
-  color: var(--gris-claro);
-}
-
-.modal-content {
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-}
-
-/* CARRUSEL */
-.carousel-indicators [data-bs-target] {
-  background-color: var(--naranja);
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: none;
-}
-
-.carousel-inner {
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-/* Barra de progreso */
-.progress-bar-custom {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 4px;
-  background: linear-gradient(to right, var(--naranja), #0088FF);
-  width: 0%;
-  z-index: 9999;
-  transition: width 0.1s ease-out;
-}
-
-/* Typewriter */
-.typewriter {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 0ch;
-  animation: typing 2.5s steps(29, end) forwards;
-}
-
-@keyframes typing {
-  from { width: 0ch; }
-  to { width: 29.2ch; }
-}
-
-
-
-/* Botones hover */
-.btn-orange-custom, .btn-outline-light, .btn-light {
+/* === BOTONES === */
+.btn {
+  border-radius: 8px;
+  font-weight: 600;
   transition: all 0.3s ease;
 }
 
-.btn-orange-custom:hover, .btn-outline-light:hover, .btn-light:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+.btn-primary-custom {
+  background-color: var(--brand-blue);
+  color: white;
+  border: none;
+}
+.btn-primary-custom:hover {
+  background-color: var(--brand-dark-blue);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 68, 204, 0.3);
 }
 
-/* Transición al cargar */
-body {
-  opacity: 0;
-  transition: opacity 1s ease;
+.btn-outline-primary-custom {
+  border: 1px solid var(--brand-blue);
+  color: var(--brand-blue);
+  background: transparent;
+}
+.btn-outline-primary-custom:hover {
+  background-color: var(--brand-blue);
+  color: white;
 }
 
-body.loaded {
-  opacity: 1;
+.btn-orange-custom {
+  background-color: var(--brand-orange);
+  color: white;
+  border: none;
+}
+.btn-orange-custom:hover {
+  background-color: var(--brand-orange-dark);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
 }
 
-/* Validación de formularios */
-.was-validated .form-control:invalid {
-  border-color: #dc3545;
+/* === NAVBAR === */
+.logo-box {
+  width: 32px; height: 32px;
+  background-color: var(--brand-blue);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
 }
 
-.was-validated .form-control:valid {
-  border-color: #28a745;
+.nav-link-custom {
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+  text-decoration: none;
+}
+.nav-link-custom:hover { color: var(--brand-blue) !important; }
+
+/* === UTILIDADES DE FONDO === */
+.bg-blue-soft { background-color: #eff6ff; }
+.bg-orange-soft { background-color: #fff7ed; }
+.bg-primary-dark { background-color: var(--brand-dark-blue); }
+
+/* === CARDS & HERO === */
+.hero-section { min-height: 85vh; display: flex; align-items: center; }
+
+.icon-box {
+  width: 50px; height: 50px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
 }
 
-.invalid-feedback {
-  display: none;
-  color: #dc3545;
+.feature-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08) !important;
 }
 
-.was-validated .form-control:invalid ~ .invalid-feedback, .was-validated .form-control:valid ~ .invalid-feedback.dynamic-error {
-  display: block;
+.bg-dark-glass {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  padding: 10px;
 }
 
-/* Animación flotante infinita para hero */
-.float {
-  animation: float 6s ease-in-out infinite;
+.icon-circle {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
 }
 
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
+/* === FOOTER === */
+.hover-primary:hover { color: var(--brand-blue) !important; }
+
+/* === FORMULARIOS === */
+.form-control:focus {
+  box-shadow: 0 0 0 3px rgba(0, 68, 204, 0.15);
+  border: 1px solid var(--brand-blue);
 }
 
-/* Efecto de pulso para logo */
-.pulse {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-/* MODALES - COLOR DE ETIQUETAS */
-#loginModal .form-label,
-#registroModal .form-label {
-  color: #000000 !important;
-  font-weight: 600;
-  font-family: 'Basement Grotesque', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-
-/* Mejorar visibilidad de los inputs */
-#loginModal .form-control,
-#registroModal .form-control {
-  background-color: rgba(255, 255, 255, 0.95);
-  border: 1px solid #ccc;
-  color: #000000;
-  padding: 10px 12px;
-}
-
-#loginModal .form-control:focus,
-#registroModal .form-control:focus {
-  background-color: #ffffff;
-  border-color: var(--naranja);
-  box-shadow: 0 0 0 0.2rem rgba(226, 75, 22, 0.25);
-}
-
-/* Responsividad */
+/* === RESPONSIVE === */
 @media (max-width: 768px) {
-  .hero-section h1 {
-    font-size: 2.5rem;
-  }
-  
-  .hero-section .btn {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-  }
-  
-  .header-custom .container {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .header-custom .navbar-toggler {
-    margin-top: 10px;
-  }
-}
-
-#particles-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2; /* Debajo de todo */
-  pointer-events: none; /* No bloquea clics */
+  .hero-section { text-align: center; }
+  .display-4 { font-size: 2.5rem; }
 }
