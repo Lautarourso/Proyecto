@@ -79,14 +79,6 @@ document.addEventListener("DOMContentLoaded", async () => {
               <input type="file" id="inputVideo" accept="video/*" style="display:none;">
             `
       }
-      <h3>Análisis:</h3>
-      ${
-        analisis.length > 0
-          ? `<ul>${analisis.map(a => `
-              <p>Tiempo: ${a.tiempo}s — Distancia: ${a.distancia}m</p>
-            `).join("")}</ul>`
-          : "<p>No hay análisis cargados.</p>"
-      }
     `;
 
     // 🟢 LÓGICA PARA SUBIR VIDEO (solo si no existe)
