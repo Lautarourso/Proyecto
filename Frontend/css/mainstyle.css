@@ -164,7 +164,7 @@ h1, h2, h3, h4, h5 {
 /* === CONTACTO === */
 .cta-box {
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* IMPORTANTE: Visible para que cualquier elemento (si lo hubiera adentro) no se corte */
     z-index: 1;
 }
 .circle-deco img {
